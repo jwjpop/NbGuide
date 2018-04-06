@@ -6,7 +6,9 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.R;
 
@@ -17,7 +19,7 @@ import com.example.woojinroom.daeran.R;
 
 public class Main extends Fragment {
     ListView mListView;
-
+    ImageButton mImageButton;
     public static Main newInstance() {
         return new Main();
     }
@@ -27,6 +29,12 @@ public class Main extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_main, container, false); // 여기서 UI를 생성해서 View를 return
         mListView = (ListView) view.findViewById(R.id.listView);
+        mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
+        mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
+            public void onClick(View view){
+                Toast.makeText(getContext(),"hi",Toast.LENGTH_SHORT).show();
+            }
+        });
         dataSetting();
         return view;
     }
