@@ -55,7 +55,6 @@ public class Main extends Fragment {
         mDbOpenHelper = new DbOpenHelper(getContext());
         mDbOpenHelper.open();
 
-
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
 
@@ -85,9 +84,10 @@ public class Main extends Fragment {
             //InfoClass에 입력된 값을 압력
             mInfoClass = new InfoClass(
                     mCursor.getInt(mCursor.getColumnIndex("_id")),
-                    mCursor.getString(mCursor.getColumnIndex("name")),
-                    mCursor.getString(mCursor.getColumnIndex("contact")),
-                    mCursor.getString(mCursor.getColumnIndex("email"))
+                    mCursor.getString(mCursor.getColumnIndex("title")),
+                    mCursor.getString(mCursor.getColumnIndex("date")),
+                    mCursor.getString(mCursor.getColumnIndex("color")),
+                    mCursor.getString(mCursor.getColumnIndex("price"))
             );
             //입력된 값을 가지고 있는 InfoClass를 InfoArray에 add
             mInfoArr.add(mInfoClass);

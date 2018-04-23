@@ -50,9 +50,10 @@ public class CustomAdapter  extends BaseAdapter {
         if (v == null) {
             holder = new ViewHolder();
             v = mInflater.inflate(R.layout.listview_custom, null);
-            holder.name = (TextView)v.findViewById(R.id.tv_title);
-            holder.contact = (TextView)v.findViewById(R.id.tv_date);
-            holder.email = (TextView)v.findViewById(R.id.tv_color);
+            holder.title = (TextView)v.findViewById(R.id.tv_title);
+            holder.date = (TextView)v.findViewById(R.id.tv_date);
+            holder.color = (TextView)v.findViewById(R.id.tv_color);
+            holder.price = (TextView)v.findViewById(R.id.tv_price);
 
             v.setTag(holder);
         } else {
@@ -63,9 +64,10 @@ public class CustomAdapter  extends BaseAdapter {
         InfoClass info = InfoArr.get(position);
 
         //리스트뷰의 아이템에 맞는 String값을 입력
-        holder.name.setText(info.name);
-        holder.contact.setText(info.contact);
-        holder.email.setText(info.email);
+        holder.title.setText(info.title);
+        holder.date.setText(info.date);
+        holder.color.setText(info.color);
+        holder.price.setText(info.price);
 
         return v;
     }
@@ -84,9 +86,10 @@ public class CustomAdapter  extends BaseAdapter {
      * ViewHolder Class 생성
      */
     private class ViewHolder {
-        TextView name;
-        TextView contact;
-        TextView email;
+        TextView title;
+        TextView date;
+        TextView color;
+        TextView price;
     }
 }
 

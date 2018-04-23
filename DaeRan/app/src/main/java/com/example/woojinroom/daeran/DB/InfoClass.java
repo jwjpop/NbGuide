@@ -9,9 +9,10 @@ package com.example.woojinroom.daeran.DB;
 public class InfoClass {
 
     public int _id;
-    public String name;
-    public String contact;
-    public String email;
+    public String title;
+    public String date;
+    public String color;
+    public String price;
 
     //생성자
     public InfoClass(){}
@@ -19,15 +20,17 @@ public class InfoClass {
     /**
      * 실질적으로 값을 입력할 때 사용되는 생성자(getter and setter)
      * @param _id       테이블 아이디
-     * @param name      이름
-     * @param contact   전화번호
-     * @param email     이메일
+     * @param title
+     * @param date
+     * @param color
+     * @param price
      */
-    public InfoClass(int _id, String name, String contact, String email) {
+    public InfoClass(int _id, String title, String date, String color,String price) {
         this._id = _id;
-        this.name = name;
-        this.contact = contact;
-        this.email = email;
+        this.title = title;
+        this.date = date;
+        this.color = color;
+        this.price = price;
     }
 
     public int get_id() {
@@ -38,28 +41,36 @@ public class InfoClass {
         this._id = _id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getContact() {
-        return contact;
+    public String getDate() {
+        return date;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getEmail() {
-        return email;
+    public String getColor() {
+        return color;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setColor(String color) {
+        this.color = color;
     }
+
+  /*  public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }*/
 }
 

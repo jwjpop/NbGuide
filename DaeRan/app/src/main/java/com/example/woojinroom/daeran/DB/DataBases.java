@@ -9,16 +9,18 @@ import android.provider.BaseColumns;
 public class DataBases {
     //데이터베이스 호출 시 사용될 생성자
     public static final class CreateDB implements BaseColumns {
-        public static final String NAME = "name";
-        public static final String CONTACT = "contact";
-        public static final String EMAIL = "email";
-        public static final String _TABLENAME = "address";
+        public static final String TITLE = "title";
+        public static final String DATE = "date";
+        public static final String COLOR = "color";
+        public static final String PRICE = "price";
+        public static final String _TABLENAME = "text2";
         public static final String _CREATE =
                 "create table " + _TABLENAME + "("
                         + _ID + " integer primary key autoincrement, "
-                        + NAME + " text not null , "
-                        + CONTACT + " text not null , "
-                        +EMAIL + " text not null );";
+                        + TITLE + " text not null , "
+                        + DATE + " text not null , "
+                        + COLOR + " text not null , "
+                        + PRICE + " text not null ); ";
     }
 }
 

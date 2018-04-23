@@ -6,7 +6,8 @@ package com.example.woojinroom.daeran.DB;
 
 public class Constants {
 
-    public static final int NAME = 0;
-    public static final int CONTACT = 1;
-    public static final int EMAIL = 2;
+    public static final int TITLE = 0;
+    public static final int DATE = 1;
+    public static final int COLOR = 2;
+    public static final int PRICE = 3;
 }

@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DbOpenHelper {
 
-    private static final String DATABASE_NAME = "addressbook.db";
+    private static final String DATABASE_NAME = "text2book.db";
     private static final int DATABASE_VERSION = 1;
     public static SQLiteDatabase mDB;
     private DataBaseHelper mDBHelper;
@@ -67,54 +67,58 @@ public class DbOpenHelper {
 
     /**
      *  데이터베이스에 사용자가 입력한 값을 insert하는 메소드
-     * @param name          이름
-     * @param contact       전화번호
-     * @param email         이메일
+     * @param title
+     * @param date
+     * @param color
+     * @param price
      * @return              SQLiteDataBase에 입력한 값을 insert
      */
-    public long insertColumn(String name, String contact, String email) {
+    public long insertColumn(String title, String date, String color,String price) {
         ContentValues values = new ContentValues();
-        values.put(DataBases.CreateDB.NAME, name);
-        values.put(DataBases.CreateDB.CONTACT, contact);
-        values.put(DataBases.CreateDB.EMAIL, email);
+        values.put(DataBases.CreateDB.TITLE, title);
+        values.put(DataBases.CreateDB.DATE, date);
+        values.put(DataBases.CreateDB.COLOR, color);
+        values.put(DataBases.CreateDB.PRICE, price);
         return mDB.insert(DataBases.CreateDB._TABLENAME, null, values);
     }
 
     /**
      * 기존 데이터베이스에 사용자가 변경할 값을 입력하면 값이 변경됨(업데이트)
      * @param id            데이터베이스 아이디
-     * @param name          이름
-     * @param contact       전화번호
-     * @param email         이메일
+     * @param title
+     * @param date
+     * @param color
+     * @param price
      * @return              SQLiteDataBase에 입력한 값을 update
      */
-    public boolean updateColumn(long id, String name, String contact, String email) {
+    public boolean updateColumn(long id, String title, String date, String color,String price) {
         ContentValues values = new ContentValues();
-        values.put(DataBases.CreateDB.NAME, name);
-        values.put(DataBases.CreateDB.CONTACT, contact);
-        values.put(DataBases.CreateDB.EMAIL, email);
+        values.put(DataBases.CreateDB.TITLE, title);
+        values.put(DataBases.CreateDB.DATE, date);
+        values.put(DataBases.CreateDB.COLOR, color);
+        values.put(DataBases.CreateDB.PRICE, price);
         return mDB.update(DataBases.CreateDB._TABLENAME, values, "_id="+id, null) > 0;
     }
 
     //입력한 id값을 가진 DB를 지우는 메소드
-    public boolean deleteColumn(long id) {
+   /* public boolean deleteColumn(long id) {
         return mDB.delete(DataBases.CreateDB._TABLENAME, "_id=" + id, null) > 0;
-    }
+    }*/
 
     //입력한 전화번호 값을 가진 DB를 지우는 메소드
-    public boolean deleteColumn(String number) {
+   /* public boolean deleteColumn(String number) {
         return mDB.delete(DataBases.CreateDB._TABLENAME, "contact="+number, null) > 0;
-    }
+    }*/
 
     //커서 전체를 선택하는 메소드
     public Cursor getAllColumns() {
-        return mDB.query(DataBases.CreateDB._TABLENAME, null, null, null, null, null, null);
+        return mDB.query(DataBases.CreateDB._TABLENAME, null, null, null, null, null, null,null);
     }
 
     //ID 컬럼 얻어오기
     public Cursor getColumn(long id) {
         Cursor c = mDB.query(DataBases.CreateDB._TABLENAME, null,
-                "_id="+id, null, null, null, null);
+                "_id="+id, null, null, null, null,null);
         //받아온 컬럼이 null이 아니고 0번째가 아닐경우 제일 처음으로 보냄
         if (c != null && c.getCount() != 0)
             c.moveToFirst();
@@ -122,8 +126,8 @@ public class DbOpenHelper {
     }
 
     //이름으로 검색하기 (rawQuery)
-    public Cursor getMatchName(String name) {
+   /* public Cursor getMatchName(String name) {
         Cursor c = mDB.rawQuery( "Select * from address where name" + "'" + name + "'", null);
         return c;
-    }
+    }*/
 }

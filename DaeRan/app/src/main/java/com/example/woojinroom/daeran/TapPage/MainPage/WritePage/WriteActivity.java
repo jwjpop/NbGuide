@@ -55,6 +55,9 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"작성 취소",Toast.LENGTH_SHORT).show();
+                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(refresh_intent);
                 finish();
             }
         });
@@ -63,10 +66,10 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDbOpenHelper.insertColumn("정우진", "01011223344", "angel@google.com");
-                Toast.makeText(getApplicationContext(),"작성 완료!",Toast.LENGTH_SHORT).show();
-                Intent join_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(join_intent);
+                mDbOpenHelper.insertColumn("정우진", "6.24", "주황","3000"); // 나중에 입력된 값으로 처리하도록 변경
+                Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
+                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(refresh_intent);
             }
         });
     }
