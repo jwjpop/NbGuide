@@ -9,9 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.woojinroom.daeran.DbOpenHelper;
+import com.example.woojinroom.daeran.DB.DbOpenHelper;
 import com.example.woojinroom.daeran.R;
 
 /**

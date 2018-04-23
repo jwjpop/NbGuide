@@ -1,4 +1,4 @@
-package com.example.woojinroom.daeran;
+package com.example.woojinroom.daeran.DB;
 
 /**
  * Created by woojinroom on 2018-04-23.
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.woojinroom.daeran.R;
 
 import java.util.ArrayList;
 

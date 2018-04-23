@@ -1,4 +1,4 @@
-package com.example.woojinroom.daeran;
+package com.example.woojinroom.daeran.DB;
 
 import android.provider.BaseColumns;
 

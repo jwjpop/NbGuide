@@ -1,4 +1,4 @@
-package com.example.woojinroom.daeran;
+package com.example.woojinroom.daeran.DB;
 
 /**
  * Created by woojinroom on 2018-04-23.

@@ -16,10 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.woojinroom.daeran.Constants;
-import com.example.woojinroom.daeran.CustomAdapter;
-import com.example.woojinroom.daeran.DbOpenHelper;
-import com.example.woojinroom.daeran.InfoClass;
+import com.example.woojinroom.daeran.DB.Constants;
+import com.example.woojinroom.daeran.DB.CustomAdapter;
+import com.example.woojinroom.daeran.DB.DbOpenHelper;
+import com.example.woojinroom.daeran.DB.InfoClass;
 import com.example.woojinroom.daeran.R;
 import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.WriteActivity;
 
@@ -34,7 +34,8 @@ public class Main extends Fragment {
 
     ImageButton mImageButton;
 
-    private static final String TAG = "TestDataBase";
+    private EditText[] mEditTexts;
+    private ListView mListView;
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;
     private InfoClass mInfoClass;
@@ -59,7 +60,8 @@ public class Main extends Fragment {
                 startActivity(join_intent);
             }
         });
-        //dataSetting();
+        //dataSetting(); DB쓰기전에 쓰던 메소드
+
         mDbOpenHelper = new DbOpenHelper(getContext());
         try {
             mDbOpenHelper.open();
@@ -67,26 +69,10 @@ public class Main extends Fragment {
             e.printStackTrace();
         }
 
-        //DataBase에 값을 입력
-        /*mDbOpenHelper.insertColumn("송중기", "01011223344", "angel@google.com");
-        mDbOpenHelper.insertColumn("송혜교", "01333331111", "asdffff@emdo.com");
-        mDbOpenHelper.insertColumn("제시카", "01234001111", "yaya@hhh.com");
-        mDbOpenHelper.insertColumn("말보루", "01600001111", "tree777@atat.com");
-        mDbOpenHelper.insertColumn("데이브", "01700001111", "tiger@tttt.com");
-        mDbOpenHelper.insertColumn("엠씨더맥스", "01800001111", "gril@zzz.com");*/
-
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
 
         doWhileCursorToArray();
-
-        //값이 제대로 입력됬는지 확인하기 위해 로그를 찍어본다
-        for (InfoClass i : mInfoArr) {
-            Log.i(TAG, "ID = " + i._id);
-            Log.i(TAG, "NAME = " + i.name);
-            Log.i(TAG, "CONTACT = " + i.contact);
-            Log.i(TAG, "EMAIL = " + i.email);
-        }
 
         //리스트뷰에 사용할 어댑터 초기화(파라메터 Context, ArrayList<InfoClass>)
         mAdapter = new CustomAdapter(getContext(), mInfoArr);
@@ -96,10 +82,8 @@ public class Main extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent,
                                            View view, int position, long id) {
-                Log.i(TAG, "position = " + position);
                 //리스트뷰의 position은 0부터 시작하므로 1을 더함
                 boolean result = mDbOpenHelper.deleteColumn(position + 1);
-                Log.i(TAG, "result = " + result);
 
                 if (result) {
                     //정상적인 position을 가져왔을 경우 ArrayList의 position과 일치하는 index 정보를 remove
@@ -116,7 +100,6 @@ public class Main extends Fragment {
             }
         });
 
-
         return view;
     }
     private void doWhileCursorToArray() {
@@ -125,7 +108,6 @@ public class Main extends Fragment {
         //DB에 있는 모든 컬럼을 가져옴
         mCursor = mDbOpenHelper.getAllColumns();
         //컬럼의 갯수 확인
-        Log.i(TAG, "Count = " + mCursor.getCount());
 
         while (mCursor.moveToNext()) {
             //InfoClass에 입력된 값을 압력
@@ -160,13 +142,6 @@ public class Main extends Fragment {
         mCursor.close();
     }
 
-    /**
-     * 레이아웃 세팅하는 메소드
-     */
-    private EditText[] mEditTexts;
-    private ListView mListView;
-
-
     //액티비티가 종료 될 때 디비를 닫아준다
     @Override
     public void onDestroy() {
@@ -176,6 +151,7 @@ public class Main extends Fragment {
 
 
 
+   /* DB쓰기전에 쓰던 메소드
     private void dataSetting() {
 
         MyAdapter mMyAdapter = new MyAdapter();
@@ -185,9 +161,8 @@ public class Main extends Fragment {
             mMyAdapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.icon), "title_" + i, "date_" + i, "color_" + i, "price_" + i);
         }
 
-        /* 리스트뷰에 어댑터 등록 */
         mListView.setAdapter(mMyAdapter);
-    }
+    }*/
 
 
 }
