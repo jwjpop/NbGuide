@@ -1,5 +1,6 @@
 package com.example.woojinroom.daeran.TapPage.MainPage.WritePage;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.DbOpenHelper;
+import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
 
 /**
@@ -60,8 +63,10 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDbOpenHelper.insertColumn("송중기", "01011223344", "angel@google.com");
-                finish();
+                mDbOpenHelper.insertColumn("정우진", "01011223344", "angel@google.com");
+                Toast.makeText(getApplicationContext(),"작성 완료!",Toast.LENGTH_SHORT).show();
+                Intent join_intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(join_intent);
             }
         });
     }
