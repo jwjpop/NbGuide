@@ -9,8 +9,10 @@ import android.graphics.drawable.Drawable;
 public class MyItem {
 
     private Drawable icon;
-    private String name;
-    private String contents;
+    private String title;
+    private String date;
+    private String color;
+    private String price;
 
     public Drawable getIcon() {
         return icon;
@@ -20,19 +22,35 @@ public class MyItem {
         this.icon = icon;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getContents() {
-        return contents;
+    public String getDate() {
+        return date;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

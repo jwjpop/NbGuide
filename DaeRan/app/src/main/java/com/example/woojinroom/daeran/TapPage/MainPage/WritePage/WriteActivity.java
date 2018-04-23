@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.woojinroom.daeran.DbOpenHelper;
 import com.example.woojinroom.daeran.R;
 
 /**
@@ -15,17 +18,31 @@ import com.example.woojinroom.daeran.R;
  */
 
 public class WriteActivity extends AppCompatActivity {
+    private DbOpenHelper mDbOpenHelper;
+
     Toolbar toolbar;
     TextView toolbar_title;
     ImageButton imageButtonLeft;
     ImageButton imageButtonRight;
 
+    Spinner color;
+    EditText title,price,content;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
+
+        mDbOpenHelper = new DbOpenHelper(this);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
         toolbar_title.setText("글 작성");
+
+        title = (EditText)findViewById(R.id.edit_title);
+        color = (Spinner) findViewById(R.id.spinner_color);
+        price = (EditText)findViewById(R.id.edit_price);
+        content = (EditText)findViewById(R.id.edit_content);
+
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +55,9 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"미 구현",Toast.LENGTH_SHORT).show();
+                mDbOpenHelper.open();
+                mDbOpenHelper.insertColumn(title.getText().toString(),color.getSelectedItem().toString(),price.getText().toString(),content.getText().toString());
+                finish();
             }
         });
     }

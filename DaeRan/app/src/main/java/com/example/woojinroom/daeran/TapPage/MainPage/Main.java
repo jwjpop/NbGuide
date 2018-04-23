@@ -48,7 +48,7 @@ public class Main extends Fragment {
 
 
         for (int i = 0; i < 11; i++) {
-            mMyAdapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.icon), "name_" + i, "contents_" + i);
+            mMyAdapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.icon), "title_" + i, "date_" + i, "color_" + i, "price_" + i);
         }
 
         /* 리스트뷰에 어댑터 등록 */
