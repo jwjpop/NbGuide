@@ -1,5 +1,6 @@
 package com.example.woojinroom.daeran.TapPage.MainPage.WritePage;
 
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import com.example.woojinroom.daeran.R;
  */
 
 public class WriteActivity extends AppCompatActivity {
+
     private DbOpenHelper mDbOpenHelper;
 
     Toolbar toolbar;
@@ -31,8 +33,12 @@ public class WriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
-
         mDbOpenHelper = new DbOpenHelper(this);
+        try {
+            mDbOpenHelper.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
@@ -55,8 +61,7 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDbOpenHelper.open();
-                mDbOpenHelper.insertColumn(title.getText().toString(),color.getSelectedItem().toString(),price.getText().toString(),content.getText().toString());
+                mDbOpenHelper.insertColumn("송중기", "01011223344", "angel@google.com");
                 finish();
             }
         });
