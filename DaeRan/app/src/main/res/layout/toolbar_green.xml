@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:layout_collapseMode="pin"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    android:background="#35babc">
+
+    <ImageButton
+        android:id="@+id/imagebutton_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="left"
+        android:src="@drawable/left_arrow"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="회원가입"
+        android:textColor="#FFFFFF"
+        android:textSize="24dp" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:src="@drawable/check"
+        android:background="@null"/>
+
+</android.support.v7.widget.Toolbar>

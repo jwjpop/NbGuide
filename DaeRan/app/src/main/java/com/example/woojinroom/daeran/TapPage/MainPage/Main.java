@@ -1,5 +1,6 @@
 package com.example.woojinroom.daeran.TapPage.MainPage;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.woojinroom.daeran.R;
+import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.WriteActivity;
 
 
 /**
@@ -32,7 +34,8 @@ public class Main extends Fragment {
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
-                Toast.makeText(getContext(),"hi",Toast.LENGTH_SHORT).show();
+                Intent join_intent = new Intent(getContext(), WriteActivity.class);
+                startActivity(join_intent);
             }
         });
         dataSetting();
