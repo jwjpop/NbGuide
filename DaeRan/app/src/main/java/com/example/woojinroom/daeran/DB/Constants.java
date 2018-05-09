@@ -9,5 +9,6 @@ public class Constants {
     public static final int TITLE = 0;
     public static final int DATE = 1;
     public static final int COLOR = 2;
-    public static final int PRICE = 3;
+    public static final int NUMBER = 3;
+    public static final int PRICE = 4;
 }

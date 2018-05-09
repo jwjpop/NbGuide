@@ -12,6 +12,7 @@ public class InfoClass {
     public String title;
     public String date;
     public String color;
+    public String number;
     public String price;
 
     //생성자
@@ -23,13 +24,15 @@ public class InfoClass {
      * @param title
      * @param date
      * @param color
+     * @param number
      * @param price
      */
-    public InfoClass(int _id, String title, String date, String color,String price) {
+    public InfoClass(int _id, String title, String date, String color,String number,String price) {
         this._id = _id;
         this.title = title;
         this.date = date;
         this.color = color;
+        this.number = number;
         this.price = price;
     }
 
@@ -65,7 +68,22 @@ public class InfoClass {
         this.color = color;
     }
 
-  /*  public String getPrice() {
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+/*  public String getPrice() {
         return price;
     }
 

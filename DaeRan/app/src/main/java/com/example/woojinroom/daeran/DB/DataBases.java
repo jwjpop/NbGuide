@@ -12,14 +12,16 @@ public class DataBases {
         public static final String TITLE = "title";
         public static final String DATE = "date";
         public static final String COLOR = "color";
+        public static final String NUMBER = "number";
         public static final String PRICE = "price";
-        public static final String _TABLENAME = "text3"; // 수정하면 새로운 테이블 생성 됨
+        public static final String _TABLENAME = "text4"; // 수정하면 새로운 테이블 생성 됨
         public static final String _CREATE =
                 "create table " + _TABLENAME + "("
                         + _ID + " integer primary key autoincrement, "
                         + TITLE + " text not null , "
                         + DATE + " text not null , "
                         + COLOR + " text not null , "
+                        + NUMBER + " text not null , "
                         + PRICE + " text not null ); ";
     }
 }

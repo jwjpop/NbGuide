@@ -53,6 +53,7 @@ public class CustomAdapter  extends BaseAdapter {
             holder.title = (TextView)v.findViewById(R.id.tv_title);
             holder.date = (TextView)v.findViewById(R.id.tv_date);
             holder.color = (TextView)v.findViewById(R.id.tv_color);
+            holder.number = (TextView)v.findViewById(R.id.tv_number);
             holder.price = (TextView)v.findViewById(R.id.tv_price);
 
             v.setTag(holder);
@@ -67,6 +68,7 @@ public class CustomAdapter  extends BaseAdapter {
         holder.title.setText(info.title);
         holder.date.setText(info.date);
         holder.color.setText(info.color);
+        holder.number.setText(info.number);
         holder.price.setText(info.price);
 
         return v;
@@ -89,6 +91,7 @@ public class CustomAdapter  extends BaseAdapter {
         TextView title;
         TextView date;
         TextView color;
+        TextView number;
         TextView price;
     }
 }

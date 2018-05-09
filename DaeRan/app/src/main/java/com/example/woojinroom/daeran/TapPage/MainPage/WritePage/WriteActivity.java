@@ -33,7 +33,7 @@ public class WriteActivity extends AppCompatActivity {
     ImageButton imageButtonRight;
 
     Spinner color;
-    EditText title,price,content;
+    EditText title,number,price,content;
 
     long mNow;
     Date mDate;
@@ -55,6 +55,7 @@ public class WriteActivity extends AppCompatActivity {
         toolbar_title.setText("글 작성");
 
         title = (EditText)findViewById(R.id.edit_title);
+        number =(EditText)findViewById(R.id.edit_number);
         color = (Spinner) findViewById(R.id.spinner_color);
         price = (EditText)findViewById(R.id.edit_price);
         content = (EditText)findViewById(R.id.edit_content);
@@ -74,7 +75,7 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDbOpenHelper.insertColumn(title.getText().toString(),getTime(),color.getSelectedItem().toString(),price.getText().toString()); // 나중에 입력된 값으로 처리하도록 변경
+                mDbOpenHelper.insertColumn(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString()); // 나중에 입력된 값으로 처리하도록 변경
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(refresh_intent);

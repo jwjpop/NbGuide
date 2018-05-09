@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DbOpenHelper  {
 
-    private static final String DATABASE_NAME = "text3book.db";
+    private static final String DATABASE_NAME = "text4book.db";
     private static final int DATABASE_VERSION = 1;
     public static SQLiteDatabase mDB;
     public DataBaseHelper mDBHelper;
@@ -70,14 +70,16 @@ public class DbOpenHelper  {
      * @param title
      * @param date
      * @param color
+     * @param number
      * @param price
      * @return              SQLiteDataBase에 입력한 값을 insert
      */
-    public long insertColumn(String title, String date, String color,String price) {
+    public long insertColumn(String title, String date, String color,String number,String price) {
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateDB.TITLE, title);
         values.put(DataBases.CreateDB.DATE, date);
         values.put(DataBases.CreateDB.COLOR, color);
+        values.put(DataBases.CreateDB.NUMBER, number);
         values.put(DataBases.CreateDB.PRICE, price);
         return mDB.insert(DataBases.CreateDB._TABLENAME, null, values);
     }
@@ -88,14 +90,16 @@ public class DbOpenHelper  {
      * @param title
      * @param date
      * @param color
+     * @param number
      * @param price
      * @return              SQLiteDataBase에 입력한 값을 update
      */
-    public boolean updateColumn(long id, String title, String date, String color,String price) {
+    public boolean updateColumn(long id, String title, String date, String color,String number,String price) {
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateDB.TITLE, title);
         values.put(DataBases.CreateDB.DATE, date);
         values.put(DataBases.CreateDB.COLOR, color);
+        values.put(DataBases.CreateDB.NUMBER, number);
         values.put(DataBases.CreateDB.PRICE, price);
         return mDB.update(DataBases.CreateDB._TABLENAME, values, "_id="+id, null) > 0;
     }
