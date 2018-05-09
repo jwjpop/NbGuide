@@ -2,6 +2,8 @@ package com.example.woojinroom.daeran.TapPage.MainPage;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import com.example.woojinroom.daeran.DB.CustomAdapter;
+import com.example.woojinroom.daeran.DB.DataBases;
 import com.example.woojinroom.daeran.DB.DbOpenHelper;
 import com.example.woojinroom.daeran.DB.InfoClass;
 import com.example.woojinroom.daeran.R;
@@ -29,6 +32,7 @@ public class Main extends Fragment {
     private ListView mListView;
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;
+    private SQLiteDatabase db;
     private InfoClass mInfoClass;
     private ArrayList<InfoClass> mInfoArr;
     private CustomAdapter mAdapter;
@@ -79,6 +83,10 @@ public class Main extends Fragment {
         mCursor = null;
         //DB에 있는 모든 컬럼을 가져옴
         mCursor = mDbOpenHelper.getAllColumns();
+
+        db=mDbOpenHelper.mDBHelper.getWritableDatabase();
+
+        mCursor = db.rawQuery("SELECT * FROM text3 order by date desc", null);
 
         while (mCursor.moveToNext()) {
             //InfoClass에 입력된 값을 압력

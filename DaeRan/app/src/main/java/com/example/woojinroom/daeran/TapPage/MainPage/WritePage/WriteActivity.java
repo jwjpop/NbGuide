@@ -16,6 +16,9 @@ import com.example.woojinroom.daeran.DB.DbOpenHelper;
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by woojinroom on 2018-04-23.
  */
@@ -31,6 +34,11 @@ public class WriteActivity extends AppCompatActivity {
 
     Spinner color;
     EditText title,price,content;
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +74,17 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDbOpenHelper.insertColumn("정우진", "6.24", "주황","3000"); // 나중에 입력된 값으로 처리하도록 변경
+                mDbOpenHelper.insertColumn(title.getText().toString(),getTime(),color.getSelectedItem().toString(),price.getText().toString()); // 나중에 입력된 값으로 처리하도록 변경
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(refresh_intent);
             }
         });
     }
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
+
 }

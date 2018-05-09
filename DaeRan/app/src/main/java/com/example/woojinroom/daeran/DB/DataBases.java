@@ -13,7 +13,7 @@ public class DataBases {
         public static final String DATE = "date";
         public static final String COLOR = "color";
         public static final String PRICE = "price";
-        public static final String _TABLENAME = "text2";
+        public static final String _TABLENAME = "text3"; // 수정하면 새로운 테이블 생성 됨
         public static final String _CREATE =
                 "create table " + _TABLENAME + "("
                         + _ID + " integer primary key autoincrement, "

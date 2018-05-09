@@ -11,15 +11,15 @@ import android.database.sqlite.SQLiteOpenHelper;
  * DbOpenHelper Class
  * Created by TonyChoi on 2016. 3. 29..
  */
-public class DbOpenHelper {
+public class DbOpenHelper  {
 
-    private static final String DATABASE_NAME = "text2book.db";
+    private static final String DATABASE_NAME = "text3book.db";
     private static final int DATABASE_VERSION = 1;
     public static SQLiteDatabase mDB;
-    private DataBaseHelper mDBHelper;
+    public DataBaseHelper mDBHelper;
     private Context mCtx;
 
-    private class DataBaseHelper extends SQLiteOpenHelper {
+    public class DataBaseHelper extends SQLiteOpenHelper {
 
         /**
          * 데이터베이스 헬퍼 생성자
