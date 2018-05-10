@@ -49,7 +49,7 @@ public class CustomAdapter  extends BaseAdapter {
 
         if (v == null) {
             holder = new ViewHolder();
-            v = mInflater.inflate(R.layout.listview_custom, null);
+            v = mInflater.inflate(R.layout.listview_custom_main, null);
             holder.title = (TextView)v.findViewById(R.id.tv_title);
             holder.date = (TextView)v.findViewById(R.id.tv_date);
             holder.color = (TextView)v.findViewById(R.id.tv_color);

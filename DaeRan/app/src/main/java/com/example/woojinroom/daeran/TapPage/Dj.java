@@ -12,14 +12,14 @@ import com.example.woojinroom.daeran.R;
  * Created by woojinroom on 2018-01-31.
  */
 
-public class Wait extends Fragment {
+public class Dj extends Fragment {
 
-    public static Wait newInstance() {
-        return new Wait();
+    public static Dj newInstance() {
+        return new Dj();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_wait, container, false); // 여기서 UI를 생성해서 View를 return
+        return inflater.inflate(R.layout.fragment_dj, container, false); // 여기서 UI를 생성해서 View를 return
     }
 }

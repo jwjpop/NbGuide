@@ -1,10 +1,11 @@
-package com.example.woojinroom.daeran.TapPage;
+package com.example.woojinroom.daeran.TapPage.InfoPage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.woojinroom.daeran.R;
 
@@ -14,12 +15,19 @@ import com.example.woojinroom.daeran.R;
 
 public class Info extends Fragment {
 
+    Button map,menu1,menu2;
     public static Info newInstance() {
         return new Info();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_info, container, false); // 여기서 UI를 생성해서 View를 return
+        View view;
+        view =  inflater.inflate(R.layout.fragment_info, container, false);
+
+        map =(Button)view.findViewById(R.id.button_map);
+        menu1 =(Button)view.findViewById(R.id.button_menu1);
+        menu2 =(Button)view.findViewById(R.id.button_menu2);
+        return view;
     }
 }

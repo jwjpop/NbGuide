@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.woojinroom.daeran.DB.CustomAdapter;
 import com.example.woojinroom.daeran.DB.DataBases;
 import com.example.woojinroom.daeran.DB.DbOpenHelper;
@@ -67,6 +70,12 @@ public class Main extends Fragment {
         //리스트뷰에 사용할 어댑터 초기화(파라메터 Context, ArrayList<InfoClass>)
         mAdapter = new CustomAdapter(getContext(), mInfoArr);
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
+            }
+        });
         //리스트뷰의 아이템을 길게 눌렀을 경우 삭제하기 위해 롱클릭 리스너 따로 설정
 
         return view;

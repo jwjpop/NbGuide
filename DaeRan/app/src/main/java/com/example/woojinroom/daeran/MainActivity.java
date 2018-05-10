@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
-import com.example.woojinroom.daeran.TapPage.Info;
+import com.example.woojinroom.daeran.TapPage.InfoPage.Info;
 import com.example.woojinroom.daeran.TapPage.MainPage.Main;
 import com.example.woojinroom.daeran.TapPage.MyPage;
-import com.example.woojinroom.daeran.TapPage.Wait;
+import com.example.woojinroom.daeran.TapPage.Dj;
 
 
 public class MainActivity extends FragmentActivity {
@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity {
                     replaceFragment(Main.newInstance());
                     return true;
                 case R.id.action_two:
-                    replaceFragment(Wait.newInstance());
+                    replaceFragment(Dj.newInstance());
                     return true;
                 case R.id.action_three:
                     replaceFragment(Info.newInstance());
