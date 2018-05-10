@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="엔비 지도"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        />
         <Button
             android:id="@+id/button_menu1"
             android:layout_width="match_parent"
