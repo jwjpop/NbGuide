@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ListView
+        android:id="@+id/listview_dj"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#000000"
+        android:layout_weight="1"
+        android:dividerHeight="1.5dp"
+        android:choiceMode="singleChoice">
+    </ListView>
+        <!--하단바에 가리지 않게 하려는 장치 코드낭비느낌-->
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="dj" />
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@xml/color"
+        app:itemTextColor="@xml/color"
+        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
+        app:menu="@xml/menu" />
+    </LinearLayout>
 </FrameLayout>

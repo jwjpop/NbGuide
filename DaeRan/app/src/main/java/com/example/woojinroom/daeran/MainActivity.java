@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.example.woojinroom.daeran.TapPage.InfoPage.Info;
 import com.example.woojinroom.daeran.TapPage.MainPage.Main;
 import com.example.woojinroom.daeran.TapPage.MyPage;
-import com.example.woojinroom.daeran.TapPage.Dj;
+import com.example.woojinroom.daeran.TapPage.DJPage.Dj;
 
 
 public class MainActivity extends FragmentActivity {
