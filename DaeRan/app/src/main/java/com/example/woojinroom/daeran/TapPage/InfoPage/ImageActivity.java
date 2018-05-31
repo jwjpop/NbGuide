@@ -35,7 +35,7 @@ public class ImageActivity extends AppCompatActivity {
         menu = get_intent.getIntExtra("menu",1);
         if(menu==1){
             imageView.setImageResource(R.drawable.menu1_180503);
-        }else
+        }else if(menu==2)
         {
             imageView.setImageResource(R.drawable.menu2_180503);
         }

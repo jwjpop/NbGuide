@@ -54,8 +54,9 @@ public class Main extends Fragment {
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
-                Intent write_intent = new Intent(getContext(), WriteActivity.class);
-                startActivity(write_intent);
+                Toast.makeText(getContext(),"글작성버튼 준비중입니다.",Toast.LENGTH_SHORT).show();
+              /*  Intent write_intent = new Intent(getContext(), WriteActivity.class);
+                startActivity(write_intent);*/
             }
         });
 

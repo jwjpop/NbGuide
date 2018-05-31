@@ -7,10 +7,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
     <Button
-        android:id="@+id/button_map"
+        android:id="@+id/button_map_1f"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="엔비 지도"
+        android:text="엔비 1층 지도"
+        android:textSize="20dp"
+        />
+        <Button
+        android:id="@+id/button_map_2f"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="엔비 2층 지도"
         android:textSize="20dp"
         />
         <Button
@@ -24,6 +31,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="메뉴판2"
+            android:textSize="20dp"/>
+        <Button
+            android:id="@+id/button_enterinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="입장 정보"
             android:textSize="20dp"/>
     </LinearLayout>
 </FrameLayout>

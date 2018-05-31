@@ -18,7 +18,7 @@ import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.WriteActivity;
 
 public class Info extends Fragment {
 
-    Button map,menu1,menu2;
+    Button map1f,map2f,menu1,menu2,enterinfo;
     public static Info newInstance() {
         return new Info();
     }
@@ -28,11 +28,19 @@ public class Info extends Fragment {
         View view;
         view =  inflater.inflate(R.layout.fragment_info, container, false);
 
-        map =(Button)view.findViewById(R.id.button_map);
-        map.setOnClickListener(new View.OnClickListener() {
+        map1f =(Button)view.findViewById(R.id.button_map_1f);
+        map1f.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"준비중입니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"1층 준비중입니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        map2f =(Button)view.findViewById(R.id.button_map_2f);
+        map2f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"2층 준비중입니다.",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -53,6 +61,14 @@ public class Info extends Fragment {
                 Intent menu2_intent = new Intent(getContext(), ImageActivity.class);
                 menu2_intent.putExtra("menu",2);
                 startActivity(menu2_intent);
+            }
+        });
+
+        enterinfo =(Button)view.findViewById(R.id.button_enterinfo);
+        enterinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"입장정보 준비중입니다.",Toast.LENGTH_SHORT).show();
             }
         });
         return view;
