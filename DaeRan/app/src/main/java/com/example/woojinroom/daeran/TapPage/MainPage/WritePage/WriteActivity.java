@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.woojinroom.daeran.DB.DbOpenHelper;
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
+import com.example.woojinroom.daeran.TapPage.MainPage.BoardClass.BoardClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,6 +37,8 @@ public class WriteActivity extends AppCompatActivity {
     TextView toolbar_title;
     ImageButton imageButtonLeft;
     ImageButton imageButtonRight;
+
+    BoardClass board ;
 
     Spinner color;
     EditText title,number,price,content;
@@ -80,8 +83,9 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString());
                 //mDbOpenHelper.insertColumn(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString()); // 나중에 입력된 값으로 처리하도록 변경
-                databaseReference.child("message").child("gdbb").setValue("2");
+                databaseReference.child("board").push().setValue(board);
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(refresh_intent);
