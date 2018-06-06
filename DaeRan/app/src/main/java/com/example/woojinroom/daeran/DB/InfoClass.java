@@ -3,12 +3,14 @@ package com.example.woojinroom.daeran.DB;
 /**
  * Created by woojinroom on 2018-04-23.
  */
+
+import com.example.woojinroom.daeran.TapPage.MainPage.BoardClass.BoardClass;
+
 /**
  * Created by TonyChoi on 2016. 3. 29..
  */
-public class InfoClass {
+public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 클래스 listview
 
-    public int _id;
     public String title;
     public String date;
     public String color;
@@ -18,31 +20,15 @@ public class InfoClass {
     //생성자
     public InfoClass(){}
 
-    /**
-     * 실질적으로 값을 입력할 때 사용되는 생성자(getter and setter)
-     * @param _id       테이블 아이디
-     * @param title
-     * @param date
-     * @param color
-     * @param number
-     * @param price
-     */
-    public InfoClass(int _id, String title, String date, String color,String number,String price) {
-        this._id = _id;
-        this.title = title;
-        this.date = date;
-        this.color = color;
-        this.number = number;
-        this.price = price;
+    public InfoClass(BoardClass boardClass) {
+
+        this.title = boardClass.getTitle();
+        this.date = boardClass.getDate();
+        this.color = boardClass.getColor();
+        this.number = boardClass.getNumber();
+        this.price = boardClass.getPrice();
     }
 
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
-    }
 
     public String getTitle() {
         return title;
@@ -83,12 +69,5 @@ public class InfoClass {
     public void setPrice(String price) {
         this.price = price;
     }
-/*  public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }*/
 }
 

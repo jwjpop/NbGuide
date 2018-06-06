@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "999093642881",
+    "firebase_url": "https://nbguide-b0993.firebaseio.com",
+    "project_id": "nbguide-b0993",
+    "storage_bucket": "nbguide-b0993.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999093642881:android:6621e2b3435ca249",
+        "android_client_info": {
+          "package_name": "com.example.woojinroom.daeran"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999093642881-brm9vdcj7armehb7hquu4dq8li143830.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.woojinroom.daeran",
+            "certificate_hash": "e752980308871be1523b0241adb5dc441fdaa406"
+          }
+        },
+        {
+          "client_id": "999093642881-lkfk2495sgi93h6hc8i91sqact38hdnf.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "999093642881-lkfk2495sgi93h6hc8i91sqact38hdnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWXI3-nkqtdNKHwHc60dVoQnq7fASNuDw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999093642881-lkfk2495sgi93h6hc8i91sqact38hdnf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
