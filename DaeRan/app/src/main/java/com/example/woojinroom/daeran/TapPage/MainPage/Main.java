@@ -1,9 +1,6 @@
 package com.example.woojinroom.daeran.TapPage.MainPage;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,13 +12,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.CustomAdapter;
-import com.example.woojinroom.daeran.DB.DataBases;
-import com.example.woojinroom.daeran.DB.DbOpenHelper;
 import com.example.woojinroom.daeran.DB.InfoClass;
 import com.example.woojinroom.daeran.R;
+import com.example.woojinroom.daeran.TapPage.MainPage.BoardClass.BoardClass;
 import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.WriteActivity;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -29,18 +32,17 @@ import java.util.ArrayList;
  */
 
 public class Main extends Fragment {
-
     ImageButton mImageButton;
 
     private ListView mListView;
-    private DbOpenHelper mDbOpenHelper;
-    private Cursor mCursor;
-    private SQLiteDatabase db;
+
     private InfoClass mInfoClass;
     private ArrayList<InfoClass> mInfoArr;
     private CustomAdapter mAdapter;
 
-
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+    private ChildEventListener mChild;
 
     public static Main newInstance() {
         return new Main();
@@ -48,9 +50,11 @@ public class Main extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view;
+        View view,custom_view;
         view = inflater.inflate(R.layout.fragment_main, container, false); // 여기서 UI를 생성해서 View를 return
+        custom_view = inflater.inflate(R.layout.listview_custom_main, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
+
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
@@ -59,21 +63,41 @@ public class Main extends Fragment {
             }
         });
 
-        mDbOpenHelper = new DbOpenHelper(getContext());
-        mDbOpenHelper.open();
-
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
 
-        doWhileCursorToArray();
+       // doWhileCursorToArray();
+        initDatabase();
 
         //리스트뷰에 사용할 어댑터 초기화(파라메터 Context, ArrayList<InfoClass>)
         mAdapter = new CustomAdapter(getContext(), mInfoArr);
         mListView.setAdapter(mAdapter);
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
+            }
+        });
+        mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            mInfoArr.clear();
+                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                    BoardClass boardClass = messageData.getValue(BoardClass.class);
+                    InfoClass infoClass = new InfoClass(boardClass);
+                    mInfoArr.add(infoClass);
+                    // child 내에 있는 데이터만큼 반복합니다.
+                }
+                Collections.reverse(mInfoArr);
+                mAdapter.notifyDataSetChanged();
+                mListView.setSelection(mAdapter.getCount() - 1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
         //리스트뷰의 아이템을 길게 눌렀을 경우 삭제하기 위해 롱클릭 리스너 따로 설정
@@ -87,43 +111,46 @@ public class Main extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    private void doWhileCursorToArray() {
-
-        mCursor = null;
-        //DB에 있는 모든 컬럼을 가져옴
-        mCursor = mDbOpenHelper.getAllColumns();
-
-        db=mDbOpenHelper.mDBHelper.getWritableDatabase();
-
-        mCursor = db.rawQuery("SELECT * FROM text4 order by date desc", null);
-
-        while (mCursor.moveToNext()) {
-            //InfoClass에 입력된 값을 압력
-            mInfoClass = new InfoClass(
-                    mCursor.getInt(mCursor.getColumnIndex("_id")),
-                    mCursor.getString(mCursor.getColumnIndex("title")),
-                    mCursor.getString(mCursor.getColumnIndex("date")),
-                    mCursor.getString(mCursor.getColumnIndex("color")),
-                    mCursor.getString(mCursor.getColumnIndex("number")),
-                    mCursor.getString(mCursor.getColumnIndex("price"))
-            );
-            //입력된 값을 가지고 있는 InfoClass를 InfoArray에 add
-            mInfoArr.add(mInfoClass);
-        }
-        //Cursor 닫기
-        mCursor.close();
-    }
-
     //액티비티가 종료 될 때 디비를 닫아준다
     @Override
     public void onDestroy() {
-        mDbOpenHelper.close();
+        mReference.removeEventListener(mChild);
         super.onDestroy();
+
     }
 
+    private void initDatabase() {
 
+        mDatabase = FirebaseDatabase.getInstance();
 
+        mReference = mDatabase.getReference("board");
 
+        mChild = new ChildEventListener() {
 
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mReference.addChildEventListener(mChild);
+    }
 }

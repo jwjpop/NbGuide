@@ -1,7 +1,6 @@
 package com.example.woojinroom.daeran.TapPage.MainPage.WritePage;
 
 import android.content.Intent;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.woojinroom.daeran.DB.DbOpenHelper;
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
 import com.example.woojinroom.daeran.TapPage.MainPage.BoardClass.BoardClass;
@@ -27,8 +25,6 @@ import java.util.Date;
  */
 
 public class WriteActivity extends AppCompatActivity {
-
-    private DbOpenHelper mDbOpenHelper;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -51,12 +47,6 @@ public class WriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
-        mDbOpenHelper = new DbOpenHelper(this);
-        try {
-            mDbOpenHelper.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
@@ -83,9 +73,9 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString());
-                //mDbOpenHelper.insertColumn(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString()); // 나중에 입력된 값으로 처리하도록 변경
+                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString(),"test","admin");
                 databaseReference.child("board").push().setValue(board);
+
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(refresh_intent);

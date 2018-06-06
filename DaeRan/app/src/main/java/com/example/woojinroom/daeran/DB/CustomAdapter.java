@@ -28,6 +28,7 @@ public class CustomAdapter  extends BaseAdapter {
         mInflater = LayoutInflater.from(c);
         InfoArr = array;
     }
+
     @Override
     public int getCount() {
         return InfoArr.size();
