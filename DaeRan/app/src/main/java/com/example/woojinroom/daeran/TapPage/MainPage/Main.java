@@ -77,6 +77,8 @@ public class Main extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
+                Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
+                startActivity(doc_intent);
             }
         });
         mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름

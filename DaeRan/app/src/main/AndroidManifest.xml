@@ -21,6 +21,9 @@
         <activity android:name=".TapPage.MainPage.WritePage.WriteActivity">
 
         </activity>
+        <activity android:name=".TapPage.MainPage.DocumentActivity">
+
+        </activity>
     </application>
 
 </manifest>
