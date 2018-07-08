@@ -21,7 +21,11 @@
         <activity android:name=".TapPage.MainPage.WritePage.WriteActivity">
 
         </activity>
+
+        <activity android:name=".TapPage.MainPage.DocumentActivity">
+
         <activity android:name=".TapPage.InfoPage.ImageActivity">
+
 
         </activity>
     </application>
