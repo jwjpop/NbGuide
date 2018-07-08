@@ -16,6 +16,8 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
     public String color;
     public String number;
     public String price;
+    public String content;
+    public String user;
 
     //생성자
     public InfoClass(){}
@@ -27,8 +29,25 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
         this.color = boardClass.getColor();
         this.number = boardClass.getNumber();
         this.price = boardClass.getPrice();
+        this.content = boardClass.getContent();
+        this.user = boardClass.getUser();
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public String getTitle() {
         return title;

@@ -12,6 +12,7 @@ public class DocumentActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView toolbar_user,title,color,number,price,content,date;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);

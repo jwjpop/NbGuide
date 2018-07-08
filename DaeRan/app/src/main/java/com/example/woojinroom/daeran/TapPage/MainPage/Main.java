@@ -1,14 +1,15 @@
 package com.example.woojinroom.daeran.TapPage.MainPage;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.CustomAdapter;
@@ -76,7 +77,30 @@ public class Main extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
+
+                TextView tx_title = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_title);
+                String st_title = tx_title.getText().toString();
+
+                TextView tx_color = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_color);
+                String st_color = tx_color.getText().toString();
+
+                TextView tx_number = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_number);
+                String st_number = tx_number.getText().toString();
+
+                TextView tx_price = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_price);
+                String st_price = tx_price.getText().toString();
+
+                TextView tx_date = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_date);
+                String st_date = tx_date.getText().toString();
+
+                TextView tx_content = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_content);
+                String st_content = tx_content.getText().toString();
+
+                TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
+                String st_user = tx_user.getText().toString();
+
+
+                Toast.makeText(getContext(),st_title,Toast.LENGTH_SHORT).show();
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
                 startActivity(doc_intent);
             }
