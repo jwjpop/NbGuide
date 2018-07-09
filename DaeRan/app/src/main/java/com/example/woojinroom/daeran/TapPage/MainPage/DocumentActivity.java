@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
@@ -16,7 +17,8 @@ public class DocumentActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView toolbar_user,title,color,number,price,content,date;
 
-    ImageButton imageButtonLeft;
+    ImageButton imageButtonLeft,imageButtonRight,imageButtonRightSuv;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
@@ -25,16 +27,6 @@ public class DocumentActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_user = (TextView) toolbar.findViewById(R.id.title);
         toolbar_user.setText("USER");
-
-        imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
-        imageButtonLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh_intent);
-                finish();
-            }
-        });
 
         title = (TextView)findViewById(R.id.doc_title);
         color = (TextView)findViewById(R.id.doc_color);
@@ -60,7 +52,56 @@ public class DocumentActivity extends AppCompatActivity {
         date.setText(st_date);
         toolbar_user.setText(st_user);
 
+        imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
+        imageButtonLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(refresh_intent);
+                finish();
+            }
+        });
 
+        imageButtonRightSuv = (ImageButton) toolbar.findViewById(R.id.imagebutton_right_suv);
+        imageButtonRightSuv.setVisibility(View.VISIBLE);
+        imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
 
+        //작성자,관리자일 경우와 일반인의 경우
+        if(st_user.equals("admin")) {
+            imageButtonRightSuv.setBackgroundResource(R.drawable.edit);
+            imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "admin_suv", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            imageButtonRight.setBackgroundResource(R.drawable.delete);
+            imageButtonRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "admin_right", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else
+        {
+            imageButtonRightSuv.setBackgroundResource(R.drawable.siren);
+            
+            imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "suv", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            imageButtonRight.setBackgroundResource(R.drawable.message);
+            imageButtonRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "right", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

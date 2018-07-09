@@ -74,7 +74,9 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //사용자 계정 넘겨주는 부분 수정
-                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString(),content.getText().toString(),"admin");
+                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),
+                        number.getText().toString(),price.getText().toString(),content.getText().toString(),
+                        "admin");
                 databaseReference.child("board").push().setValue(board);
 
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
