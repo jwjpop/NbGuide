@@ -43,5 +43,24 @@ public class DocumentActivity extends AppCompatActivity {
         content = (TextView)findViewById(R.id.doc_content);
         date = (TextView)findViewById(R.id.doc_date);
 
+        Intent doc_intent = getIntent();
+        String st_title = doc_intent.getStringExtra("title");
+        String st_color = doc_intent.getStringExtra("color");
+        String st_number = doc_intent.getStringExtra("number");
+        String st_price = doc_intent.getStringExtra("price");
+        String st_date = doc_intent.getStringExtra("date");
+        String st_content = doc_intent.getStringExtra("content");
+        String st_user = doc_intent.getStringExtra("user");
+
+        title.setText(st_title);
+        color.setText(st_color);
+        number.setText(st_number);
+        price.setText(st_price);
+        content.setText(st_content);
+        date.setText(st_date);
+        toolbar_user.setText(st_user);
+
+
+
     }
 }

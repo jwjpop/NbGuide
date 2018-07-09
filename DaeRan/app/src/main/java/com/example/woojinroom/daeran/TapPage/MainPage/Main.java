@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.CustomAdapter;
 import com.example.woojinroom.daeran.DB.InfoClass;
@@ -98,10 +97,15 @@ public class Main extends Fragment {
 
                 TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
                 String st_user = tx_user.getText().toString();
-
-
-                Toast.makeText(getContext(),st_title,Toast.LENGTH_SHORT).show();
+                
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
+                doc_intent.putExtra("title",st_title);
+                doc_intent.putExtra("color",st_color);
+                doc_intent.putExtra("number",st_number);
+                doc_intent.putExtra("price",st_price);
+                doc_intent.putExtra("date",st_date);
+                doc_intent.putExtra("content",st_content);
+                doc_intent.putExtra("user",st_user);
                 startActivity(doc_intent);
             }
         });
