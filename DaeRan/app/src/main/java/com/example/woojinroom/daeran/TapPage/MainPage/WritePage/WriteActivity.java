@@ -73,7 +73,8 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString(),"test","admin");
+                //사용자 계정 넘겨주는 부분 수정
+                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),number.getText().toString(),price.getText().toString(),content.getText().toString(),"admin");
                 databaseReference.child("board").push().setValue(board);
 
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();

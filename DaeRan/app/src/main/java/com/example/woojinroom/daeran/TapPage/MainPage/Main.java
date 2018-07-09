@@ -97,7 +97,7 @@ public class Main extends Fragment {
 
                 TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
                 String st_user = tx_user.getText().toString();
-                
+
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
                 doc_intent.putExtra("title",st_title);
                 doc_intent.putExtra("color",st_color);
