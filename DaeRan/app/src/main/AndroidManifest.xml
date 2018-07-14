@@ -28,6 +28,9 @@
         <activity android:name=".TapPage.InfoPage.ImageActivity">
 
         </activity>
+        <activity android:name=".TapPage.MyPage.SignUpActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <Button
         android:layout_gravity="center"
         android:gravity="center"
-        android:id="@+id/textView"
+        android:id="@+id/button_guest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24dp"
-        android:text="준비중입니다" />
+        android:text="회원가입을 해주세요" />
 </FrameLayout>
