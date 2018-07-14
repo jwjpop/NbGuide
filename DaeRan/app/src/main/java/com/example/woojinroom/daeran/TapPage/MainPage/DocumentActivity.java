@@ -87,7 +87,7 @@ public class DocumentActivity extends AppCompatActivity {
         else
         {
             imageButtonRightSuv.setBackgroundResource(R.drawable.siren);
-            
+
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
