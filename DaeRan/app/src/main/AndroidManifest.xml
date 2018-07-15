@@ -31,6 +31,9 @@
         <activity android:name=".TapPage.MyPage.SignUpActivity">
 
         </activity>
+        <activity android:name=".TapPage.MyPage.LoginActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
@@ -18,35 +19,37 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 /**
- * Created by woojin on 2018-07-14.
+ * Created by woojin on 2018-07-15.
  */
 
-public class SignUpActivity extends AppCompatActivity {
-
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference();
+public class LoginActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
 
     Toolbar toolbar;
+
+    TextView text_toolbar;
+
     ImageButton imageButtonLeft,imageButtonRight;
-    EditText editText_id,editText_pw,editText_pwchk;
-    String id,pw,pwchk;
-    Button button_equals;
+    EditText editText_id,editText_pw;
+    String id,pw;
+    String equal_id,equal_pw;
+
+    Button button_signUp;
 
     int id_count=0;
-    int id_chk=0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        editText_id=(EditText)findViewById(R.id.edit_id);
-        editText_pw=(EditText)findViewById(R.id.edit_pw);
-        editText_pwchk=(EditText)findViewById(R.id.edit_pwchk);
+        text_toolbar = (TextView)toolbar.findViewById(R.id.title);
+        text_toolbar.setText("로그인");
 
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
@@ -58,21 +61,23 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        editText_id = (EditText)findViewById(R.id.edit_id);
+        editText_pw = (EditText)findViewById(R.id.edit_pw);
+
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("user"); // 변경값을 확인할 child 이름
 
-        button_equals = (Button)findViewById(R.id.button_equals);
-        button_equals.setOnClickListener(new View.OnClickListener() {
+        imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
+        imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-                id_chk = 0;
                 id_count = 0;
 
                 id = editText_id.getText().toString();
+                pw = editText_pw.getText().toString();
 
-                if (!id.equals("")) {
-
+                if (!id.equals("")) { // 공백이 아닌 경우
                     mReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,16 +86,22 @@ public class SignUpActivity extends AppCompatActivity {
                                 // child 내에 있는 데이터만큼 반복합니다.
                                 if (id.equals(db_user.getId())) {
                                     id_count++;
+                                    equal_id=db_user.getId();
+                                    equal_pw=db_user.getPw();
                                 }
                             }
-
-                            if (id_count != 0) {
-                                Toast.makeText(getApplicationContext(), "중복 된 아이디 입니다.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
-                                id_chk = 1;
-                             }
-
+                            if (id_count != 0) { // 계정이 있는 경우
+                                if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
+                                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
+                                    Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(login_intent);
+                                    finish();
+                                } else{ //아이디는 맞지만 비밀번호가 다른 경우
+                                    Toast.makeText(getApplicationContext(),"비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else { // 계정이 없는 경우
+                                Toast.makeText(getApplicationContext(), "계정을 확인해주세요", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -98,39 +109,20 @@ public class SignUpActivity extends AppCompatActivity {
 
                         }
                     });
-
-                } else {
+                }else{ // 공백인 경우
                     Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
-        imageButtonRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                id = editText_id.getText().toString();
-                pw = editText_pw.getText().toString();
-                pwchk = editText_pwchk.getText().toString();
 
-                if(id_chk==1) {
-                    if (pw.equals(pwchk)) {
-                        UserClass userClass = new UserClass(id, pw);
-                        databaseReference.child("user").push().setValue(userClass);
-                        Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
-                        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(refresh_intent);
-                        finish();
-                    } else {
-                        Toast.makeText(v.getContext(), "pw와 pwchk가 다릅니다", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"중복 확인을 먼저 해주세요.",Toast.LENGTH_SHORT).show();
-                }
+        button_signUp=(Button)findViewById(R.id.button_signUp);
+        button_signUp.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent intent_signup = new Intent(getApplicationContext(),SignUpActivity.class);
+                startActivity(intent_signup);
+                finish();
             }
         });
     }
-
 }
