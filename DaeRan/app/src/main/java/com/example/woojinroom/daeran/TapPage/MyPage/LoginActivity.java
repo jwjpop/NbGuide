@@ -88,13 +88,17 @@ public class LoginActivity extends AppCompatActivity {
                                     id_count++;
                                     equal_id=db_user.getId();
                                     equal_pw=db_user.getPw();
+                                    break;
                                 }
                             }
                             if (id_count != 0) { // 계정이 있는 경우
                                 if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
                                     Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
                                     Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    login_intent.putExtra("value",1);
+                                    login_intent.putExtra("id",id);
                                     startActivity(login_intent);
+
                                     finish();
                                 } else{ //아이디는 맞지만 비밀번호가 다른 경우
                                     Toast.makeText(getApplicationContext(),"비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
@@ -119,8 +123,8 @@ public class LoginActivity extends AppCompatActivity {
         button_signUp=(Button)findViewById(R.id.button_signUp);
         button_signUp.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent intent_signup = new Intent(getApplicationContext(),SignUpActivity.class);
-                startActivity(intent_signup);
+                Intent intent_signUp = new Intent(getApplicationContext(),SignUpActivity.class);
+                startActivity(intent_signUp);
                 finish();
             }
         });

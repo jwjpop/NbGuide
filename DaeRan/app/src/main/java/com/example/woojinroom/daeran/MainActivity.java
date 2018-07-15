@@ -1,22 +1,26 @@
 package com.example.woojinroom.daeran;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
+import com.example.woojinroom.daeran.TapPage.DJPage.Dj;
 import com.example.woojinroom.daeran.TapPage.InfoPage.Info;
 import com.example.woojinroom.daeran.TapPage.MainPage.Main;
 import com.example.woojinroom.daeran.TapPage.MyPage.MyPage;
-import com.example.woojinroom.daeran.TapPage.DJPage.Dj;
 
 
 public class MainActivity extends FragmentActivity {
 
+    Intent intent;
+    int value=0;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,12 @@ public class MainActivity extends FragmentActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container, Main.newInstance()).commit();
+
+        intent = getIntent();
+        if(intent!=null) {
+            value = intent.getIntExtra("value", 0);
+            id = intent.getStringExtra("id");
+        }
 
 
     }
@@ -45,6 +55,9 @@ public class MainActivity extends FragmentActivity {
                     return true;
                 case R.id.action_four:
                     replaceFragment(MyPage.newInstance());
+                    if(value==1) {
+                        //로그인하면 이쪽으로 정보 넘어오는데 그 뒤로 마이페이지에 전달을 못하겠음. 세션으로 해결해야 할 듯
+                    }
                     return true;
             }
             return false;
