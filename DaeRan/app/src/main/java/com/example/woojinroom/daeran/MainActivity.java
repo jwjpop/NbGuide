@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.example.woojinroom.daeran.TapPage.DJPage.Dj;
 import com.example.woojinroom.daeran.TapPage.InfoPage.Info;
 import com.example.woojinroom.daeran.TapPage.MainPage.Main;
+import com.example.woojinroom.daeran.TapPage.MyPage.LoginMyPage;
 import com.example.woojinroom.daeran.TapPage.MyPage.MyPage;
 
 
@@ -34,7 +35,7 @@ public class MainActivity extends FragmentActivity {
         intent = getIntent();
         if(intent!=null) {
             value = intent.getIntExtra("value", 0);
-            id = intent.getStringExtra("id");
+            id = intent.getStringExtra("id"); //로그인한 아이디
         }
 
 
@@ -54,9 +55,10 @@ public class MainActivity extends FragmentActivity {
                     replaceFragment(Info.newInstance());
                     return true;
                 case R.id.action_four:
-                    replaceFragment(MyPage.newInstance());
-                    if(value==1) {
-                        //로그인하면 이쪽으로 정보 넘어오는데 그 뒤로 마이페이지에 전달을 못하겠음. 세션으로 해결해야 할 듯
+                    if(value==1) { //로그인 성공시
+                        replaceFragment(LoginMyPage.newInstance());
+                    } else { //로그아웃 또는 비 로그인시
+                        replaceFragment(MyPage.newInstance());
                     }
                     return true;
             }
