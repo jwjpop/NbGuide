@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.woojinroom.daeran.R;
 
@@ -18,7 +17,6 @@ import com.example.woojinroom.daeran.R;
 public class MyPage extends Fragment {
 
     public Button button_login,button_signUp;
-    public TextView text_id;
     public static MyPage newInstance() {
         return new MyPage();
     }
@@ -27,8 +25,6 @@ public class MyPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_mypage, container, false);
-
-        text_id = (TextView)view.findViewById(R.id.text_id);
 
         button_login=(Button)view.findViewById(R.id.button_login);
         button_login.setOnClickListener(new View.OnClickListener(){
@@ -49,10 +45,5 @@ public class MyPage extends Fragment {
 
 
         return view;// 여기서 UI를 생성해서 View를 return
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 }

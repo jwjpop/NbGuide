@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (id_count != 0) { // 계정이 있는 경우
                                 if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
                                     Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
+
                                     Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
                                     login_intent.putExtra("value",1);
                                     login_intent.putExtra("id",id);

@@ -36,10 +36,12 @@ public class MainActivity extends FragmentActivity {
         if(intent!=null) {
             value = intent.getIntExtra("value", 0);
             id = intent.getStringExtra("id"); //로그인한 아이디
+
         }
 
 
     }
+
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -56,7 +58,9 @@ public class MainActivity extends FragmentActivity {
                     return true;
                 case R.id.action_four:
                     if(value==1) { //로그인 성공시
+
                         replaceFragment(LoginMyPage.newInstance());
+
                     } else { //로그아웃 또는 비 로그인시
                         replaceFragment(MyPage.newInstance());
                     }
@@ -66,10 +70,18 @@ public class MainActivity extends FragmentActivity {
         }
 
     };
+
     private void replaceFragment(Fragment fragment) {
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment).commit();
-    }
 
+        if(value==1){
+            Bundle bundle = new Bundle();
+            bundle.putString("id",id);
+            fragment.setArguments(bundle);
+        }
+
+    }
 }

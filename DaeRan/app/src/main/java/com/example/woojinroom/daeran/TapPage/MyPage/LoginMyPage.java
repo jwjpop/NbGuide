@@ -29,7 +29,12 @@ public class LoginMyPage extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_loginmypage, container, false);
 
+        Bundle extra = getArguments();
+        String id = extra.getString("id");
+
         text_id = (TextView)view.findViewById(R.id.text_id);
+        text_id.setVisibility(View.VISIBLE);
+        text_id.setText(id);
 
         button_logout=(Button)view.findViewById(R.id.button_logout);
         button_logout.setOnClickListener(new View.OnClickListener(){
