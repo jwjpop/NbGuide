@@ -48,8 +48,5 @@ public class LoginMyPage extends Fragment {
         return view;// 여기서 UI를 생성해서 View를 return
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.TapPage.DJPage.Dj;
 import com.example.woojinroom.daeran.TapPage.InfoPage.Info;
@@ -22,6 +23,9 @@ public class MainActivity extends FragmentActivity {
     Intent intent;
     int value=0;
     String id;
+
+    private long pressedTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +42,6 @@ public class MainActivity extends FragmentActivity {
             id = intent.getStringExtra("id"); //로그인한 아이디
 
         }
-
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener
@@ -58,7 +60,6 @@ public class MainActivity extends FragmentActivity {
                     return true;
                 case R.id.action_four:
                     if(value==1) { //로그인 성공시
-
                         replaceFragment(LoginMyPage.newInstance());
 
                     } else { //로그아웃 또는 비 로그인시
@@ -81,6 +82,41 @@ public class MainActivity extends FragmentActivity {
             Bundle bundle = new Bundle();
             bundle.putString("id",id);
             fragment.setArguments(bundle);
+        }
+
+    }
+
+    public interface onKeyBackPressedListener {
+        public void onBack();
+    }
+    private onKeyBackPressedListener mOnKeyBackPressedListener;
+
+    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener) {
+        mOnKeyBackPressedListener = listener;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mOnKeyBackPressedListener != null) {
+            mOnKeyBackPressedListener.onBack();
+        } else {
+            if (pressedTime == 0) {
+                Toast.makeText(getApplicationContext(),
+                        " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                pressedTime = System.currentTimeMillis();
+            } else {
+                int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+                if (seconds > 2000) {
+                    Toast.makeText(getApplicationContext(),
+                            " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                    pressedTime = 0;
+                } else {
+                    super.onBackPressed();
+                    finish();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                }
+            }
         }
 
     }

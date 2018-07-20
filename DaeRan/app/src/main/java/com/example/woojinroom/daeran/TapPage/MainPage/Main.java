@@ -183,4 +183,21 @@ public class Main extends Fragment {
         };
         mReference.addChildEventListener(mChild);
     }
+
+    /*@Override
+    public void onBack() {
+
+            MainActivity activity = (MainActivity) getActivity();
+            activity.setOnKeyBackPressedListener(null);
+            activity.onBackPressed();
+
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).setOnKeyBackPressedListener(this);
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, mainFragment).commit();
+    }*/
+    //나중에 뒤로가기 수정
 }
