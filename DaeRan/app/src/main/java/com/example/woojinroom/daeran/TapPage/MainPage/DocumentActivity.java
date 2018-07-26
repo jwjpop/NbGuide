@@ -43,7 +43,7 @@ public class DocumentActivity extends AppCompatActivity {
         String st_date = doc_intent.getStringExtra("date");
         String st_content = doc_intent.getStringExtra("content");
         String st_user = doc_intent.getStringExtra("user"); // 글쓴이
-        String login_id = doc_intent.getStringExtra("login_id"); //로그인한 사람 또는 게스트
+        String login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
 
         title.setText(st_title);
         color.setText(st_color);
@@ -52,6 +52,8 @@ public class DocumentActivity extends AppCompatActivity {
         content.setText(st_content);
         date.setText(st_date);
         toolbar_user.setText(st_user);
+
+        Toast.makeText(getApplicationContext(),login_id,Toast.LENGTH_SHORT).show();
 
         //왼쪽 버튼
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
@@ -69,7 +71,7 @@ public class DocumentActivity extends AppCompatActivity {
         imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
 
         //작성자,관리자일 경우와 일반인의 경우
-        if(st_user.equals("admin")) {
+        if(st_user.equals(login_id)) {
             imageButtonRightSuv.setBackgroundResource(R.drawable.edit);
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override

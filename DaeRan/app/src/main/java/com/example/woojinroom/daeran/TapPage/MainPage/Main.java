@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.CustomAdapter;
 import com.example.woojinroom.daeran.DB.InfoClass;
@@ -59,7 +58,13 @@ public class Main extends Fragment {
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
+                Bundle extra = getArguments();
+                String login_id="guest";
+                if(extra!=null) {
+                    login_id = extra.getString("id");
+                }
                 Intent write_intent = new Intent(getContext(), WriteActivity.class);
+                write_intent.putExtra("id",login_id);
                 startActivity(write_intent);
             }
         });
@@ -104,7 +109,6 @@ public class Main extends Fragment {
                 if(extra!=null) {
                     login_id = extra.getString("id");
                 }
-                Toast.makeText(getContext(),login_id,Toast.LENGTH_SHORT).show();
 
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
                 doc_intent.putExtra("title",st_title);

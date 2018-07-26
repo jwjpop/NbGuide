@@ -73,15 +73,19 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent user = getIntent();
+
                 //사용자 계정 넘겨주는 부분 수정
                 board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),
                         number.getText().toString(),price.getText().toString(),content.getText().toString(),
-                        "admin");
+                        user.getStringExtra("id"));
+
                 databaseReference.child("board").push().setValue(board);
 
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(refresh_intent);
+                finish();
             }
         });
     }

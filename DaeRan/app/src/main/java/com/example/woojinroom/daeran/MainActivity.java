@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container, Main.newInstance()).commit();
 
+        //만약 로그인 기록이 있다면 로그인 자체가 어렵기 때문에 굳이 여기서 빡세게 돌릴 필요 없이 유무만 확인
         SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
 
         loginId = auto.getString("inputId",null);
