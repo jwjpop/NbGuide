@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.CustomAdapter;
 import com.example.woojinroom.daeran.DB.InfoClass;
@@ -63,9 +64,13 @@ public class Main extends Fragment {
                 if(extra!=null) {
                     login_id = extra.getString("id");
                 }
-                Intent write_intent = new Intent(getContext(), WriteActivity.class);
-                write_intent.putExtra("id",login_id);
-                startActivity(write_intent);
+                if(login_id.equals("guest")){
+                    Toast.makeText(getContext(),"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent write_intent = new Intent(getContext(), WriteActivity.class);
+                    write_intent.putExtra("id", login_id);
+                    startActivity(write_intent);
+                }
             }
         });
 
