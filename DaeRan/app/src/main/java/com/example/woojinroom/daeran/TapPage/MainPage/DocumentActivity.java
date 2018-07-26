@@ -42,7 +42,8 @@ public class DocumentActivity extends AppCompatActivity {
         String st_price = doc_intent.getStringExtra("price");
         String st_date = doc_intent.getStringExtra("date");
         String st_content = doc_intent.getStringExtra("content");
-        String st_user = doc_intent.getStringExtra("user");
+        String st_user = doc_intent.getStringExtra("user"); // 글쓴이
+        String login_id = doc_intent.getStringExtra("login_id"); //로그인한 사람 또는 게스트
 
         title.setText(st_title);
         color.setText(st_color);
@@ -52,6 +53,7 @@ public class DocumentActivity extends AppCompatActivity {
         date.setText(st_date);
         toolbar_user.setText(st_user);
 
+        //왼쪽 버튼
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override

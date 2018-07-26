@@ -1,6 +1,8 @@
 package com.example.woojinroom.daeran.TapPage.MyPage;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -93,11 +95,16 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             if (id_count != 0) { // 계정이 있는 경우
                                 if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
+
                                     Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
 
+                                    SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                                    SharedPreferences.Editor autoLogin = auto.edit();
+                                    autoLogin.putString("inputId", id);
+                                    autoLogin.putString("inputPwd", pw);
+                                    autoLogin.commit();
+
                                     Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    login_intent.putExtra("value",1);
-                                    login_intent.putExtra("id",id);
                                     startActivity(login_intent);
                                     finish();
                                 } else{ //아이디는 맞지만 비밀번호가 다른 경우

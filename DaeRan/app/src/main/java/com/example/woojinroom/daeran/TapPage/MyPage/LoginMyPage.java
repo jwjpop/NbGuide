@@ -1,6 +1,8 @@
 package com.example.woojinroom.daeran.TapPage.MyPage;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -39,9 +41,16 @@ public class LoginMyPage extends Fragment {
         button_logout=(Button)view.findViewById(R.id.button_logout);
         button_logout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
+
+                SharedPreferences auto = getActivity().getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = auto.edit();
+                //editor.clear()는 auto에 들어있는 모든 정보를 기기에서 지웁니다.
+                editor.clear();
+                editor.commit();
+
                 Intent logout_intent = new Intent(getContext(), MainActivity.class);
-                logout_intent.putExtra("value",0);
                 startActivity(logout_intent);
+                getActivity().finish();
             }
         });
 

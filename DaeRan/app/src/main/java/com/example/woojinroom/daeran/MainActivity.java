@@ -1,6 +1,8 @@
 package com.example.woojinroom.daeran;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,6 +25,9 @@ public class MainActivity extends FragmentActivity {
     Intent intent;
     int value=0;
     String id;
+    String loginId, loginPwd;
+
+    int login=0;
 
     private long pressedTime = 0;
 
@@ -36,12 +41,16 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.container, Main.newInstance()).commit();
 
-        intent = getIntent();
-        if(intent!=null) {
-            value = intent.getIntExtra("value", 0);
-            id = intent.getStringExtra("id"); //로그인한 아이디
+        SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
 
+        loginId = auto.getString("inputId",null);
+        loginPwd = auto.getString("inputPwd",null);
+
+        if(loginId !=null && loginPwd != null) {
+            login=1;
+            id=loginId;
         }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener
@@ -59,7 +68,7 @@ public class MainActivity extends FragmentActivity {
                     replaceFragment(Info.newInstance());
                     return true;
                 case R.id.action_four:
-                    if(value==1) { //로그인 성공시
+                    if(login==1) { //로그인 성공시
                         replaceFragment(LoginMyPage.newInstance());
 
                     } else { //로그아웃 또는 비 로그인시
@@ -78,7 +87,7 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment).commit();
 
-        if(value==1){
+        if(login==1){
             Bundle bundle = new Bundle();
             bundle.putString("id",id);
             fragment.setArguments(bundle);
@@ -119,5 +128,11 @@ public class MainActivity extends FragmentActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        replaceFragment(Main.newInstance());
     }
 }

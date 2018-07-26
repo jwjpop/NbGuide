@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.DB.CustomAdapter;
 import com.example.woojinroom.daeran.DB.InfoClass;
@@ -98,6 +99,13 @@ public class Main extends Fragment {
                 TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
                 String st_user = tx_user.getText().toString();
 
+                Bundle extra = getArguments();
+                String login_id="guest";
+                if(extra!=null) {
+                    login_id = extra.getString("id");
+                }
+                Toast.makeText(getContext(),login_id,Toast.LENGTH_SHORT).show();
+
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
                 doc_intent.putExtra("title",st_title);
                 doc_intent.putExtra("color",st_color);
@@ -106,7 +114,9 @@ public class Main extends Fragment {
                 doc_intent.putExtra("date",st_date);
                 doc_intent.putExtra("content",st_content);
                 doc_intent.putExtra("user",st_user);
+                doc_intent.putExtra("login",login_id);
                 startActivity(doc_intent);
+                getActivity().finish();
             }
         });
         mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
