@@ -1,7 +1,6 @@
 package com.example.woojinroom.daeran;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,8 +21,6 @@ import com.example.woojinroom.daeran.TapPage.MyPage.MyPage;
 
 public class MainActivity extends FragmentActivity {
 
-    Intent intent;
-    int value=0;
     String id;
     String loginId, loginPwd;
 

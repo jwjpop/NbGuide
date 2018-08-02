@@ -59,11 +59,14 @@ public class Main extends Fragment {
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
+
                 Bundle extra = getArguments();
                 String login_id="guest";
+
                 if(extra!=null) {
                     login_id = extra.getString("id");
                 }
+
                 if(login_id.equals("guest")){
                     Toast.makeText(getContext(),"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
                 } else {

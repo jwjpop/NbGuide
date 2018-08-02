@@ -71,7 +71,7 @@ public class DocumentActivity extends AppCompatActivity {
         imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
 
         //작성자,관리자일 경우와 일반인의 경우
-        if(st_user.equals(login_id)) {
+        if(login_id.equals(st_user)) {
             imageButtonRightSuv.setBackgroundResource(R.drawable.edit);
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,10 +88,27 @@ public class DocumentActivity extends AppCompatActivity {
                 }
             });
         }
+        else if(login_id.equals("guest")){
+            imageButtonRightSuv.setBackgroundResource(R.drawable.siren);
+            imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            imageButtonRight.setBackgroundResource(R.drawable.message);
+            imageButtonRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         else
         {
-            imageButtonRightSuv.setBackgroundResource(R.drawable.siren);
 
+            imageButtonRightSuv.setBackgroundResource(R.drawable.siren);
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
