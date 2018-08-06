@@ -33,6 +33,7 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
         this.user = boardClass.getUser();
     }
 
+
     public String getContent() {
         return content;
     }

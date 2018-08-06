@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DocumentActivity extends AppCompatActivity {
 
@@ -18,6 +20,11 @@ public class DocumentActivity extends AppCompatActivity {
     TextView toolbar_user,title,color,number,price,content,date;
 
     ImageButton imageButtonLeft,imageButtonRight,imageButtonRightSuv;
+
+    String st_title,st_color,st_number,st_price,st_date,st_content,st_user;
+
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +43,13 @@ public class DocumentActivity extends AppCompatActivity {
         date = (TextView)findViewById(R.id.doc_date);
 
         Intent doc_intent = getIntent();
-        String st_title = doc_intent.getStringExtra("title");
-        String st_color = doc_intent.getStringExtra("color");
-        String st_number = doc_intent.getStringExtra("number");
-        String st_price = doc_intent.getStringExtra("price");
-        String st_date = doc_intent.getStringExtra("date");
-        String st_content = doc_intent.getStringExtra("content");
-        String st_user = doc_intent.getStringExtra("user"); // 글쓴이
+        st_title = doc_intent.getStringExtra("title");
+        st_color = doc_intent.getStringExtra("color");
+        st_number = doc_intent.getStringExtra("number");
+        st_price = doc_intent.getStringExtra("price");
+        st_date = doc_intent.getStringExtra("date");     // 작성 시간
+        st_content = doc_intent.getStringExtra("content");
+        st_user = doc_intent.getStringExtra("user"); // 작성자
         String login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
 
         title.setText(st_title);
@@ -76,7 +83,7 @@ public class DocumentActivity extends AppCompatActivity {
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "admin_suv", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "수정", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -84,7 +91,13 @@ public class DocumentActivity extends AppCompatActivity {
             imageButtonRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "admin_right", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "삭제", Toast.LENGTH_SHORT).show();
+                    mDatabase = FirebaseDatabase.getInstance();
+                    mReference = mDatabase.getReference("board/"+st_user+st_date);
+                    mReference.removeValue();
+                    Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(login_intent);
+                    finish();
                 }
             });
         }
@@ -112,7 +125,7 @@ public class DocumentActivity extends AppCompatActivity {
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "suv", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "신고", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -120,7 +133,7 @@ public class DocumentActivity extends AppCompatActivity {
             imageButtonRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "right", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "메세지", Toast.LENGTH_SHORT).show();
                 }
             });
         }

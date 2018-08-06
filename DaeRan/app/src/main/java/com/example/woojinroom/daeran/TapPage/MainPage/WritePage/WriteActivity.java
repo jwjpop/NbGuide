@@ -80,7 +80,7 @@ public class WriteActivity extends AppCompatActivity {
                         number.getText().toString(),price.getText().toString(),content.getText().toString(),
                         user.getStringExtra("id"));
 
-                databaseReference.child("board").push().setValue(board);
+                databaseReference.child("board").child(user.getStringExtra("id")+getTime()).setValue(board);
 
                 Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);

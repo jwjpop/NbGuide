@@ -22,6 +22,9 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
         this.content = content;
         this.user = user;
     }
+
+
+
     public String getTitle() {
         return title;
     }

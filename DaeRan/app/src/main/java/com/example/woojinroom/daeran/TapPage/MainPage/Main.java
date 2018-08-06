@@ -127,6 +127,7 @@ public class Main extends Fragment {
                 doc_intent.putExtra("content",st_content);
                 doc_intent.putExtra("user",st_user);
                 doc_intent.putExtra("login",login_id);
+
                 startActivity(doc_intent);
                 getActivity().finish();
             }
