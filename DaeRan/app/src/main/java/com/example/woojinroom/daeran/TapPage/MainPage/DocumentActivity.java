@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
+import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.EditActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -84,6 +85,17 @@ public class DocumentActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "수정", Toast.LENGTH_SHORT).show();
+                    Intent edit_intent = new Intent(getApplicationContext(), EditActivity.class);
+
+                    edit_intent.putExtra("title",st_title);
+                    edit_intent.putExtra("number",st_number);
+                    edit_intent.putExtra("price",st_price);
+                    edit_intent.putExtra("content",st_content);
+                    edit_intent.putExtra("date",st_date);
+                    edit_intent.putExtra("user",st_user);
+
+                    startActivity(edit_intent);
+                    finish();
                 }
             });
 
@@ -95,8 +107,8 @@ public class DocumentActivity extends AppCompatActivity {
                     mDatabase = FirebaseDatabase.getInstance();
                     mReference = mDatabase.getReference("board/"+st_user+st_date);
                     mReference.removeValue();
-                    Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(login_intent);
+                    Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(refresh_intent);
                     finish();
                 }
             });

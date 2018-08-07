@@ -34,6 +34,9 @@
         <activity android:name=".TapPage.MyPage.LoginActivity">
 
         </activity>
+        <activity android:name=".TapPage.MainPage.WritePage.EditActivity">
+
+        </activity>
     </application>
 
 </manifest>
