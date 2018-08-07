@@ -138,6 +138,16 @@ public class DocumentActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "신고", Toast.LENGTH_SHORT).show();
+
+                    Intent email = new Intent(Intent.ACTION_SEND);
+                    email.setType("plain/text");
+                    // email setting 배열로 해놔서 복수 발송 가능
+                    String[] address = {"jwjppp@naver.com"};
+                    email.putExtra(Intent.EXTRA_EMAIL, address);
+                    email.putExtra(Intent.EXTRA_SUBJECT,"제목");
+                    email.putExtra(Intent.EXTRA_TEXT,"본문");
+                    startActivity(Intent.createChooser(email,"Send mail"));
+
                 }
             });
 
