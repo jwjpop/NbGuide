@@ -37,7 +37,6 @@ public class Main extends Fragment {
 
     private ListView mListView;
 
-    private InfoClass mInfoClass;
     private ArrayList<InfoClass> mInfoArr;
     private CustomAdapter mAdapter;
 
@@ -51,9 +50,8 @@ public class Main extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view,custom_view;
+        View view;
         view = inflater.inflate(R.layout.fragment_main, container, false); // 여기서 UI를 생성해서 View를 return
-        custom_view = inflater.inflate(R.layout.listview_custom_main, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
 
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
@@ -132,6 +130,9 @@ public class Main extends Fragment {
                 getActivity().finish();
             }
         });
+
+        //여기 코드엔 initdatabase 안에 이미 들어있음 복사용
+       // mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
         mReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -23,7 +23,7 @@ public class DocumentActivity extends AppCompatActivity {
 
     ImageButton imageButtonLeft,imageButtonRight,imageButtonRightSuv;
 
-    String st_title,st_color,st_number,st_price,st_date,st_content,st_user;
+    String st_title,st_color,st_number,st_price,st_date,st_content,st_user,login_id;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -52,7 +52,7 @@ public class DocumentActivity extends AppCompatActivity {
         st_date = doc_intent.getStringExtra("date");     // 작성 시간
         st_content = doc_intent.getStringExtra("content");
         st_user = doc_intent.getStringExtra("user"); // 작성자
-        String login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
+        login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
 
         title.setText(st_title);
         color.setText(st_color);
@@ -158,6 +158,8 @@ public class DocumentActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "메세지", Toast.LENGTH_SHORT).show();
                     Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    chat_intent.putExtra("user",st_user);
+                    chat_intent.putExtra("sender",login_id);
                     startActivity(chat_intent);
                     finish();
                 }
