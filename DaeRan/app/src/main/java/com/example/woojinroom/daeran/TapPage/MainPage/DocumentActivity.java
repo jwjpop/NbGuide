@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
+import com.example.woojinroom.daeran.TapPage.Chat.ChatActivity;
 import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.EditActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -156,6 +157,9 @@ public class DocumentActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "메세지", Toast.LENGTH_SHORT).show();
+                    Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    startActivity(chat_intent);
+                    finish();
                 }
             });
         }

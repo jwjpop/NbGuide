@@ -20,7 +20,7 @@ import com.example.woojinroom.daeran.R;
 
 public class LoginMyPage extends Fragment {
 
-    public Button button_logout;
+    public Button button_logout,button_chatlist;
     public TextView text_id;
     public static LoginMyPage newInstance() {
         return new LoginMyPage();
@@ -37,6 +37,13 @@ public class LoginMyPage extends Fragment {
         text_id = (TextView)view.findViewById(R.id.text_id);
         text_id.setVisibility(View.VISIBLE);
         text_id.setText(id);
+
+        button_chatlist=(Button)view.findViewById(R.id.button_chatlist);
+        button_chatlist.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+
+            }
+        });
 
         button_logout=(Button)view.findViewById(R.id.button_logout);
         button_logout.setOnClickListener(new View.OnClickListener(){
