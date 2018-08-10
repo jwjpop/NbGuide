@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
@@ -33,6 +35,8 @@ public class ChatActivity extends AppCompatActivity {
     TextView toolbar_user;
 
     ImageButton imageButtonLeft,imageButtonRight;
+
+    LinearLayout layout_chat;
 
     Button button_send;
     EditText editText_text;
@@ -71,7 +75,7 @@ public class ChatActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listView_chat);
         mChatArr = new ArrayList<ChatClass>();
 
-        mAdapter = new ChatCustomAdapter(getApplicationContext(), mChatArr);
+        mAdapter = new ChatCustomAdapter(getApplicationContext(), mChatArr,sender);
         mListView.setAdapter(mAdapter);
 
         mDatabase = FirebaseDatabase.getInstance();
@@ -81,7 +85,7 @@ public class ChatActivity extends AppCompatActivity {
             mReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-
+                    Toast.makeText(getApplicationContext(),"변경",Toast.LENGTH_SHORT).show();
                     if(dataSnapshot.getValue()==null) //첫 검사 때 방이 없는 경우
                     {
                         room=1;
@@ -106,7 +110,7 @@ public class ChatActivity extends AppCompatActivity {
                             }
                         });
                     }
-                    else { //방이 있는 경우
+                    else { //방이 아예 없거나 메세지 받은 적이 있는 모든 경우
 
                         mChatArr.clear();
                         for (DataSnapshot messageData : dataSnapshot.getChildren()) {
@@ -136,10 +140,11 @@ public class ChatActivity extends AppCompatActivity {
                     date = getTime();
                     text = editText_text.getText().toString();
                     chat_send = new ChatClass(sender, date, text);
-                    //둘만의 방이 만들어지게 경로 셋팅해야함
+
                     if (room == 0) { //원래 방이 있으면
                         databaseReference.child("chat").child(sender + " " + user).push().setValue(chat_send);
-                    } else //방이 없거나 받기만 했으면
+                    }
+                    else //방이 없거나 받기만 했으면
                     {
                         databaseReference.child("chat").child(user + " " + sender).push().setValue(chat_send);
                     }
@@ -167,5 +172,12 @@ public class ChatActivity extends AppCompatActivity {
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
         return mFormat.format(mDate);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
+        finish();
     }
 }

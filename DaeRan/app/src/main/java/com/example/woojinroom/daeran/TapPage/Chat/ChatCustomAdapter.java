@@ -1,10 +1,12 @@
 package com.example.woojinroom.daeran.TapPage.Chat;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.woojinroom.daeran.R;
@@ -20,10 +22,13 @@ public class ChatCustomAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ArrayList<ChatClass> ChatArr;
     private ViewHolder holder;
+    public LinearLayout layout_chat;
+    public String sender;
 
-    public ChatCustomAdapter(Context c, ArrayList<ChatClass> array) {
+    public ChatCustomAdapter(Context c, ArrayList<ChatClass> array,String sender) {
         mInflater = LayoutInflater.from(c);
         ChatArr = array;
+        this.sender = sender;
     }
 
     @Override
@@ -45,17 +50,12 @@ public class ChatCustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
-        if (v == null) {
-            holder = new ViewHolder();
-            v = mInflater.inflate(R.layout.listview_custom_chat, null);
-            holder.user = (TextView)v.findViewById(R.id.tv_user_id);
-            holder.date = (TextView)v.findViewById(R.id.tv_user_date);
-            holder.text = (TextView)v.findViewById(R.id.tv_user_text);
-
-            v.setTag(holder);
-        } else {
-            holder = (ViewHolder)v.getTag();
-        }
+        holder = new ViewHolder();
+        v = mInflater.inflate(R.layout.listview_custom_chat, null);
+        layout_chat = (LinearLayout)v.findViewById(R.id.layout_chat);
+        holder.user = (TextView)v.findViewById(R.id.tv_user_id);
+        holder.date = (TextView)v.findViewById(R.id.tv_user_date);
+        holder.text = (TextView)v.findViewById(R.id.tv_user_text);
 
         ChatClass chat = ChatArr.get(position);
 
@@ -64,6 +64,12 @@ public class ChatCustomAdapter extends BaseAdapter {
         holder.date.setText(chat.date);
         holder.text.setText(chat.text);
 
+        if(holder.user.getText().equals(sender)){
+            layout_chat.setGravity(Gravity.RIGHT);
+        }
+        else{
+            layout_chat.setGravity(Gravity.LEFT);
+        }
         return v;
     }
 
@@ -72,4 +78,5 @@ public class ChatCustomAdapter extends BaseAdapter {
         TextView date;
         TextView text;
     }
+
 }

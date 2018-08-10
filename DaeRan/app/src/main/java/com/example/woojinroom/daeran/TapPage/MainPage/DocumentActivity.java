@@ -62,8 +62,6 @@ public class DocumentActivity extends AppCompatActivity{
         date.setText(st_date);
         toolbar_user.setText(st_user);
 
-        Toast.makeText(getApplicationContext(),login_id,Toast.LENGTH_SHORT).show();
-
         //왼쪽 버튼
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
