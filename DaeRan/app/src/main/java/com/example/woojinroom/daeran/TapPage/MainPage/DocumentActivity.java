@@ -16,7 +16,7 @@ import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.EditActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class DocumentActivity extends AppCompatActivity {
+public class DocumentActivity extends AppCompatActivity{
 
     Toolbar toolbar;
     TextView toolbar_user,title,color,number,price,content,date;
@@ -165,5 +165,12 @@ public class DocumentActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
+        finish();
     }
 }
