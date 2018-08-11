@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
+import com.example.woojinroom.daeran.TapPage.Chat.ChatListActivity;
 
 /**
  * Created by woojinroom on 201801-31.
@@ -22,6 +23,9 @@ public class LoginMyPage extends Fragment {
 
     public Button button_logout,button_chatlist;
     public TextView text_id;
+
+    String id;
+
     public static LoginMyPage newInstance() {
         return new LoginMyPage();
     }
@@ -32,16 +36,21 @@ public class LoginMyPage extends Fragment {
         view = inflater.inflate(R.layout.fragment_loginmypage, container, false);
 
         Bundle extra = getArguments();
-        String id = extra.getString("id");
+        id = extra.getString("id"); //로그인한 아이디
 
         text_id = (TextView)view.findViewById(R.id.text_id);
         text_id.setVisibility(View.VISIBLE);
         text_id.setText(id);
 
+
+
         button_chatlist=(Button)view.findViewById(R.id.button_chatlist);
         button_chatlist.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-
+                Intent intent_chatlist = new Intent(getContext(),ChatListActivity.class);
+                intent_chatlist.putExtra("id",id);
+                startActivity(intent_chatlist);
+                getActivity().finish();
             }
         });
 

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +35,6 @@ public class ChatActivity extends AppCompatActivity {
 
     ImageButton imageButtonLeft,imageButtonRight;
 
-    LinearLayout layout_chat;
-
     Button button_send;
     EditText editText_text;
 
@@ -59,12 +56,13 @@ public class ChatActivity extends AppCompatActivity {
     ChatClass chat_send;
 
     int room = 0;
+    Intent chat;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        final Intent chat = getIntent();
+        chat = getIntent();
         user = chat.getStringExtra("user");
         sender = chat.getStringExtra("sender");
 

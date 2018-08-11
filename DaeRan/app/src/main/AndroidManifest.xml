@@ -36,9 +36,14 @@
         </activity>
         <activity android:name=".TapPage.MainPage.WritePage.EditActivity">
 
-        </activity><activity android:name=".TapPage.Chat.ChatActivity">
+        </activity>
+        <activity android:name=".TapPage.Chat.ChatActivity">
 
     </activity>
+        <activity android:name=".TapPage.Chat.ChatListActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

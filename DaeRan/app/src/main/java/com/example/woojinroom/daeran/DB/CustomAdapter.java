@@ -48,7 +48,7 @@ public class CustomAdapter  extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
-        if (v == null) {
+
             holder = new ViewHolder();
             v = mInflater.inflate(R.layout.listview_custom_main, null);
             holder.title = (TextView)v.findViewById(R.id.tv_title);
@@ -59,10 +59,7 @@ public class CustomAdapter  extends BaseAdapter {
             holder.content = (TextView)v.findViewById(R.id.tv_content);
             holder.user = (TextView)v.findViewById(R.id.tv_user);
 
-            v.setTag(holder);
-        } else {
-            holder = (ViewHolder)v.getTag();
-        }
+
 
         //InfoClass를 생성하여 각 뷰의 포지션에 맞는 데이터를 가져옴
         InfoClass info = InfoArr.get(position);
