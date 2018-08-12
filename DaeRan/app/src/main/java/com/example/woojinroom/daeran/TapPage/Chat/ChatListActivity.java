@@ -112,7 +112,7 @@ public class ChatListActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                
+
                 Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
                 chat_intent.putExtra("user",mChatList.get(position));
                 chat_intent.putExtra("sender",login_id);

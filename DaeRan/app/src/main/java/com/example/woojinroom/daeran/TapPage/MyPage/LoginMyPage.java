@@ -21,7 +21,7 @@ import com.example.woojinroom.daeran.TapPage.Chat.ChatListActivity;
 
 public class LoginMyPage extends Fragment {
 
-    public Button button_logout,button_chatlist;
+    public Button button_logout,button_chatlist,button_editaccount;
     public TextView text_id;
 
     String id;
@@ -39,7 +39,6 @@ public class LoginMyPage extends Fragment {
         id = extra.getString("id"); //로그인한 아이디
 
         text_id = (TextView)view.findViewById(R.id.text_id);
-        text_id.setVisibility(View.VISIBLE);
         text_id.setText(id);
 
 
@@ -50,6 +49,17 @@ public class LoginMyPage extends Fragment {
                 Intent intent_chatlist = new Intent(getContext(),ChatListActivity.class);
                 intent_chatlist.putExtra("id",id);
                 startActivity(intent_chatlist);
+                getActivity().finish();
+            }
+        });
+
+        button_editaccount=(Button)view.findViewById(R.id.button_edit_account);
+        button_editaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_edit = new Intent(getContext(),EditAccountActivity.class);
+                intent_edit.putExtra("id",id);
+                startActivity(intent_edit);
                 getActivity().finish();
             }
         });

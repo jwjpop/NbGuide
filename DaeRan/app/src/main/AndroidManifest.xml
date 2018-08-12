@@ -43,6 +43,9 @@
         <activity android:name=".TapPage.Chat.ChatListActivity">
 
         </activity>
+        <activity android:name=".TapPage.MyPage.EditAccountActivity">
+
+        </activity>
 
     </application>
 

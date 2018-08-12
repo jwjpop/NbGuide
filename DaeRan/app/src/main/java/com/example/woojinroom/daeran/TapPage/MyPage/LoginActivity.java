@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mReference;
 
     Toolbar toolbar;
-
     TextView text_toolbar;
 
     ImageButton imageButtonLeft,imageButtonRight;
@@ -135,5 +134,10 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
+        finish();
     }
 }

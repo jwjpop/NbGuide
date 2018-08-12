@@ -38,10 +38,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     int id_count=0;
     int id_chk=0;
+    int sign=0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_signup);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         editText_id=(EditText)findViewById(R.id.edit_id);
@@ -85,11 +86,13 @@ public class SignUpActivity extends AppCompatActivity {
                             }
 
                             if (id_count != 0) {
-                                Toast.makeText(getApplicationContext(), "중복 된 아이디 입니다.", Toast.LENGTH_SHORT).show();
+                                if(sign==0) {
+                                    Toast.makeText(getApplicationContext(), "중복 된 아이디 입니다.", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
                                 id_chk = 1;
-                             }
+                            }
 
                         }
 
@@ -116,8 +119,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(id_chk==1) {
                     if (pw.equals(pwchk)) {
                         UserClass userClass = new UserClass(id, pw);
-                        databaseReference.child("user").push().setValue(userClass);
+                        databaseReference.child("user").child(id).setValue(userClass);
                         Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
+                        sign =1;
                         Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(refresh_intent);
                         finish();
@@ -131,6 +135,11 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
+        finish();
     }
 
 }
