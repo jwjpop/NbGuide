@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by woojin on 2018-07-14.
  */
@@ -39,6 +42,9 @@ public class SignUpActivity extends AppCompatActivity {
     int id_count=0;
     int id_chk=0;
     int sign=0;
+
+    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
+    public static final Pattern VALID_ID_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9]{4,16}$");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,35 +79,39 @@ public class SignUpActivity extends AppCompatActivity {
                 id = editText_id.getText().toString();
 
                 if (!id.equals("")) {
+                    if(validateId(id)){
 
-                    mReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-                                UserClass db_user = messageData.getValue(UserClass.class);
-                                // child 내에 있는 데이터만큼 반복합니다.
-                                if (id.equals(db_user.getId())) {
-                                    id_count++;
+                        mReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                                    UserClass db_user = messageData.getValue(UserClass.class);
+                                    // child 내에 있는 데이터만큼 반복합니다.
+                                    if (id.equals(db_user.getId())) {
+                                        id_count++;
+                                    }
                                 }
+
+                                if (id_count != 0) {
+                                    if (sign == 0) {
+                                        Toast.makeText(getApplicationContext(), "중복 된 아이디 입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
+                                    id_chk = 1;
+                                }
+
                             }
 
-                            if (id_count != 0) {
-                                if(sign==0) {
-                                    Toast.makeText(getApplicationContext(), "중복 된 아이디 입니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
-                                id_chk = 1;
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
                             }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
+                        });
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "4자 이상 영문자와 숫자를 조합해주세요", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
@@ -117,16 +127,21 @@ public class SignUpActivity extends AppCompatActivity {
                 pwchk = editText_pwchk.getText().toString();
 
                 if(id_chk==1) {
-                    if (pw.equals(pwchk)) {
-                        UserClass userClass = new UserClass(id, pw);
-                        databaseReference.child("user").child(id).setValue(userClass);
-                        Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
-                        sign =1;
-                        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(refresh_intent);
-                        finish();
-                    } else {
-                        Toast.makeText(v.getContext(), "pw와 pwchk가 다릅니다", Toast.LENGTH_SHORT).show();
+                    if(validatePassword(pw)){
+                        if (pw.equals(pwchk)) {
+                            UserClass userClass = new UserClass(id, pw);
+                            databaseReference.child("user").child(id).setValue(userClass);
+                            Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
+                            sign = 1;
+                            Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(refresh_intent);
+                            finish();
+                        } else {
+                            Toast.makeText(v.getContext(), "pw와 pwchk가 다릅니다", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(v.getContext(), "4~16자리를 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
@@ -140,6 +155,13 @@ public class SignUpActivity extends AppCompatActivity {
         Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(refresh_intent);
         finish();
+    }
+
+    public static boolean validatePassword(String pwStr) {
+        Matcher matcher = VALID_PASSWOLD_REGEX_ALPHA_NUM.matcher(pwStr); return matcher.matches();
+    }
+    public static boolean validateId(String idStr) {
+        Matcher matcher = VALID_ID_REGEX_ALPHA_NUM.matcher(idStr); return matcher.matches();
     }
 
 }
