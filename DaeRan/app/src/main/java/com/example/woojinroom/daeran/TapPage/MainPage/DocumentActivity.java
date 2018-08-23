@@ -104,7 +104,7 @@ public class DocumentActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "삭제", Toast.LENGTH_SHORT).show();
                     mDatabase = FirebaseDatabase.getInstance();
-                    mReference = mDatabase.getReference("board/"+st_user+st_date);
+                    mReference = mDatabase.getReference("board/"+st_date+"_"+st_user);
                     mReference.removeValue();
                     Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(refresh_intent);

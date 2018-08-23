@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by woojinroom on 2018-04-23.
@@ -28,6 +30,8 @@ public class WriteActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+    public static final Pattern NUMBER = Pattern.compile("^[0-9]$");
 
     Toolbar toolbar;
     TextView toolbar_title;
@@ -41,7 +45,7 @@ public class WriteActivity extends AppCompatActivity {
 
     long mNow;
     Date mDate;
-    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +77,37 @@ public class WriteActivity extends AppCompatActivity {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent user = getIntent();
+                if(!title.getText().toString().equals("")) {
+                    if (validateNumber(number.getText().toString())) {
+                        if (validateNumber(price.getText().toString())) {
+                            if(!content.getText().toString().equals("")) {
+                                Intent user = getIntent();
 
-                //사용자 계정 넘겨주는 부분 수정
-                board = new BoardClass(title.getText().toString(),getTime(),color.getSelectedItem().toString(),
-                        number.getText().toString(),price.getText().toString(),content.getText().toString(),
-                        user.getStringExtra("id"));
+                                //사용자 계정 넘겨주는 부분 수정
+                                board = new BoardClass(title.getText().toString(), getTime(), color.getSelectedItem().toString(),
+                                        number.getText().toString(), price.getText().toString(), content.getText().toString(),
+                                        user.getStringExtra("id"));
 
-                databaseReference.child("board").child(user.getStringExtra("id")+getTime()).setValue(board);
+                                databaseReference.child("board").child(getTime() + "_" + user.getStringExtra("id")).setValue(board);
 
-                Toast.makeText(getApplicationContext(),"작성 완료",Toast.LENGTH_SHORT).show();
-                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh_intent);
-                finish();
+                                Toast.makeText(getApplicationContext(), "작성 완료", Toast.LENGTH_SHORT).show();
+                                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(refresh_intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "내용을 입력하세요", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "가격은 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "드링크 수는 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "제목을 입력하세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -93,6 +115,10 @@ public class WriteActivity extends AppCompatActivity {
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
         return mFormat.format(mDate);
+    }
+
+    public static boolean validateNumber(String Str) {
+        Matcher matcher = NUMBER.matcher(Str); return matcher.matches();
     }
 
 }

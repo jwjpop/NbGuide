@@ -110,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
                         });
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "4자 이상 영문자와 숫자를 조합해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "4~16자로 영문자와 숫자를 조합해주세요", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();

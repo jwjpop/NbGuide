@@ -23,6 +23,7 @@
         </activity>
 
         <activity android:name=".TapPage.MainPage.DocumentActivity">
+
         </activity>
 
         <activity android:name=".TapPage.InfoPage.ImageActivity">

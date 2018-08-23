@@ -84,7 +84,8 @@ public class EditActivity extends AppCompatActivity {
                         edit.getStringExtra("user"));
 
                 //수정할때는 시간 초기화하지 않음
-                databaseReference.child("board").child(edit.getStringExtra("user")+edit.getStringExtra("date")).setValue(board);
+                // 데이터 정렬이 이상해서 정리한번해야함
+                databaseReference.child("board").child(edit.getStringExtra("date")+"_"+edit.getStringExtra("user")).setValue(board);
 
                 Toast.makeText(getApplicationContext(),"수정 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);

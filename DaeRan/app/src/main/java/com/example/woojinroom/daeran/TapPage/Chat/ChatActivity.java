@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
@@ -49,7 +48,7 @@ public class ChatActivity extends AppCompatActivity {
 
     long mNow;
     Date mDate;
-    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -83,7 +82,6 @@ public class ChatActivity extends AppCompatActivity {
             mReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Toast.makeText(getApplicationContext(),"변경",Toast.LENGTH_SHORT).show();
                     if(dataSnapshot.getValue()==null) //첫 검사 때 방이 없는 경우
                     {
                         room=1;

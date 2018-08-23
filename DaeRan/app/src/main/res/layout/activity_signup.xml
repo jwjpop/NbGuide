@@ -36,7 +36,7 @@
         android:textColor="#000000"/>
     <EditText
         android:id="@+id/edit_id"
-        android:layout_width="70dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="ID"
@@ -61,7 +61,7 @@
             android:textColor="#000000"/>
         <EditText
             android:id="@+id/edit_pw"
-            android:layout_width="70dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="PW"
@@ -85,7 +85,7 @@
             android:textColor="#000000"/>
         <EditText
             android:id="@+id/edit_pwchk"
-            android:layout_width="120dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="PW CHK"
