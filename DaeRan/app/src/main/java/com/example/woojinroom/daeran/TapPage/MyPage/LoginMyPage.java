@@ -49,7 +49,6 @@ public class LoginMyPage extends Fragment {
                 Intent intent_chatlist = new Intent(getContext(),ChatListActivity.class);
                 intent_chatlist.putExtra("id",id);
                 startActivity(intent_chatlist);
-                getActivity().finish();
             }
         });
 
@@ -60,7 +59,6 @@ public class LoginMyPage extends Fragment {
                 Intent intent_edit = new Intent(getContext(),EditAccountActivity.class);
                 intent_edit.putExtra("id",id);
                 startActivity(intent_edit);
-                getActivity().finish();
             }
         });
 

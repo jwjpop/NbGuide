@@ -65,8 +65,6 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"수정 취소",Toast.LENGTH_SHORT).show();
-                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh_intent);
                 finish();
             }
         });
@@ -95,8 +93,6 @@ public class EditActivity extends AppCompatActivity {
         });
     }
     public void onBackPressed() {
-        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(refresh_intent);
         finish();
     }
 

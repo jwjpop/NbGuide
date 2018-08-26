@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -153,8 +152,6 @@ public class ChatActivity extends AppCompatActivity {
             imageButtonLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(refresh_intent);
                     finish();
                 }
             });
@@ -172,8 +169,6 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(refresh_intent);
         finish();
     }
 }

@@ -56,6 +56,7 @@ public class DocumentActivity extends AppCompatActivity{
         st_user = doc_intent.getStringExtra("user"); // 작성자
         login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
 
+        Toast.makeText(getApplicationContext(),"로그인_"+login_id,Toast.LENGTH_SHORT).show();
         title.setText(st_title);
         color.setText(st_color);
         number.setText(st_number);
@@ -96,7 +97,7 @@ public class DocumentActivity extends AppCompatActivity{
                     edit_intent.putExtra("user",st_user);
 
                     startActivity(edit_intent);
-                    finish();
+
                 }
             });
 
@@ -176,7 +177,6 @@ public class DocumentActivity extends AppCompatActivity{
                     chat_intent.putExtra("user",st_user);
                     chat_intent.putExtra("sender",login_id);
                     startActivity(chat_intent);
-                    finish();
                 }
             });
         }
@@ -184,7 +184,7 @@ public class DocumentActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+       Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(refresh_intent);
         finish();
     }

@@ -36,6 +36,8 @@ public class Main extends Fragment {
 
     ImageButton mImageButton;
 
+    String login_id="guest";
+
     private ListView mListView;
 
     private ArrayList<InfoClass> mInfoArr;
@@ -45,6 +47,7 @@ public class Main extends Fragment {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
 
+    Bundle extra;
     public static Main newInstance() {
         return new Main();
     }
@@ -55,14 +58,13 @@ public class Main extends Fragment {
         view = inflater.inflate(R.layout.fragment_main, container, false); // 여기서 UI를 생성해서 View를 return
         mListView = (ListView) view.findViewById(R.id.listView);
 
+        extra = getArguments();
+
         mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
             public void onClick(View view){
 
-                Bundle extra = getArguments();
-                String login_id="guest";
-
-                if(extra!=null) {
+                if(extra!=null) { //널이 아니면
                     login_id = extra.getString("id");
                 }
 
@@ -111,8 +113,6 @@ public class Main extends Fragment {
                 TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
                 String st_user = tx_user.getText().toString();
 
-                Bundle extra = getArguments();
-                String login_id="guest";
                 if(extra!=null) {
                     login_id = extra.getString("id");
                 }

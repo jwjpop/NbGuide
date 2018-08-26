@@ -1,6 +1,8 @@
 package com.example.woojinroom.daeran.TapPage.MyPage;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -59,8 +61,6 @@ public class SignUpActivity extends AppCompatActivity {
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh_intent);
                 finish();
             }
         });
@@ -133,6 +133,13 @@ public class SignUpActivity extends AppCompatActivity {
                             databaseReference.child("user").child(id).setValue(userClass);
                             Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
                             sign = 1;
+
+                            SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor autoLogin = auto.edit();
+                            autoLogin.putString("inputId", id);
+                            autoLogin.putString("inputPwd", pw);
+                            autoLogin.commit();
+
                             Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(refresh_intent);
                             finish();
@@ -152,8 +159,6 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     public void onBackPressed() {
-        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(refresh_intent);
         finish();
     }
 

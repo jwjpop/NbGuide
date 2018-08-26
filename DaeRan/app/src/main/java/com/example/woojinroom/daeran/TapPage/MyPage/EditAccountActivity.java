@@ -62,8 +62,6 @@ public class EditAccountActivity extends AppCompatActivity {
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh_intent);
                 finish();
             }
         });
@@ -126,8 +124,6 @@ public class EditAccountActivity extends AppCompatActivity {
         });
     }
     public void onBackPressed() {
-        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(refresh_intent);
         finish();
     }
 }

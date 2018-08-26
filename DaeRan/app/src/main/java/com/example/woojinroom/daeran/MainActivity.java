@@ -23,7 +23,6 @@ public class MainActivity extends FragmentActivity {
 
     String id;
     String loginId, loginPwd;
-
     int login=0;
 
     private long pressedTime = 0;
@@ -48,7 +47,7 @@ public class MainActivity extends FragmentActivity {
             login=1;
             id=loginId;
         }
-
+        replaceFragment(Main.newInstance());
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener
@@ -131,6 +130,5 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        replaceFragment(Main.newInstance());
     }
 }
