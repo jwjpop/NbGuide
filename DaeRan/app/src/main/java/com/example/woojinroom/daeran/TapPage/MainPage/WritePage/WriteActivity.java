@@ -121,4 +121,10 @@ public class WriteActivity extends AppCompatActivity {
         Matcher matcher = NUMBER.matcher(Str); return matcher.matches();
     }
 
+    public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
+        finish();
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.example.woojinroom.daeran.TapPage.MainPage;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -102,13 +104,28 @@ public class DocumentActivity extends AppCompatActivity{
             imageButtonRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "삭제", Toast.LENGTH_SHORT).show();
-                    mDatabase = FirebaseDatabase.getInstance();
-                    mReference = mDatabase.getReference("board/"+st_date+"_"+st_user);
-                    mReference.removeValue();
-                    Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(refresh_intent);
-                    finish();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DocumentActivity.this);
+                    builder.setTitle("삭제 경고");
+                    builder.setMessage("정말로 글을 삭제하시겠습니까?");
+                    builder.setPositiveButton("예",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mDatabase = FirebaseDatabase.getInstance();
+                                    mReference = mDatabase.getReference("board/"+st_date+"_"+st_user);
+                                    mReference.removeValue();
+                                    Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(refresh_intent);
+                                    finish();
+                                }
+                            });
+                    builder.setNegativeButton("아니오",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                    builder.show();
                 }
             });
         }
