@@ -56,7 +56,6 @@ public class DocumentActivity extends AppCompatActivity{
         st_user = doc_intent.getStringExtra("user"); // 작성자
         login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
 
-        Toast.makeText(getApplicationContext(),"로그인_"+login_id,Toast.LENGTH_SHORT).show();
         title.setText(st_title);
         color.setText(st_color);
         number.setText(st_number);

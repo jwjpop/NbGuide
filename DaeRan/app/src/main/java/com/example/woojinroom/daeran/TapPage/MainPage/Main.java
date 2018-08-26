@@ -74,6 +74,7 @@ public class Main extends Fragment {
                     Intent write_intent = new Intent(getContext(), WriteActivity.class);
                     write_intent.putExtra("id", login_id);
                     startActivity(write_intent);
+                    getActivity().finish();
                 }
             }
         });
