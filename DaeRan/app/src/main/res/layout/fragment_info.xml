@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000000">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,38 +15,33 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
-    <Button
-        android:id="@+id/button_map_1f"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="엔비 1층 지도"
-        android:textSize="20dp"
-        />
         <Button
-        android:id="@+id/button_map_2f"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="엔비 2층 지도"
-        android:textSize="20dp"
-        />
+            android:id="@+id/button_enterinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_enterinfo"/>
         <Button
             android:id="@+id/button_menu1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="메뉴판1"
-            android:textSize="20dp"/>
+            android:background="@drawable/button_menu1"/>
         <Button
             android:id="@+id/button_menu2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="메뉴판2"
-            android:textSize="20dp"/>
+            android:background="@drawable/button_menu2"/>
         <Button
-        android:id="@+id/button_enterinfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="입장 정보"
-        android:textSize="20dp"/>
+            android:id="@+id/button_map_1f"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_1fmap"
+            />
+        <Button
+            android:id="@+id/button_map_2f"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_2fmap"
+            />
 
         <!--하단바에 가리지 않게 하려는 장치 visibility 설정 완료-->
         <android.support.design.widget.BottomNavigationView
