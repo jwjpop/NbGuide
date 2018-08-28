@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.woojinroom.daeran.R;
@@ -49,7 +50,7 @@ public class ChatListCustomAdapter extends BaseAdapter {
 
         holder = new ViewHolder();
         v = mInflater.inflate(R.layout.listview_custom_chatlist, null);
-        holder.user = (TextView)v.findViewById(R.id.tv_user_id);
+        holder.user = (Button) v.findViewById(R.id.button_user_id);
 
         String chat = ChatList.get(position);
 
@@ -60,7 +61,7 @@ public class ChatListCustomAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView user;
+        Button user;
     }
 
 }

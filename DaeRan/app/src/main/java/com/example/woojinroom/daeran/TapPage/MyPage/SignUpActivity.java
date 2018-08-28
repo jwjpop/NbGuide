@@ -45,8 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
     int id_chk=0;
     int sign=0;
 
-    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
     public static final Pattern VALID_ID_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9]{4,16}$");
+    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
                         });
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "4~16자로 영문자와 숫자를 조합해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "4~16자로 영문자 또는 영문자와 숫자를 조합해주세요", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
