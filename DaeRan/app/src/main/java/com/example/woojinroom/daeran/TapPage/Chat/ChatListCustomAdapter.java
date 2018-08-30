@@ -1,12 +1,14 @@
 package com.example.woojinroom.daeran.TapPage.Chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.R;
 
@@ -50,7 +52,7 @@ public class ChatListCustomAdapter extends BaseAdapter {
 
         holder = new ViewHolder();
         v = mInflater.inflate(R.layout.listview_custom_chatlist, null);
-        holder.user = (Button) v.findViewById(R.id.button_user_id);
+        holder.user = (TextView) v.findViewById(R.id.tv_user_id);
 
         String chat = ChatList.get(position);
 
@@ -61,7 +63,7 @@ public class ChatListCustomAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        Button user;
+        TextView user;
     }
 
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
@@ -40,8 +41,6 @@ public class LoginMyPage extends Fragment {
 
         text_id = (TextView)view.findViewById(R.id.text_id);
         text_id.setText(id);
-
-
 
         button_chatlist=(Button)view.findViewById(R.id.button_chatlist);
         button_chatlist.setOnClickListener(new View.OnClickListener(){

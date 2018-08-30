@@ -6,12 +6,13 @@
     android:orientation="vertical"
     android:background="#000000">
 
-        <Button
-            android:id="@+id/button_user_id"
+        <TextView
+            android:id="@+id/tv_user_id"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/mypage_background"
             android:textSize="25dp"
+            android:gravity="center"
             android:text="AAAAAAAAAAAAAAAA"
             android:textAllCaps="false"
             android:textColor="#e677c8"/>
