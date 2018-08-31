@@ -11,8 +11,7 @@
         android:background="@drawable/button_back"
         />
 
-
-        <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/image_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

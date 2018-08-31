@@ -32,7 +32,9 @@ public class Info extends Fragment {
         map1f.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"1층 준비중입니다.",Toast.LENGTH_SHORT).show();
+                Intent menu1_intent = new Intent(getContext(), ImageActivity.class);
+                menu1_intent.putExtra("menu",3);
+                startActivity(menu1_intent);
             }
         });
 
