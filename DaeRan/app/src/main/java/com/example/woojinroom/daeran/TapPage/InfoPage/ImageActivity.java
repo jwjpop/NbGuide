@@ -47,6 +47,10 @@ public class ImageActivity extends AppCompatActivity {
         {
             mimageView.setImageResource(R.drawable.map_1f);
         }
+        else  if (menu==4)
+        {
+            mimageView.setImageResource(R.drawable.map_2f);
+        }
 
     }
 

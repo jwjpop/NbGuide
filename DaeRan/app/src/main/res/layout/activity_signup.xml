@@ -68,7 +68,8 @@
             android:hint="PW"
             android:password="true"
             android:textSize="24dp"
-            android:background="#ffffff"/>
+            android:background="#ffffff"
+            />
     </LinearLayout>
 
 
@@ -93,6 +94,7 @@
             android:hint="PW CHK"
             android:password="true"
             android:textSize="24dp"
-            android:background="#ffffff"/>
+            android:background="#ffffff"
+            />
     </LinearLayout>
 </LinearLayout>
