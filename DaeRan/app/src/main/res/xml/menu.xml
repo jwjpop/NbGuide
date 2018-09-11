@@ -5,23 +5,23 @@
         android:id="@+id/action_one"
         android:enabled="true"
         android:icon="@drawable/book"
-        android:title="main"
+        android:title="MARKET"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_two"
         android:icon="@drawable/dj"
-        android:title="dj"
+        android:title="DJ"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_three"
         android:enabled="true"
         android:icon="@drawable/cake"
-        android:title="info"
+        android:title="INFO"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_four"
         android:enabled="true"
         android:icon="@drawable/id"
-        android:title="mypage"
+        android:title="MYPAGE"
         app:showAsAction="ifRoom" />
 </menu>

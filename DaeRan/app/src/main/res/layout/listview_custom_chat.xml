@@ -32,7 +32,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="유저 텍스트"/>
+            android:text="유저 텍스트"
+            android:textStyle="bold"/>
 
 
 </LinearLayout>

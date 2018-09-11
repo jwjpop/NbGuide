@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.woojinroom.daeran.R;
+import com.github.chrisbanes.photoview.PhotoView;
 
 /**
  * Created by woojinroom on 2018-05-10.
@@ -15,7 +16,7 @@ import com.example.woojinroom.daeran.R;
 
 public class ImageActivity extends AppCompatActivity {
     Button back;
-    ImageView imageView;
+    PhotoView mimageView;
     int menu;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +30,26 @@ public class ImageActivity extends AppCompatActivity {
                 finish();
             }
         });
-        imageView =(ImageView)findViewById(R.id.image_info);
+
+        mimageView =(PhotoView) findViewById(R.id.image_info);
+
         Intent get_intent;
         get_intent = getIntent();
         menu = get_intent.getIntExtra("menu",1);
+
         if(menu==1){
-            imageView.setImageResource(R.drawable.menu1_180503);
+            mimageView.setImageResource(R.drawable.menu1_180503);
         }else if(menu==2)
         {
-            imageView.setImageResource(R.drawable.menu2_180503);
+            mimageView.setImageResource(R.drawable.menu2_180503);
+        }
+        else if(menu==3)
+        {
+            mimageView.setImageResource(R.drawable.map_1f);
+        }
+        else  if (menu==4)
+        {
+            mimageView.setImageResource(R.drawable.map_2f);
         }
 
     }

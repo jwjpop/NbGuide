@@ -7,7 +7,7 @@
     android:layout_height="?attr/actionBarSize"
     app:layout_collapseMode="pin"
     app:titleTextAppearance="@style/Toolbar.TitleText"
-    android:background="#35babc">
+    android:background="#000000">
 
     <ImageButton
         android:id="@+id/imagebutton_left"

@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/outside">
 
         <ImageView
             android:id="@+id/iv_img"
@@ -17,7 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,6 +32,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="제목"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:textSize="15dp"
@@ -44,6 +48,8 @@
                     android:layout_marginRight="5dp"
                     android:gravity="right"
                     android:text="날짜"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:textSize="15dp"/>
 
             </LinearLayout>
@@ -63,6 +69,8 @@
                     android:layout_weight="1"
                     android:text="색깔"
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:gravity="center"/>
 
                 <TextView
@@ -70,6 +78,8 @@
                     android:layout_height="wrap_content"
                     android:text="/    총"
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:layout_marginRight="5dp"/>
                 <TextView
                     android:id="@+id/tv_number"
@@ -78,12 +88,16 @@
                     android:layout_weight="1"
                     android:text="10"
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="장    "
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:layout_marginLeft="5dp"/>
 
                 <TextView
@@ -91,6 +105,8 @@
                     android:layout_height="wrap_content"
                     android:text="/    각"
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"/>
                 <TextView
@@ -98,14 +114,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="가격"
+                    android:text="1000"
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="원    "
                     android:textSize="15dp"
+                    android:textColor="#8ae098"
+                    android:textStyle="bold"
                     android:layout_marginLeft="5dp"/>
             </LinearLayout>
         </LinearLayout>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,29 +19,41 @@
         android:text="id"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
+        android:textColor="#ffffff"
         android:textSize="24dp"/>
 
-    <Button
-        android:id="@+id/button_chatlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:text="채팅 목록"
-        android:textSize="24dp" />
+        <Button
+            android:id="@+id/button_chatlist"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_chatlist" />
+
         <Button
             android:id="@+id/button_edit_account"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:text="비밀번호 변경"
-            android:textSize="24dp" />
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="로그아웃"
-        android:textSize="24dp" />
+            android:background="@drawable/button_edit" />
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_logout" />
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/colorPrimary"
+            app:itemIconTint="@xml/color"
+            app:itemTextColor="@xml/color"
+            app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
+            android:visibility="invisible"
+            app:menu="@xml/menu" />
     </LinearLayout>
+    </ScrollView>
+
 </FrameLayout>
