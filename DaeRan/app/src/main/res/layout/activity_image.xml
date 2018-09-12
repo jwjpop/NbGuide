@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
@@ -12,8 +12,19 @@
         />
 
     <com.github.chrisbanes.photoview.PhotoView
-            android:id="@+id/image_info"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-</LinearLayout>
+        android:id="@+id/image_info"
+        android:layout_marginTop="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        />
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_marginTop="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        android:text="입장정보"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        />
+</FrameLayout>
