@@ -9,8 +9,8 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_two"
-        android:icon="@drawable/dj"
-        android:title="DJ"
+        android:icon="@drawable/music"
+        android:title="MUSIC"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_three"

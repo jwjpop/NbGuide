@@ -14,6 +14,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textColor="#e12323"
+        android:text="본 앱은 거래에 대한 책임을 지지 않습니다."
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
     <EditText
         android:layout_margin="10dp"
         android:layout_width="wrap_content"

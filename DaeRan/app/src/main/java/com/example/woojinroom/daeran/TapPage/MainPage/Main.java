@@ -45,6 +45,7 @@ public class Main extends Fragment {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+
     private ChildEventListener mChild;
 
     Bundle extra;

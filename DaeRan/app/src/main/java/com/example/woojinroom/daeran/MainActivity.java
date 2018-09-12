@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.woojinroom.daeran.TapPage.DJPage.Dj;
+import com.example.woojinroom.daeran.TapPage.PlayListPage.PlayList;
 import com.example.woojinroom.daeran.TapPage.InfoPage.Info;
 import com.example.woojinroom.daeran.TapPage.MainPage.Main;
 import com.example.woojinroom.daeran.TapPage.MyPage.LoginMyPage;
@@ -59,7 +59,7 @@ public class MainActivity extends FragmentActivity {
                     replaceFragment(Main.newInstance());
                     return true;
                 case R.id.action_two:
-                    replaceFragment(Dj.newInstance());
+                    replaceFragment(PlayList.newInstance());
                     return true;
                 case R.id.action_three:
                     replaceFragment(Info.newInstance());
