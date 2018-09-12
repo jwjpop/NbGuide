@@ -47,6 +47,9 @@
         <activity android:name=".TapPage.MyPage.EditAccountActivity">
 
         </activity>
+        <activity android:name=".TapPage.MyPage.AdminActivitiy">
+
+    </activity>
         <!-- 서비스 태그 추가 -->
         <service
             android:name=".TapPage.PushMessaging.MyFirebaseMessagingService">

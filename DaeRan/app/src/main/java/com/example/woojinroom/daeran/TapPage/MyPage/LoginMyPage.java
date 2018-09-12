@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
@@ -22,7 +21,7 @@ import com.example.woojinroom.daeran.TapPage.Chat.ChatListActivity;
 
 public class LoginMyPage extends Fragment {
 
-    public Button button_logout,button_chatlist,button_editaccount;
+    public Button button_logout,button_chatlist,button_editaccount,button_playlist;
     public TextView text_id;
 
     String id;
@@ -41,6 +40,8 @@ public class LoginMyPage extends Fragment {
 
         text_id = (TextView)view.findViewById(R.id.text_id);
         text_id.setText(id);
+
+        button_playlist = (Button)view.findViewById(R.id.button_playlist);
 
         button_chatlist=(Button)view.findViewById(R.id.button_chatlist);
         button_chatlist.setOnClickListener(new View.OnClickListener(){
@@ -76,6 +77,20 @@ public class LoginMyPage extends Fragment {
                 getActivity().finish();
             }
         });
+
+        button_playlist.setVisibility(View.INVISIBLE);
+
+        if(id.equals("cowooding"))
+        {
+            button_playlist.setVisibility(View.VISIBLE);
+            button_playlist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent admin_intent = new Intent(getContext(), AdminActivitiy.class);
+                    startActivity(admin_intent);
+                }
+            });
+        }
 
         return view;// 여기서 UI를 생성해서 View를 return
     }

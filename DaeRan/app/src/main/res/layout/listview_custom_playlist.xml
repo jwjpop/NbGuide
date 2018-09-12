@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="@drawable/outside">
+        android:background="@drawable/outside_playlist">
 
         <ImageView
             android:id="@+id/iv_img"
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="제목"
-                    android:textColor="#8ae098"
+                    android:textColor="#FFFFE959"
                     android:textStyle="bold"
                     android:layout_weight="1"
                     android:textSize="15dp"
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="뮤지션"
-                android:textColor="#8ae098"
+                android:textColor="#FFFFE959"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:textSize="15dp"
