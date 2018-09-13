@@ -114,6 +114,9 @@ public class DocumentActivity extends AppCompatActivity{
                                     mDatabase = FirebaseDatabase.getInstance();
                                     mReference = mDatabase.getReference("board/"+st_date+"_"+st_user);
                                     mReference.removeValue();
+                                    mReference = mDatabase.getReference("user/"+st_user+"/write");
+                                    mReference.setValue("0");
+
                                     Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(refresh_intent);
                                     finish();

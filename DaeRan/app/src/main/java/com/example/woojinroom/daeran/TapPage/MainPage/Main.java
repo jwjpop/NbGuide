@@ -39,7 +39,7 @@ public class Main extends Fragment {
     ImageButton mImageButton;
 
     String login_id = "guest";
-
+    String write;
     private ListView mListView;
 
     private ArrayList<InfoClass> mInfoArr;
@@ -55,6 +55,7 @@ public class Main extends Fragment {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String nowtime;
 
+    int i=0;
     Bundle extra;
 
     public static Main newInstance() {
@@ -70,35 +71,6 @@ public class Main extends Fragment {
         extra = getArguments();
         nowtime = getTime();
 
-        mImageButton = (ImageButton) view.findViewById(R.id.iamgebutton_write);
-        mImageButton.setOnClickListener(new ImageButton.OnClickListener() {
-            public void onClick(View view) {
-
-                if (extra != null) { //널이 아니면
-                    login_id = extra.getString("id");
-                }
-
-                if (login_id.equals("guest")) {
-                    Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
-                } else {
-                    //시간으로 자름(00시부터06시까지 작성 가능)
-                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
-                        if(true/*유저가 글을 작성했는지 보는 부분*/){
-                            //작성했다면
-                        } else {
-                            //작성하지 않았다면
-                            Intent write_intent = new Intent(getContext(), WriteActivity.class);
-                            write_intent.putExtra("id", login_id);
-                            startActivity(write_intent);
-                            getActivity().finish();
-                        }
-                    } else {
-                        Toast.makeText(getContext(), "00시부터 06시까지 작성 가능합니다.", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            }
-        });
 
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
@@ -168,6 +140,7 @@ public class Main extends Fragment {
                     InfoClass infoClass = new InfoClass(boardClass);
 
                     //날짜로 자름 (00시부터 작성 가능하기 때문에 문제 없다)
+                    //날짜가 같은건 불러오고 아닌건 삭제
                     if(infoClass.getDate().substring(8,10).equals(nowtime.substring(8,10))){
                         mInfoArr.add(infoClass);
                     } else {
@@ -186,6 +159,56 @@ public class Main extends Fragment {
             }
         });
         //리스트뷰의 아이템을 길게 눌렀을 경우 삭제하기 위해 롱클릭 리스너 따로 설정
+
+        mImageButton = (ImageButton) view.findViewById(R.id.iamgebutton_write);
+        mImageButton.setOnClickListener(new ImageButton.OnClickListener() {
+            public void onClick(View view) {
+
+                if (extra != null) { //널이 아니면
+                    login_id = extra.getString("id");
+                }
+
+                if (login_id.equals("guest")) {
+                    Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    //시간으로 자름(00시부터06시까지 작성 가능)
+                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
+
+                    /*mReference = mDatabase.getReference("user/"+login_id); // 변경값을 확인할 child 이름
+                    mReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                                write = String.valueOf(messageData.getValue());
+                            }
+                            // 이 안에서 해결해야 할 듯
+                            if(write.equals("1"))
+                            {
+                                //getContext 문제
+                                Toast.makeText(getContext(),"이전 글을 삭제하세요",Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {*/
+                        Intent write_intent = new Intent(getContext(), WriteActivity.class);
+                        write_intent.putExtra("id", login_id);
+                        startActivity(write_intent);
+                        getActivity().finish();
+                           /* }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });*/
+
+                    } else {
+                        Toast.makeText(getContext(), "00시부터 06시까지 작성 가능합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+        });
 
         return view;
     }
