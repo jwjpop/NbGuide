@@ -24,8 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 
 /**
@@ -36,7 +38,7 @@ public class Main extends Fragment {
 
     ImageButton mImageButton;
 
-    String login_id="guest";
+    String login_id = "guest";
 
     private ListView mListView;
 
@@ -48,7 +50,13 @@ public class Main extends Fragment {
 
     private ChildEventListener mChild;
 
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String nowtime;
+
     Bundle extra;
+
     public static Main newInstance() {
         return new Main();
     }
@@ -60,22 +68,28 @@ public class Main extends Fragment {
         mListView = (ListView) view.findViewById(R.id.listView);
 
         extra = getArguments();
+        nowtime = getTime();
 
-        mImageButton = (ImageButton)view.findViewById(R.id.iamgebutton_write);
-        mImageButton.setOnClickListener(new ImageButton.OnClickListener(){
-            public void onClick(View view){
+        mImageButton = (ImageButton) view.findViewById(R.id.iamgebutton_write);
+        mImageButton.setOnClickListener(new ImageButton.OnClickListener() {
+            public void onClick(View view) {
 
-                if(extra!=null) { //널이 아니면
+                if (extra != null) { //널이 아니면
                     login_id = extra.getString("id");
                 }
 
-                if(login_id.equals("guest")){
-                    Toast.makeText(getContext(),"로그인이 필요합니다.",Toast.LENGTH_SHORT).show();
+                if (login_id.equals("guest")) {
+                    Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent write_intent = new Intent(getContext(), WriteActivity.class);
-                    write_intent.putExtra("id", login_id);
-                    startActivity(write_intent);
-                    getActivity().finish();
+                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
+                        Intent write_intent = new Intent(getContext(), WriteActivity.class);
+                        write_intent.putExtra("id", login_id);
+                        startActivity(write_intent);
+                        getActivity().finish();
+                    } else {
+                        Toast.makeText(getContext(), "00시부터 06시까지 작성 가능합니다.", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -83,7 +97,7 @@ public class Main extends Fragment {
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
 
-       // doWhileCursorToArray();
+        // doWhileCursorToArray();
         initDatabase();
 
         //리스트뷰에 사용할 어댑터 초기화(파라메터 Context, ArrayList<InfoClass>)
@@ -115,36 +129,42 @@ public class Main extends Fragment {
                 TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
                 String st_user = tx_user.getText().toString();
 
-                if(extra!=null) {
+                if (extra != null) {
                     login_id = extra.getString("id");
                 }
 
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
-                doc_intent.putExtra("title",st_title);
-                doc_intent.putExtra("color",st_color);
-                doc_intent.putExtra("number",st_number);
-                doc_intent.putExtra("price",st_price);
-                doc_intent.putExtra("date",st_date);
-                doc_intent.putExtra("content",st_content);
-                doc_intent.putExtra("user",st_user);
-                doc_intent.putExtra("login",login_id);
+                doc_intent.putExtra("title", st_title);
+                doc_intent.putExtra("color", st_color);
+                doc_intent.putExtra("number", st_number);
+                doc_intent.putExtra("price", st_price);
+                doc_intent.putExtra("date", st_date);
+                doc_intent.putExtra("content", st_content);
+                doc_intent.putExtra("user", st_user);
+                doc_intent.putExtra("login", login_id);
 
                 startActivity(doc_intent);
                 getActivity().finish();
             }
         });
 
+
+
         //여기 코드엔 initdatabase 안에 이미 들어있음 복사용
-       // mDatabase = FirebaseDatabase.getInstance();
+        // mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-            mInfoArr.clear();
+                mInfoArr.clear();
                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                     BoardClass boardClass = messageData.getValue(BoardClass.class);
                     InfoClass infoClass = new InfoClass(boardClass);
-                    mInfoArr.add(infoClass);
+                    if(infoClass.getDate().substring(8,10).equals(nowtime.substring(8,10))){
+                        mInfoArr.add(infoClass);
+                    } else {
+                        mDatabase.getReference("board").child(infoClass.getDate()+"_"+infoClass.getUser()).setValue(null);
+                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
                 Collections.reverse(mInfoArr);
@@ -227,4 +247,10 @@ public class Main extends Fragment {
                 .replace(R.id.fragment_container, mainFragment).commit();
     }*/
     //나중에 뒤로가기 수정
+
+    private String getTime() {
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
 }
