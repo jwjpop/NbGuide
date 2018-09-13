@@ -86,7 +86,7 @@ public class WriteActivity extends AppCompatActivity {
                                 //사용자 계정 넘겨주는 부분 수정
                                 board = new BoardClass(title.getText().toString(), getTime(), color.getSelectedItem().toString(),
                                         number.getText().toString(), price.getText().toString(), content.getText().toString(),
-                                        user.getStringExtra("id"),"1");
+                                        user.getStringExtra("id"));
 
                                 databaseReference.child("board").child(getTime() + "_" + user.getStringExtra("id")).setValue(board);
 

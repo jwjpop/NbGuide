@@ -83,10 +83,15 @@ public class Main extends Fragment {
                 } else {
                     //시간으로 자름(00시부터06시까지 작성 가능)
                     if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
-                        Intent write_intent = new Intent(getContext(), WriteActivity.class);
-                        write_intent.putExtra("id", login_id);
-                        startActivity(write_intent);
-                        getActivity().finish();
+                        if(true/*유저가 글을 작성했는지 보는 부분*/){
+                            //작성했다면
+                        } else {
+                            //작성하지 않았다면
+                            Intent write_intent = new Intent(getContext(), WriteActivity.class);
+                            write_intent.putExtra("id", login_id);
+                            startActivity(write_intent);
+                            getActivity().finish();
+                        }
                     } else {
                         Toast.makeText(getContext(), "00시부터 06시까지 작성 가능합니다.", Toast.LENGTH_SHORT).show();
                     }

@@ -7,12 +7,14 @@ package com.example.woojinroom.daeran.TapPage.MyPage;
 public class UserClass {
     String id;
     String pw;
+    String write;
 
     public UserClass(){}
 
-    public UserClass(String id, String pw){
+    public UserClass(String id, String pw,String write){
         this.id = id;
         this.pw = pw;
+        this.write = write;
     }
 
     public String getId() {
@@ -29,5 +31,13 @@ public class UserClass {
 
     public void setPw(String pw) {
         this.pw = pw;
+    }
+
+    public String getWrite() {
+        return write;
+    }
+
+    public void setWrite(String write) {
+        this.write = write;
     }
 }

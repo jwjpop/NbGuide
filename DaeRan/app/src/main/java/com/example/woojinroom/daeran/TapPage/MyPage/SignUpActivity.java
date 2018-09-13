@@ -129,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(id_chk==1) {
                     if(validatePassword(pw)){
                         if (pw.equals(pwchk)) {
-                            UserClass userClass = new UserClass(id, pw);
+                            UserClass userClass = new UserClass(id, pw,"0");
                             databaseReference.child("user").child(id).setValue(userClass);
                             Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
                             sign = 1;
