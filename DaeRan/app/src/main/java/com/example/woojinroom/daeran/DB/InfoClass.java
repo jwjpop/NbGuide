@@ -18,6 +18,7 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
     public String price;
     public String content;
     public String user;
+    public String writing;
 
     //생성자
     public InfoClass(){}
@@ -31,6 +32,7 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
         this.price = boardClass.getPrice();
         this.content = boardClass.getContent();
         this.user = boardClass.getUser();
+        this.writing = boardClass.getWriting();
     }
 
 
@@ -88,6 +90,14 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getWriting() {
+        return writing;
+    }
+
+    public void setWriting(String writing) {
+        this.writing = writing;
     }
 }
 

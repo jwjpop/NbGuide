@@ -9,10 +9,11 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
     String price;
     String content;
     String user;
+    String writing;
 
     public BoardClass(){}
 
-    public BoardClass(String title, String date, String color,String number,String price,String content,String user) {
+    public BoardClass(String title, String date, String color,String number,String price,String content,String user,String writing) {
 
         this.title = title;
         this.date = date;
@@ -21,6 +22,7 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
         this.price = price;
         this.content = content;
         this.user = user;
+        this.writing = writing;
     }
 
 
@@ -79,5 +81,13 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getWriting() {
+        return writing;
+    }
+
+    public void setWriting(String writing) {
+        this.writing = writing;
     }
 }

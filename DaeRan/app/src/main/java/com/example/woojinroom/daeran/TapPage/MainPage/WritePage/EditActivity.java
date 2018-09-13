@@ -79,7 +79,7 @@ public class EditActivity extends AppCompatActivity {
                 //title.getText 를 반납
                 board = new BoardClass(title.getText().toString(),edit.getStringExtra("date"),color.getSelectedItem().toString(),
                         number.getText().toString(),price.getText().toString(),content.getText().toString(),
-                        edit.getStringExtra("user"));
+                        edit.getStringExtra("user"),"1");
 
                 //수정할때는 시간 초기화하지 않음
                 // 데이터 정렬이 이상해서 정리한번해야함

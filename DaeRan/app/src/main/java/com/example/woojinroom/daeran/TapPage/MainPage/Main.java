@@ -81,6 +81,7 @@ public class Main extends Fragment {
                 if (login_id.equals("guest")) {
                     Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 } else {
+                    //시간으로 자름(00시부터06시까지 작성 가능)
                     if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
                         Intent write_intent = new Intent(getContext(), WriteActivity.class);
                         write_intent.putExtra("id", login_id);
@@ -160,6 +161,8 @@ public class Main extends Fragment {
                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                     BoardClass boardClass = messageData.getValue(BoardClass.class);
                     InfoClass infoClass = new InfoClass(boardClass);
+
+                    //날짜로 자름 (00시부터 작성 가능하기 때문에 문제 없다)
                     if(infoClass.getDate().substring(8,10).equals(nowtime.substring(8,10))){
                         mInfoArr.add(infoClass);
                     } else {
