@@ -2,8 +2,5 @@
     <string name="app_name">Nb_Guide</string>
 
     <string-array name="color">
-        <item>빨강</item>
-        <item>주황</item>
-        <item>노랑</item>
     </string-array>
 </resources>
