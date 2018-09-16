@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.R;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText editText_text;
 
     String user,date,text,sender;
+    int chatlist=0;
 
     private ListView mListView;
     private ArrayList<ChatClass> mChatArr;
@@ -59,7 +61,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        Toast.makeText(getApplicationContext(),"채팅은 20개까지 유지됩니다.",Toast.LENGTH_LONG).show();
         chat = getIntent();
         user = chat.getStringExtra("user");
         sender = chat.getStringExtra("sender");
@@ -92,7 +94,13 @@ public class ChatActivity extends AppCompatActivity {
                                 mChatArr.clear();
                                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                                     ChatClass chatClass = messageData.getValue(ChatClass.class);
+                                    chatlist = Integer.parseInt(messageData.getKey())+1;
+                                    //채팅을 20개씩만 유지
+                                    if(chatlist>20){
+                                        mDatabase.getReference("chat/" + user + " " + sender).child(String.valueOf(chatlist-21)).setValue(null);
+                                    }
                                     mChatArr.add(chatClass);
+
                                     // child 내에 있는 데이터만큼 반복합니다.
                                 }
                                 mAdapter.notifyDataSetChanged();
@@ -110,6 +118,11 @@ public class ChatActivity extends AppCompatActivity {
                         mChatArr.clear();
                         for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                             ChatClass chatClass = messageData.getValue(ChatClass.class);
+                            chatlist = Integer.parseInt(messageData.getKey())+1;
+                            //채팅을 20개씩만 유지
+                            if(chatlist>20){
+                                mDatabase.getReference("chat/" + user + " " + sender).child(String.valueOf(chatlist-21)).setValue(null);
+                            }
                             mChatArr.add(chatClass);
                             // child 내에 있는 데이터만큼 반복합니다.
 
@@ -137,12 +150,14 @@ public class ChatActivity extends AppCompatActivity {
                     chat_send = new ChatClass(sender, date, text);
 
                     if (room == 0) { //원래 방이 있으면
-                        databaseReference.child("chat").child(sender + " " + user).push().setValue(chat_send);
+                        databaseReference.child("chat").child(sender + " " + user).child(String.valueOf(chatlist)).setValue(chat_send);
+
                     }
                     else //방이 없거나 받기만 했으면
                     {
-                        databaseReference.child("chat").child(user + " " + sender).push().setValue(chat_send);
+                        databaseReference.child("chat").child(user + " " + sender).child(String.valueOf(chatlist)).setValue(chat_send);
                     }
+                    chatlist++;
 
                     editText_text.setText("");
                 }

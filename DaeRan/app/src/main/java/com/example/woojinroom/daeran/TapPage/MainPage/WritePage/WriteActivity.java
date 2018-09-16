@@ -31,7 +31,7 @@ public class WriteActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-    public static final Pattern NUMBER = Pattern.compile("^[0-9]$");
+    public static final Pattern NUMBER = Pattern.compile("^[0-9]{1,4}$");
 
     Toolbar toolbar;
     TextView toolbar_title;
@@ -89,6 +89,7 @@ public class WriteActivity extends AppCompatActivity {
                                         user.getStringExtra("id"));
 
                                 databaseReference.child("board").child(getTime() + "_" + user.getStringExtra("id")).setValue(board);
+                                databaseReference.child("user").child(user.getStringExtra("id")+"/write").setValue("1");
 
                                 Toast.makeText(getApplicationContext(), "작성 완료", Toast.LENGTH_SHORT).show();
                                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);

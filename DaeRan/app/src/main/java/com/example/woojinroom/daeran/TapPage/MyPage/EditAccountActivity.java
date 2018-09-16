@@ -11,13 +11,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.woojinroom.daeran.MainActivity;
 import com.example.woojinroom.daeran.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by woojin on 2018-08-13.
@@ -38,6 +40,9 @@ public class EditAccountActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,14 +92,19 @@ public class EditAccountActivity extends AppCompatActivity {
                                 UserClass db_user = messageData.getValue(UserClass.class);
                                 if(db_user.getId().equals(id)){ //아이디가 일치한 경우
                                     if(db_user.getPw().equals(pwnow)){ //현재 비밀번호가 일치한 경우
-                                        if(pwnew.equals(pwnewagain)){ //새 비밀번호끼리 일치한 경우
-                                            UserClass userClass = new UserClass(id, pwnew);
-                                            databaseReference.child("user").child(id).setValue(userClass);
-                                            Toast.makeText(getApplicationContext(), "비밀번호 변경 완료", Toast.LENGTH_SHORT).show();
 
-                                            Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(refresh_intent);
-                                            finish();
+                                        if(pwnew.equals(pwnewagain)){ //새 비밀번호끼리 일치한 경우
+                                            if(validatePassword(pwnew)) {
+                                                UserClass userClass = new UserClass(id, pwnew, db_user.getWrite());
+                                                databaseReference.child("user").child(id).setValue(userClass);
+                                                Toast.makeText(getApplicationContext(), "비밀번호 변경 완료", Toast.LENGTH_SHORT).show();
+
+                                                finish();
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(getApplicationContext(),"4~16자리를 입력해주세요",Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                         else
                                         {
@@ -125,5 +135,8 @@ public class EditAccountActivity extends AppCompatActivity {
     }
     public void onBackPressed() {
         finish();
+    }
+    public static boolean validatePassword(String pwStr) {
+        Matcher matcher = VALID_PASSWOLD_REGEX_ALPHA_NUM.matcher(pwStr); return matcher.matches();
     }
 }

@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.woojinroom.daeran.R;
-import com.example.woojinroom.daeran.TapPage.MainPage.WritePage.WriteActivity;
 
 /**
  * Created by woojinroom on 2018-01-31.
@@ -72,7 +70,9 @@ public class Info extends Fragment {
         enterinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"입장정보 준비중입니다.",Toast.LENGTH_SHORT).show();
+                Intent menu2_intent = new Intent(getContext(), ImageActivity.class);
+                menu2_intent.putExtra("menu",5);
+                startActivity(menu2_intent);
             }
         });
         return view;

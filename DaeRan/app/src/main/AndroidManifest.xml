@@ -47,7 +47,23 @@
         <activity android:name=".TapPage.MyPage.EditAccountActivity">
 
         </activity>
+        <activity android:name=".TapPage.MyPage.AdminActivitiy">
 
+    </activity>
+        <!-- 서비스 태그 추가 -->
+        <service
+            android:name=".TapPage.PushMessaging.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".TapPage.PushMessaging.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

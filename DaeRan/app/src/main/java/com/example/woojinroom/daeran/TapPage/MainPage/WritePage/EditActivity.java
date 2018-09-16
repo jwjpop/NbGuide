@@ -17,6 +17,9 @@ import com.example.woojinroom.daeran.TapPage.MainPage.BoardClass.BoardClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by woojinroom on 2018-04-23.
  */
@@ -37,6 +40,8 @@ public class EditActivity extends AppCompatActivity {
     EditText title,number,price,content;
 
     Intent edit;
+
+    public static final Pattern NUMBER = Pattern.compile("^[0-9]{1,4}$");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,23 +80,44 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                if(!title.getText().toString().equals("")) {
+                    if (validateNumber(number.getText().toString())) {
+                        if (validateNumber(price.getText().toString())) {
+                            if(!content.getText().toString().equals("")) {
                 //title.getText 를 반납
                 board = new BoardClass(title.getText().toString(),edit.getStringExtra("date"),color.getSelectedItem().toString(),
                         number.getText().toString(),price.getText().toString(),content.getText().toString(),
                         edit.getStringExtra("user"));
 
                 //수정할때는 시간 초기화하지 않음
-                // 데이터 정렬이 이상해서 정리한번해야함
                 databaseReference.child("board").child(edit.getStringExtra("date")+"_"+edit.getStringExtra("user")).setValue(board);
 
                 Toast.makeText(getApplicationContext(),"수정 완료",Toast.LENGTH_SHORT).show();
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(refresh_intent);
                 finish();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "내용을 입력하세요", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "가격은 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "드링크 수는 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "제목을 입력하세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
+    public static boolean validateNumber(String Str) {
+        Matcher matcher = NUMBER.matcher(Str); return matcher.matches();
+    }
+
     public void onBackPressed() {
         finish();
     }

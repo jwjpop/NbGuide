@@ -81,11 +81,11 @@ public class DocumentActivity extends AppCompatActivity{
 
         //작성자,관리자일 경우와 일반인의 경우
         if(login_id.equals(st_user)) {
+            //수정
             imageButtonRightSuv.setBackgroundResource(R.drawable.edit);
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "수정", Toast.LENGTH_SHORT).show();
                     Intent edit_intent = new Intent(getApplicationContext(), EditActivity.class);
 
                     edit_intent.putExtra("title",st_title);
@@ -114,6 +114,9 @@ public class DocumentActivity extends AppCompatActivity{
                                     mDatabase = FirebaseDatabase.getInstance();
                                     mReference = mDatabase.getReference("board/"+st_date+"_"+st_user);
                                     mReference.removeValue();
+                                    mReference = mDatabase.getReference("user/"+st_user+"/write");
+                                    mReference.setValue("0");
+
                                     Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(refresh_intent);
                                     finish();
@@ -148,7 +151,7 @@ public class DocumentActivity extends AppCompatActivity{
         }
         else
         {
-
+            //신고
             imageButtonRightSuv.setBackgroundResource(R.drawable.siren);
             imageButtonRightSuv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -166,12 +169,11 @@ public class DocumentActivity extends AppCompatActivity{
 
                 }
             });
-
+            //메세지
             imageButtonRight.setBackgroundResource(R.drawable.message);
             imageButtonRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "메세지", Toast.LENGTH_SHORT).show();
                     Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
                     chat_intent.putExtra("user",st_user);
                     chat_intent.putExtra("sender",login_id);
