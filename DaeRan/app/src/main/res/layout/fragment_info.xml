@@ -18,28 +18,28 @@
         <Button
             android:id="@+id/button_enterinfo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:background="@drawable/button_enterinfo"/>
         <Button
             android:id="@+id/button_menu1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:background="@drawable/button_menu1"/>
         <Button
             android:id="@+id/button_menu2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:background="@drawable/button_menu2"/>
         <Button
             android:id="@+id/button_map_1f"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:background="@drawable/button_1fmap"
             />
         <Button
             android:id="@+id/button_map_2f"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:background="@drawable/button_2fmap"
             />
 

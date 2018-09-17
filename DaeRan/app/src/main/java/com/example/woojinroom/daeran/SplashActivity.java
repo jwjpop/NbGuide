@@ -12,7 +12,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         try {
-            Thread.sleep(30000);
+            Thread.sleep(2000);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
