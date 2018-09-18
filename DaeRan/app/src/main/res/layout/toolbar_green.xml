@@ -29,7 +29,7 @@
     <ImageButton
         android:id="@+id/imagebutton_right"
         android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
         android:background="@drawable/check"/>

@@ -61,7 +61,10 @@ public class SignUpActivity extends AppCompatActivity {
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(refresh_intent);
+                            finish();
             }
         });
 
