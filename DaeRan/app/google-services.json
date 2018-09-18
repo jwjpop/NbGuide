@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:999093642881:android:6621e2b3435ca249",
         "android_client_info": {
-          "package_name": "com.example.woojinroom.daeran"
+          "package_name": "com.example.woojinroom.nbguide"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "999093642881-brm9vdcj7armehb7hquu4dq8li143830.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.woojinroom.daeran",
+            "package_name": "com.example.woojinroom.nbguide",
             "certificate_hash": "e752980308871be1523b0241adb5dc441fdaa406"
           }
         },
