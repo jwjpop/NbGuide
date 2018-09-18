@@ -80,6 +80,7 @@ public class ChatActivity extends AppCompatActivity {
 
         //첫 방 생성
         mDatabase = FirebaseDatabase.getInstance();
+
         mReference = mDatabase.getReference("chat/" + sender + " " + user +  " " + day); // 변경값을 확인할 child 이름
             mReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -114,7 +115,6 @@ public class ChatActivity extends AppCompatActivity {
                         });
                     }
                     else { //방이 아예 없거나 메세지 받은 적이 있는 모든 경우
-
                         mChatArr.clear();
                         for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                             ChatClass chatClass = messageData.getValue(ChatClass.class);
@@ -138,9 +138,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
 
-
             editText_text = (EditText) findViewById(R.id.edit_send);
-
 
         //보내기 눌렀을 경우
             button_send = (Button) findViewById(R.id.button_send);

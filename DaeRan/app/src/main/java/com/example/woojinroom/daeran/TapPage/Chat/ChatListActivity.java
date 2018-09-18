@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.woojinroom.daeran.R;
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by woojin on 2018-08-11.
@@ -38,6 +41,12 @@ public class ChatListActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    String day;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +76,9 @@ public class ChatListActivity extends AppCompatActivity {
         mAdapter = new ChatListCustomAdapter(getApplicationContext(), mChatList,login_id);
         mListView.setAdapter(mAdapter);
 
+        //오늘 날짜
+        day = getTime().substring(8,10);
+
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("chat"); // 변경값을 확인할 child 이름
         mReference.addValueEventListener(new ValueEventListener() {
@@ -80,13 +92,20 @@ public class ChatListActivity extends AppCompatActivity {
 
                         for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                             String id[] = messageData.getKey().split(" ");
-                            if(id[0].equals(login_id) && !id[1].equals(login_id)){
-                                mChatList.add(id[1]);
+                            //날짜가 같지 않으면
+                            if(!id[2].equals(day))
+                            {
+                                mDatabase.getReference("chat/" + id[0] + " " + id[1] +  " " + id[2]).setValue(null);
                             }
-                            else if(!id[0].equals(login_id) && id[1].equals(login_id)) {
-                                mChatList.add(id[0]);
-                            }
+                            else{
 
+                                if(id[0].equals(login_id) && !id[1].equals(login_id)){
+                                    mChatList.add(id[1]);
+                                }
+                                else if(!id[0].equals(login_id) && id[1].equals(login_id)) {
+                                    mChatList.add(id[0]);
+                                }
+                            }
                             mAdapter.notifyDataSetChanged();
                             mListView.setSelection(mAdapter.getCount() - 1);
 
@@ -117,6 +136,12 @@ public class ChatListActivity extends AppCompatActivity {
             }
         });
     }
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
+
     public void onBackPressed() {
         finish();
     }
