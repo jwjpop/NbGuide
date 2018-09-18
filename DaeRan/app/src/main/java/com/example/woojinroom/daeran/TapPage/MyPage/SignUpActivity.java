@@ -159,6 +159,8 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
         finish();
     }
 

@@ -37,7 +37,7 @@ public class ChatActivity extends AppCompatActivity {
     Button button_send;
     EditText editText_text;
 
-    String user,date,text,sender;
+    String user,date,text,sender,day;
     int chatlist=0;
 
     private ListView mListView;
@@ -76,28 +76,28 @@ public class ChatActivity extends AppCompatActivity {
         mAdapter = new ChatCustomAdapter(getApplicationContext(), mChatArr,sender);
         mListView.setAdapter(mAdapter);
 
+        day = getTime().substring(8,10);
+
+        //첫 방 생성
         mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference("chat/" + sender + " " + user); // 변경값을 확인할 child 이름
-
-
+        mReference = mDatabase.getReference("chat/" + sender + " " + user +  " " + day); // 변경값을 확인할 child 이름
             mReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.getValue()==null) //첫 검사 때 방이 없는 경우
                     {
                         room=1;
-                        mReference = mDatabase.getReference("chat/" + user + " " + sender);
+                        mReference = mDatabase.getReference("chat/" + user + " " + sender +  " " + day);
                         mReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-
                                 mChatArr.clear();
                                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                                     ChatClass chatClass = messageData.getValue(ChatClass.class);
                                     chatlist = Integer.parseInt(messageData.getKey())+1;
                                     //채팅을 20개씩만 유지
                                     if(chatlist>20){
-                                        mDatabase.getReference("chat/" + user + " " + sender).child(String.valueOf(chatlist-21)).setValue(null);
+                                        mDatabase.getReference("chat/" + user + " " + sender +  " " + day).child(String.valueOf(chatlist-21)).setValue(null);
                                     }
                                     mChatArr.add(chatClass);
 
@@ -121,7 +121,7 @@ public class ChatActivity extends AppCompatActivity {
                             chatlist = Integer.parseInt(messageData.getKey())+1;
                             //채팅을 20개씩만 유지
                             if(chatlist>20){
-                                mDatabase.getReference("chat/" + user + " " + sender).child(String.valueOf(chatlist-21)).setValue(null);
+                                mDatabase.getReference("chat/" + user + " " + sender +  " " + day).child(String.valueOf(chatlist-21)).setValue(null);
                             }
                             mChatArr.add(chatClass);
                             // child 내에 있는 데이터만큼 반복합니다.
@@ -141,6 +141,8 @@ public class ChatActivity extends AppCompatActivity {
 
             editText_text = (EditText) findViewById(R.id.edit_send);
 
+
+        //보내기 눌렀을 경우
             button_send = (Button) findViewById(R.id.button_send);
             button_send.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -150,12 +152,12 @@ public class ChatActivity extends AppCompatActivity {
                     chat_send = new ChatClass(sender, date, text);
 
                     if (room == 0) { //원래 방이 있으면
-                        databaseReference.child("chat").child(sender + " " + user).child(String.valueOf(chatlist)).setValue(chat_send);
+                        databaseReference.child("chat").child(sender + " " + user +  " " + day).child(String.valueOf(chatlist)).setValue(chat_send);
 
                     }
                     else //방이 없거나 받기만 했으면
                     {
-                        databaseReference.child("chat").child(user + " " + sender).child(String.valueOf(chatlist)).setValue(chat_send);
+                        databaseReference.child("chat").child(user + " " + sender + " " + day).child(String.valueOf(chatlist)).setValue(chat_send);
                     }
                     chatlist++;
 
