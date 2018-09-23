@@ -26,18 +26,19 @@
         android:text="회원가입"
         android:textColor="#FFFFFF"
         android:textSize="24dp" />
+
     <ImageButton
         android:id="@+id/imagebutton_right"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
         android:background="@drawable/check"/>
 
     <ImageButton
         android:id="@+id/imagebutton_right_suv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
         android:layout_gravity="right"
         android:visibility="gone"

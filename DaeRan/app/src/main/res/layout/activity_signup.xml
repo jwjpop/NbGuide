@@ -13,20 +13,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:layout_gravity="right"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:id="@+id/button_equals"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:background="@drawable/button_check"/>
 <LinearLayout
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center">
+    android:gravity="left|center_vertical">
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -36,23 +28,32 @@
         android:textColor="#ffffff"/>
     <EditText
         android:id="@+id/edit_id"
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="ID"
         android:textSize="24dp"
         android:background="#ffffff"
+        android:layout_marginRight="10dp"
         />
 
 </LinearLayout>
 
+    <Button
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/button_equals"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button_check"/>
 
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="left">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,13 +63,14 @@
             android:textColor="#ffffff"/>
         <EditText
             android:id="@+id/edit_pw"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="PW"
             android:password="true"
             android:textSize="24dp"
             android:background="#ffffff"
+            android:layout_marginRight="10dp"
             />
     </LinearLayout>
 
@@ -78,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="left">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,13 +90,14 @@
             android:textColor="#ffffff"/>
         <EditText
             android:id="@+id/edit_pwchk"
-            android:layout_width="175dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="PW CHK"
             android:password="true"
             android:textSize="24dp"
             android:background="#ffffff"
+            android:layout_marginRight="10dp"
             />
     </LinearLayout>
 </LinearLayout>

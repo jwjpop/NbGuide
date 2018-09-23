@@ -28,7 +28,7 @@
             android:textColor="#ffffff"/>
         <EditText
             android:id="@+id/edit_id"
-            android:layout_width="70dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:hint="ID"
             android:gravity="center"
@@ -51,7 +51,7 @@
             android:textColor="#ffffff"/>
         <EditText
             android:id="@+id/edit_pw"
-            android:layout_width="70dp"
+            android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:hint="PW"
             android:gravity="center"
