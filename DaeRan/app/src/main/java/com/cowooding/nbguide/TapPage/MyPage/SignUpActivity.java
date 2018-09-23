@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -132,7 +133,8 @@ public class SignUpActivity extends AppCompatActivity {
                 if(id_chk==1) {
                     if(validatePassword(pw)){
                         if (pw.equals(pwchk)) {
-                            UserClass userClass = new UserClass(id, pw,"0");
+                            String token = FirebaseInstanceId.getInstance().getToken();
+                            UserClass userClass = new UserClass(id, pw,"0",token);
                             databaseReference.child("user").child(id).setValue(userClass);
                             Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
                             sign = 1;

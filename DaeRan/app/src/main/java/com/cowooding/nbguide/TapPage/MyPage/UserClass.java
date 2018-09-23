@@ -8,13 +8,15 @@ public class UserClass {
     String id;
     String pw;
     String write;
+    String token;
 
     public UserClass(){}
 
-    public UserClass(String id, String pw,String write){
+    public UserClass(String id, String pw,String write,String token){
         this.id = id;
         this.pw = pw;
         this.write = write;
+        this.token = token;
     }
 
     public String getId() {
@@ -39,5 +41,13 @@ public class UserClass {
 
     public void setWrite(String write) {
         this.write = write;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

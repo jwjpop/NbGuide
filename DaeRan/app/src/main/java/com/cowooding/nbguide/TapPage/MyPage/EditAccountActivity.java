@@ -95,7 +95,7 @@ public class EditAccountActivity extends AppCompatActivity {
 
                                         if(pwnew.equals(pwnewagain)){ //새 비밀번호끼리 일치한 경우
                                             if(validatePassword(pwnew)) {
-                                                UserClass userClass = new UserClass(id, pwnew, db_user.getWrite());
+                                                UserClass userClass = new UserClass(id, pwnew, db_user.getWrite(),db_user.getToken());
                                                 databaseReference.child("user").child(id).setValue(userClass);
                                                 Toast.makeText(getApplicationContext(), "비밀번호 변경 완료", Toast.LENGTH_SHORT).show();
 
