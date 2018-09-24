@@ -21,7 +21,7 @@ import com.cowooding.nbguide.TapPage.Chat.ChatListActivity;
 
 public class LoginMyPage extends Fragment {
 
-    public Button button_logout,button_chatlist,button_editaccount,button_playlist;
+    public Button button_logout,button_chatlist,button_editaccount,button_playlist,button_setup;
     public TextView text_id;
 
     String id;
@@ -51,6 +51,17 @@ public class LoginMyPage extends Fragment {
                 startActivity(intent_chatlist);
             }
         });
+
+        button_setup=(Button)view.findViewById(R.id.button_setup);
+        button_setup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_setup = new Intent(getContext(),SetupActivity.class);
+                intent_setup.putExtra("id",id);
+                startActivity(intent_setup);
+            }
+        });
+
 
         button_editaccount=(Button)view.findViewById(R.id.button_edit_account);
         button_editaccount.setOnClickListener(new View.OnClickListener() {

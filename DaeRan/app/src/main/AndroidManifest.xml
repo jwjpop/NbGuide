@@ -52,6 +52,9 @@
         <activity android:name=".TapPage.MyPage.AdminActivitiy">
 
     </activity>
+        <activity android:name=".TapPage.MyPage.SetupActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>
