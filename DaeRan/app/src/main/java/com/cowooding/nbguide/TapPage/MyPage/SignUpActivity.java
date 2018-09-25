@@ -133,12 +133,23 @@ public class SignUpActivity extends AppCompatActivity {
                 if(id_chk==1) {
                     if(validatePassword(pw)){
                         if (pw.equals(pwchk)) {
-                            String token = FirebaseInstanceId.getInstance().getToken();
-                            UserClass userClass = new UserClass(id, pw,"0",token);
-                            databaseReference.child("user").child(id).setValue(userClass);
+
+
                             Toast.makeText(v.getContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
                             sign = 1;
 
+                            //토큰 받기
+                            String token = FirebaseInstanceId.getInstance().getToken();
+                            UserClass userClass = new UserClass(id, pw,"0",token);
+                            databaseReference.child("user").child(id).setValue(userClass);
+
+                            //최초 회원가입시에 알림 동의
+                            SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor alarm = agree.edit();
+                            alarm.putString("agree", "true");
+                            alarm.commit();
+
+                            //로그인 정보 저장
                             SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                             SharedPreferences.Editor autoLogin = auto.edit();
                             autoLogin.putString("inputId", id);

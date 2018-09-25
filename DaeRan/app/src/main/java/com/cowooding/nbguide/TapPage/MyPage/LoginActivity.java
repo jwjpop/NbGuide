@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 /**
@@ -30,6 +31,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
+
 
     Toolbar toolbar;
     TextView text_toolbar;
@@ -95,8 +99,20 @@ public class LoginActivity extends AppCompatActivity {
                             if (id_count != 0) { // 계정이 있는 경우
                                 if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
 
+                                    //유저가 토큰이 변경 될 만한 행동을 한 경우
+                                    String token = FirebaseInstanceId.getInstance().getToken();
+                                    UserClass userClass = new UserClass(id, pw,"0",token);
+                                    databaseReference.child("user").child(id).setValue(userClass);
+
+                                    //최초 로그인시에 알림 동의 / 재 로그인시에 알림 값 설정하려면 디비에 넣어놔야 할 듯
+                                    SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
+                                    SharedPreferences.Editor alarm = agree.edit();
+                                    alarm.putString("agree", "true");
+                                    alarm.commit();
+
                                     Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
 
+                                    //로그인 정보 저장
                                     SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                                     SharedPreferences.Editor autoLogin = auto.edit();
                                     autoLogin.putString("inputId", id);

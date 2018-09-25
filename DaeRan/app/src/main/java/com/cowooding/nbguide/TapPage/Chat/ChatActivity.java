@@ -224,7 +224,7 @@ public class ChatActivity extends AppCompatActivity {
                                     notification.put("body", message);
                                     notification.put("title", getString(R.string.app_name) + " : " + sender);
                                     root.put("notification", notification);
-                                    root.put("to", "fz3j8f4bx_Y:APA91bEuGHN0VGTqVjxCW8QhJ4UPBTqFN3cEtgZr7-rAZ_8IqejEkxoubXz5hFL26fyQZTGo1obGAUqnb0WdBPNr1tqA4eDCm80GHqxo7Q66C4zLCcF_kt6m_ggBQeRTGOOjuRrcTXkW");
+                                    root.put("to", "dKheVw04ssw:APA91bGmR2hZRhLr1G8OIdRAFgcS_8QGOun4nUmdMwVgfQhcJxCiVrntdSx-Tu2Nat7WUL5TxPQ6_LsNIhR3F4vstZbPCTB8L8Tx-XSDJH0iboMoOTVNduYomv33EDvPFCjrqJbDVYIP");
                                     // FMC 메시지 생성 end
 
                                     java.net.URL Url = new java.net.URL(FCM_MESSAGE_URL);
