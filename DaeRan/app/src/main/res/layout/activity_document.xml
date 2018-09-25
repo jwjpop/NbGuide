@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
+            android:textSize="30dp"
             android:textColor="#000000"
             android:text="시간"/>
         <LinearLayout
@@ -75,6 +75,15 @@
                 android:textSize="30dp"
                 android:textColor="#000000"
                 android:text="개수"/>
+
+            <TextView
+                android:layout_margin="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="개"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,6 +100,14 @@
                 android:textSize="30dp"
                 android:textColor="#000000"
                 android:text="가격"/>
+            <TextView
+                android:layout_margin="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="원"/>
         </LinearLayout>
         <TextView
             android:id="@+id/doc_content"
@@ -98,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
+            android:textSize="30dp"
             android:textColor="#000000"
             android:text="내용"/>
 

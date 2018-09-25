@@ -27,9 +27,9 @@
 
     <EditText
         android:layout_margin="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:hint="제목"
         android:id="@+id/edit_title"/>
     <LinearLayout
@@ -61,18 +61,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="드링크 수 :"
-        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:layout_marginLeft="35dp"
         android:textSize="18dp"/>
     <EditText
         android:id="@+id/edit_number"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="47dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="개수"/>
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,25 +78,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1장 가격 :"
-            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:layout_marginLeft="35dp"
             android:textSize="18dp"/>
     <EditText
         android:id="@+id/edit_price"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="가격"/>
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
     </LinearLayout>
     <EditText
         android:id="@+id/edit_content"
         android:layout_margin="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:hint="내용"/>
 
 </LinearLayout>

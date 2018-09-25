@@ -99,16 +99,23 @@ public class LoginActivity extends AppCompatActivity {
                             if (id_count != 0) { // 계정이 있는 경우
                                 if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
 
-                                    //유저가 토큰이 변경 될 만한 행동을 한 경우
+                                    //유저가 토큰이 변경 될 만한 행동을 한 경우 로그인 할 때 토큰 초기화해줌
                                     String token = FirebaseInstanceId.getInstance().getToken();
                                     UserClass userClass = new UserClass(id, pw,"0",token);
                                     databaseReference.child("user").child(id).setValue(userClass);
 
-                                    //최초 로그인시에 알림 동의 / 재 로그인시에 알림 값 설정하려면 디비에 넣어놔야 할 듯
                                     SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
+                                    String  st_agree = agree.getString("agree","null");
+                                    if(st_agree.equals("null")){
+                                        SharedPreferences.Editor alarm = agree.edit();
+                                        alarm.putString("agree", "true");
+                                        alarm.commit();
+                                    }
+                                    //최초 로그인시에 알림 동의 / 재 로그인시에 알림 값 설정하려면 디비에 넣어놔야 할 듯
+                                   /* SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
                                     SharedPreferences.Editor alarm = agree.edit();
                                     alarm.putString("agree", "true");
-                                    alarm.commit();
+                                    alarm.commit();*/
 
                                     Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
 
