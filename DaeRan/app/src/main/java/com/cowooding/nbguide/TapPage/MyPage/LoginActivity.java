@@ -60,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh_intent);
                 finish();
             }
         });
@@ -100,10 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                                 if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
 
                                     //유저가 토큰이 변경 될 만한 행동을 한 경우 로그인 할 때 토큰 초기화해줌
+
                                     String token = FirebaseInstanceId.getInstance().getToken();
                                     UserClass userClass = new UserClass(id, pw,"0",token);
                                     databaseReference.child("user").child(id).setValue(userClass);
 
+                                    //기기에 저장된 값 가져와서 null(한 번도 동의한 적 없는 경우)이면 true
+                                    //true 또는 false면 그대로 가져옴
                                     SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
                                     String  st_agree = agree.getString("agree","null");
                                     if(st_agree.equals("null")){
@@ -111,11 +112,6 @@ public class LoginActivity extends AppCompatActivity {
                                         alarm.putString("agree", "true");
                                         alarm.commit();
                                     }
-                                    //최초 로그인시에 알림 동의 / 재 로그인시에 알림 값 설정하려면 디비에 넣어놔야 할 듯
-                                   /* SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
-                                    SharedPreferences.Editor alarm = agree.edit();
-                                    alarm.putString("agree", "true");
-                                    alarm.commit();*/
 
                                     Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
 
@@ -150,17 +146,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
         button_signUp=(Button)findViewById(R.id.button_signUp);
+
         button_signUp.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent intent_signUp = new Intent(getApplicationContext(),SignUpActivity.class);
                 startActivity(intent_signUp);
-                finish();
             }
         });
     }
     public void onBackPressed() {
-        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(refresh_intent);
         finish();
     }
 }

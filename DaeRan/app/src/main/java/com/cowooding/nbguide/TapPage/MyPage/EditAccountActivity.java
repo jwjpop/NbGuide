@@ -55,7 +55,7 @@ public class EditAccountActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         text_toolbar = (TextView)toolbar.findViewById(R.id.title);
-        text_toolbar.setText("비밀번호 수정");
+        text_toolbar.setText("비밀번호 변경");
 
         editText_pwnow = (EditText)findViewById(R.id.edit_pwnow);
         editText_pwnew = (EditText)findViewById(R.id.edit_pwnew);

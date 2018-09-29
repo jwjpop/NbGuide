@@ -74,6 +74,17 @@ public class ChatActivity extends AppCompatActivity {
         toolbar_user = (TextView) toolbar.findViewById(R.id.title);
         toolbar_user.setText(user);
 
+        imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
+        imageButtonLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
+        imageButtonRight.setVisibility(View.INVISIBLE);
+
         mListView = (ListView) findViewById(R.id.listView_chat);
         mChatArr = new ArrayList<ChatClass>();
 
@@ -182,17 +193,6 @@ public class ChatActivity extends AppCompatActivity {
                 editText_text.setText("");
             }
         });
-
-        imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
-        imageButtonLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
-        imageButtonRight.setVisibility(View.INVISIBLE);
 
     }
 
