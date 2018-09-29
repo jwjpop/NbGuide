@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -17,6 +18,10 @@ import com.cowooding.nbguide.DB.InfoClass;
 import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.MainPage.BoardClass.BoardClass;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,6 +71,10 @@ public class WriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
+
+        AdsFull adsFull = new AdsFull(this);
+        adsFull.getInstance(this);
+        adsFull.show();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
@@ -129,6 +138,8 @@ public class WriteActivity extends AppCompatActivity {
                                 databaseReference.child("board").child(getTime() + "_" + user.getStringExtra("id")).setValue(board);
                                // databaseReference.child("user").child(user.getStringExtra("id")+"/write").setValue("1");
 
+
+
                                 Toast.makeText(getApplicationContext(), "작성 완료", Toast.LENGTH_SHORT).show();
                                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(refresh_intent);
@@ -165,5 +176,28 @@ public class WriteActivity extends AppCompatActivity {
         startActivity(refresh_intent);
         finish();
     }
+/*
+    private void setFullAd(){
+        interstitialAd = new InterstitialAd(this); //새 광고를 만듭니다.
+        interstitialAd.setAdUnitId(getResources().getString(R.string.adID)); //이전에 String에 저장해 두었던 광고 ID를 전면 광고에 설정합니다.
+        AdRequest adRequest1 = new AdRequest.Builder().build(); //새 광고요청
+        interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
+        interstitialAd.setAdListener(new AdListener() { //전면 광고의 상태를 확인하는 리스너 등록
+
+            @Override
+            public void onAdClosed() { //전면 광고가 열린 뒤에 닫혔을 때
+                AdRequest adRequest1 = new AdRequest.Builder().build();  //새 광고요청
+                interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
+            }
+        });
+    }
+    public void displayAD(){
+        count++;
+        if(count>10)
+            if(interstitialAd.isLoaded()) { //광고가 로드 되었을 시
+                interstitialAd.show(); //보여준다
+                count=0;
+            }
+    }*/
 
 }

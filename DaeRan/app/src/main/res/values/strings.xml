@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">NbGuide</string>
-    <string name="ad_unit_id">id</string>
+    <string name="adID">ca-app-pub-2955863180824800/2283003206</string>
     <string-array name="color">
     </string-array>
 </resources>
