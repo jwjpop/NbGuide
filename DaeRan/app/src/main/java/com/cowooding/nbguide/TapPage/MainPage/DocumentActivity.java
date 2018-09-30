@@ -15,6 +15,8 @@ import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.Chat.ChatActivity;
 import com.cowooding.nbguide.TapPage.MainPage.WritePage.EditActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -184,7 +186,7 @@ public class DocumentActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-       Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(refresh_intent);
         finish();
     }

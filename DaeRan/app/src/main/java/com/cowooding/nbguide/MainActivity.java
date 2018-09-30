@@ -1,6 +1,8 @@
 package com.cowooding.nbguide;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,9 +19,16 @@ import com.cowooding.nbguide.TapPage.InfoPage.Info;
 import com.cowooding.nbguide.TapPage.MainPage.Main;
 import com.cowooding.nbguide.TapPage.MyPage.LoginMyPage;
 import com.cowooding.nbguide.TapPage.MyPage.MyPage;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 
 public class MainActivity extends FragmentActivity {
+
+    private InterstitialAd interstitialAd;
+    AdRequest adRequest;
+
 
     String id;
     String loginId, loginPwd;
@@ -48,6 +57,13 @@ public class MainActivity extends FragmentActivity {
             id=loginId;
         }
         replaceFragment(Main.newInstance());
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-2955863180824800/2283003206");
+
+        adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+
+        interstitialAd.loadAd(adRequest);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener
@@ -106,6 +122,30 @@ public class MainActivity extends FragmentActivity {
         if (mOnKeyBackPressedListener != null) {
             mOnKeyBackPressedListener.onBack();
         } else {
+
+
+            //이건 누르면 종료 물어보는 코드 (여기에 광고 노출 가능)
+            AlertDialog.Builder alert_ex = new AlertDialog.Builder(this);
+            alert_ex.setTitle("종료하시겠습니까?");
+            alert_ex.setMessage("정말로 종료하시겠습니까?");
+            alert_ex.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // 내용(취소시 할 일이 없기 때문에 아무일도 하지 않게 아무것도 적지
+                }
+            });
+            alert_ex.setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog alert = alert_ex.create();
+            alert.show();
+
+
+
+            /* 이건 두번 누르면 종료되는 코드
             if (pressedTime == 0) {
                 Toast.makeText(getApplicationContext(),
                         " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
@@ -122,11 +162,20 @@ public class MainActivity extends FragmentActivity {
                     finish();
                     android.os.Process.killProcess(android.os.Process.myPid());
                 }
-            }
+            }*/
         }
 
     }
 
+    private void showInterstitial() {
+
+        if (interstitialAd.isLoaded()) {
+
+            interstitialAd.show();
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+            interstitialAd.loadAd(adRequest);
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();

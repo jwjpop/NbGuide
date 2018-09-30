@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,10 +21,12 @@ import com.cowooding.nbguide.DB.InfoClass;
 import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.MainPage.BoardClass.BoardClass;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,11 +50,13 @@ public class WriteActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     private InterstitialAd interstitialAd;
+    AdRequest adRequest;
 
     public static final Pattern NUMBER = Pattern.compile("^[0-9]{1,4}$");
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+
 
     Toolbar toolbar;
     TextView toolbar_title;
@@ -76,22 +82,29 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
+
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-2955863180824800/2283003206");
 
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
 
-        interstitialAd.loadAd(adRequest);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
         toolbar_title.setText("글 작성");
 
         title = (EditText)findViewById(R.id.edit_title);
+        title.setSelected(false);
         number =(EditText)findViewById(R.id.edit_number);
+        number.setSelected(false);
         color = (Spinner) findViewById(R.id.spinner_color);
+        color.setSelected(false);
         price = (EditText)findViewById(R.id.edit_price);
+        price.setSelected(false);
         content = (EditText)findViewById(R.id.edit_content);
+        content.setSelected(false);
 
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +140,6 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
 
-
         imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,9 +159,23 @@ public class WriteActivity extends AppCompatActivity {
                                 // databaseReference.child("user").child(user.getStringExtra("id")+"/write").setValue("1");
 
                                 //광고 출력
-                                if(interstitialAd.isLoaded()){
-                                    interstitialAd.show();
-                                }
+                                interstitialAd.loadAd(adRequest);
+                                interstitialAd.setAdListener(new AdListener() {
+                                    @Override
+                                    public void onAdClosed() {
+
+                                    }
+
+                                    @Override
+                                    public void onAdLoaded() {
+                                        showInterstitial();
+                                    }
+
+                                    @Override
+                                    public void onAdFailedToLoad(int errorCode) {
+
+                                    }
+                                });
 
                                 Toast.makeText(getApplicationContext(), "작성 완료", Toast.LENGTH_SHORT).show();
                                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -187,11 +213,13 @@ public class WriteActivity extends AppCompatActivity {
         startActivity(refresh_intent);
         finish();
     }
+    private void showInterstitial() {
 
-    public void displayInterstitial(){
-        if(interstitialAd.isLoaded()){
-            interstitialAd.show();
+        if (interstitialAd.isLoaded()) {
+
+                            interstitialAd.show();
+                            AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+                            interstitialAd.loadAd(adRequest);
         }
     }
-
 }
