@@ -1,5 +1,6 @@
 package com.cowooding.nbguide.TapPage.MainPage.WritePage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +45,8 @@ public class WriteActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+    private InterstitialAd interstitialAd;
+
     public static final Pattern NUMBER = Pattern.compile("^[0-9]{1,4}$");
 
     private FirebaseDatabase mDatabase;
@@ -63,6 +66,7 @@ public class WriteActivity extends AppCompatActivity {
 
     EditText title,number,price,content;
 
+
     long mNow;
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -72,9 +76,12 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
-        AdsFull adsFull = new AdsFull(this);
-        adsFull.getInstance(this);
-        adsFull.show();
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-2955863180824800/2283003206");
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+
+        interstitialAd.loadAd(adRequest);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
@@ -109,7 +116,7 @@ public class WriteActivity extends AppCompatActivity {
                     st_color = messageData.getValue().toString();
                     arr_spin.add(st_color);
                 }
-              spinnerAdapter = new ArrayAdapter(getApplicationContext(),R.layout.custom_simple_dropdown_item_1line,arr_spin);
+                spinnerAdapter = new ArrayAdapter(getApplicationContext(),R.layout.custom_simple_dropdown_item_1line,arr_spin);
                 color.setAdapter(spinnerAdapter);
 
             }
@@ -119,6 +126,7 @@ public class WriteActivity extends AppCompatActivity {
 
             }
         });
+
 
         imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
@@ -136,9 +144,12 @@ public class WriteActivity extends AppCompatActivity {
                                         user.getStringExtra("id"));
 
                                 databaseReference.child("board").child(getTime() + "_" + user.getStringExtra("id")).setValue(board);
-                               // databaseReference.child("user").child(user.getStringExtra("id")+"/write").setValue("1");
+                                // databaseReference.child("user").child(user.getStringExtra("id")+"/write").setValue("1");
 
-
+                                //광고 출력
+                                if(interstitialAd.isLoaded()){
+                                    interstitialAd.show();
+                                }
 
                                 Toast.makeText(getApplicationContext(), "작성 완료", Toast.LENGTH_SHORT).show();
                                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -176,28 +187,11 @@ public class WriteActivity extends AppCompatActivity {
         startActivity(refresh_intent);
         finish();
     }
-/*
-    private void setFullAd(){
-        interstitialAd = new InterstitialAd(this); //새 광고를 만듭니다.
-        interstitialAd.setAdUnitId(getResources().getString(R.string.adID)); //이전에 String에 저장해 두었던 광고 ID를 전면 광고에 설정합니다.
-        AdRequest adRequest1 = new AdRequest.Builder().build(); //새 광고요청
-        interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
-        interstitialAd.setAdListener(new AdListener() { //전면 광고의 상태를 확인하는 리스너 등록
 
-            @Override
-            public void onAdClosed() { //전면 광고가 열린 뒤에 닫혔을 때
-                AdRequest adRequest1 = new AdRequest.Builder().build();  //새 광고요청
-                interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
-            }
-        });
+    public void displayInterstitial(){
+        if(interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
     }
-    public void displayAD(){
-        count++;
-        if(count>10)
-            if(interstitialAd.isLoaded()) { //광고가 로드 되었을 시
-                interstitialAd.show(); //보여준다
-                count=0;
-            }
-    }*/
 
 }
