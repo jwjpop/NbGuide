@@ -31,6 +31,7 @@ public class MyPage extends Fragment {
             public void onClick(View view){
                 Intent intent_login = new Intent(getContext(),LoginActivity.class);
                 startActivity(intent_login);
+                getActivity().finish();
             }
         });
 
@@ -39,6 +40,7 @@ public class MyPage extends Fragment {
             public void onClick(View view){
                 Intent intent_signUp = new Intent(getContext(),SignUpActivity.class);
                 startActivity(intent_signUp);
+                getActivity().finish();
             }
         });
 

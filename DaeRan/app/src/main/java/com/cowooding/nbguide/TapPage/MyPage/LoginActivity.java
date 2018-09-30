@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(refresh_intent);
                 finish();
             }
         });
@@ -151,10 +153,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent_signUp = new Intent(getApplicationContext(),SignUpActivity.class);
                 startActivity(intent_signUp);
+                finish();
             }
         });
     }
     public void onBackPressed() {
+        Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(refresh_intent);
         finish();
     }
 }
