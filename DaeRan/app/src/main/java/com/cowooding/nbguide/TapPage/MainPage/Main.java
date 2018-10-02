@@ -71,7 +71,6 @@ public class Main extends Fragment {
         extra = getArguments();
         nowtime = getTime();
 
-
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
 

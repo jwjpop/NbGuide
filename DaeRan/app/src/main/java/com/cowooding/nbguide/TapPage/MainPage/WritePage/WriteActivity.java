@@ -1,32 +1,24 @@
 package com.cowooding.nbguide.TapPage.MainPage.WritePage;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cowooding.nbguide.DB.InfoClass;
 import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.MainPage.BoardClass.BoardClass;
-
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -162,18 +153,8 @@ public class WriteActivity extends AppCompatActivity {
                                 interstitialAd.loadAd(adRequest);
                                 interstitialAd.setAdListener(new AdListener() {
                                     @Override
-                                    public void onAdClosed() {
-
-                                    }
-
-                                    @Override
                                     public void onAdLoaded() {
                                         showInterstitial();
-                                    }
-
-                                    @Override
-                                    public void onAdFailedToLoad(int errorCode) {
-
                                     }
                                 });
 
