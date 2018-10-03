@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cowooding.nbguide.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +53,10 @@ public class ChatListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatlist);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
@@ -92,20 +98,18 @@ public class ChatListActivity extends AppCompatActivity {
 
                         for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                             String id[] = messageData.getKey().split(" ");
-                            //날짜가 같지 않으면
-                            if(!id[2].equals(day))
-                            {
-                                mDatabase.getReference("chat/" + id[0] + " " + id[1] +  " " + id[2]).setValue(null);
-                            }
-                            else{
+                            //날짜가 같으면 리스트 추가
+                                if (id[2].equals(day)) {
+                                    if (id[0].equals(login_id) && !id[1].equals(login_id)) {
+                                        mChatList.add(id[1]);
+                                    } else if (!id[0].equals(login_id) && id[1].equals(login_id)) {
+                                        mChatList.add(id[0]);
+                                    }
+                                    //날짜 같지 않으면 관리자일 때 리스트 제거
+                                } else if(login_id.equals("cowooding@naver_com")){
+                                    mDatabase.getReference("chat/" + id[0] + " " + id[1] + " " + id[2]).setValue(null);
+                                }
 
-                                if(id[0].equals(login_id) && !id[1].equals(login_id)){
-                                    mChatList.add(id[1]);
-                                }
-                                else if(!id[0].equals(login_id) && id[1].equals(login_id)) {
-                                    mChatList.add(id[0]);
-                                }
-                            }
                             mAdapter.notifyDataSetChanged();
                             mListView.setSelection(mAdapter.getCount() - 1);
 

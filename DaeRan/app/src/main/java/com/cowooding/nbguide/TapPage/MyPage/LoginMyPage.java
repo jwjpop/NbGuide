@@ -25,6 +25,7 @@ public class LoginMyPage extends Fragment {
     public TextView text_id;
 
     String id;
+    String new_id;
 
     public static LoginMyPage newInstance() {
         return new LoginMyPage();
@@ -37,9 +38,11 @@ public class LoginMyPage extends Fragment {
 
         Bundle extra = getArguments();
         id = extra.getString("id"); //로그인한 아이디
+        String split_id[] = id.split("\\.");
+        new_id = split_id[0]+"_"+split_id[1];
 
         text_id = (TextView)view.findViewById(R.id.text_id);
-        text_id.setText(id);
+        text_id.setText(new_id);
 
         button_playlist = (Button)view.findViewById(R.id.button_playlist);
 
@@ -47,7 +50,7 @@ public class LoginMyPage extends Fragment {
         button_chatlist.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent intent_chatlist = new Intent(getContext(),ChatListActivity.class);
-                intent_chatlist.putExtra("id",id);
+                intent_chatlist.putExtra("id",new_id);
                 startActivity(intent_chatlist);
             }
         });
@@ -57,7 +60,7 @@ public class LoginMyPage extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent_setup = new Intent(getContext(),SetupActivity.class);
-                intent_setup.putExtra("id",id);
+                intent_setup.putExtra("id",new_id);
                 startActivity(intent_setup);
             }
         });
@@ -68,7 +71,7 @@ public class LoginMyPage extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent_edit = new Intent(getContext(),EditAccountActivity.class);
-                intent_edit.putExtra("id",id);
+                intent_edit.putExtra("id",new_id);
                 startActivity(intent_edit);
             }
         });

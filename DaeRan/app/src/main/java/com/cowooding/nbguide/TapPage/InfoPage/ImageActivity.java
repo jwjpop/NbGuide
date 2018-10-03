@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.cowooding.nbguide.R;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,10 @@ public class ImageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
 
         mimageView =(PhotoView) findViewById(R.id.image_info);
         tv_info = (TextView) findViewById(R.id.tv_info);

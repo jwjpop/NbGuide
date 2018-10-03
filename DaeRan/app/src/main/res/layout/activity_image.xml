@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
     <Button
         android:id="@+id/button_back"
         android:layout_width="match_parent"
@@ -13,20 +18,29 @@
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image_info"
-        android:layout_marginTop="140dp"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="match_parent"
         />
 
     <TextView
         android:id="@+id/tv_info"
-        android:layout_marginTop="140dp"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="match_parent"
         android:text="입장정보"
         android:textSize="20dp"
         android:gravity="center"
         android:textColor="#7fbfe7"
         android:scrollbars="vertical"
         />
-</FrameLayout>
+    </LinearLayout>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#333333"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-2955863180824800/3988629241"/>
+
+</LinearLayout>

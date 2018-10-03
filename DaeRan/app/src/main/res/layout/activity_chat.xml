@@ -41,4 +41,13 @@
             android:layout_weight="1"
             android:text="보내기"/>
     </LinearLayout>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#333333"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-2955863180824800/3988629241"/>
 </LinearLayout>

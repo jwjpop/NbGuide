@@ -16,6 +16,7 @@ import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.Chat.ChatActivity;
 import com.cowooding.nbguide.TapPage.MainPage.WritePage.EditActivity;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,6 +37,10 @@ public class DocumentActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
+
         //툴바 설정
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_user = (TextView) toolbar.findViewById(R.id.title);
@@ -55,8 +60,8 @@ public class DocumentActivity extends AppCompatActivity{
         st_price = doc_intent.getStringExtra("price");
         st_date = doc_intent.getStringExtra("date");     // 작성 시간
         st_content = doc_intent.getStringExtra("content");
-        st_user = doc_intent.getStringExtra("user"); // 작성자
-        login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트
+        st_user = doc_intent.getStringExtra("user"); // 작성자 cowooding@naver_com 형식
+        login_id = doc_intent.getStringExtra("login"); //로그인한 사람 또는 게스트 cowooding@naver_com 형식
 
         title.setText(st_title);
         color.setText(st_color);
@@ -116,8 +121,6 @@ public class DocumentActivity extends AppCompatActivity{
                                     mDatabase = FirebaseDatabase.getInstance();
                                     mReference = mDatabase.getReference("board/"+st_date+"_"+st_user);
                                     mReference.removeValue();
-                                    //mReference = mDatabase.getReference("user/"+st_user+"/write");
-                                    //mReference.setValue("0");
 
                                     Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(refresh_intent);

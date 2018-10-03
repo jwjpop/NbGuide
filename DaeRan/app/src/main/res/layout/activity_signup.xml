@@ -12,7 +12,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1">
 <LinearLayout
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"
@@ -31,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="ID"
+        android:hint="cowooding@naver.com"
         android:textSize="24dp"
         android:background="#ffffff"
         android:layout_marginRight="10dp"
@@ -66,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="PW"
+            android:hint="6자리 이상"
             android:password="true"
             android:textSize="24dp"
             android:background="#ffffff"
@@ -93,11 +97,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="PW CHK"
+            android:hint="6자리 이상"
             android:password="true"
             android:textSize="24dp"
             android:background="#ffffff"
             android:layout_marginRight="10dp"
             />
     </LinearLayout>
+</LinearLayout>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#333333"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-2955863180824800/3988629241"/>
 </LinearLayout>

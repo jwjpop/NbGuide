@@ -61,7 +61,8 @@
         <activity android:name=".TapPage.MyPage.SetupActivity">
 
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard">
 
         </activity>
 

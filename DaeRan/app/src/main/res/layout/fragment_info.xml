@@ -51,6 +51,7 @@
             app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@xml/color"
             app:itemTextColor="@xml/color"
+            android:layout_marginBottom="50dp"
             app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
             android:visibility="invisible"
             app:menu="@xml/menu" />

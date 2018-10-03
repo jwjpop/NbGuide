@@ -141,13 +141,15 @@ public class WriteActivity extends AppCompatActivity {
                             if(!content.getText().toString().equals("")) {
                                 Intent user = getIntent();
 
+                                //아이디 가공
+                                String id = user.getStringExtra("id");
+
                                 //사용자 계정 넘겨주는 부분 수정
                                 board = new BoardClass(title.getText().toString(), getTime(), color.getSelectedItem().toString(),
                                         number.getText().toString(), price.getText().toString(), content.getText().toString(),
-                                        user.getStringExtra("id"));
+                                        id);
 
-                                databaseReference.child("board").child(getTime() + "_" + user.getStringExtra("id")).setValue(board);
-                                // databaseReference.child("user").child(user.getStringExtra("id")+"/write").setValue("1");
+                                databaseReference.child("board").child(getTime() + "_" + id).setValue(board);
 
                                 //광고 출력
                                 interstitialAd.loadAd(adRequest);
@@ -194,6 +196,7 @@ public class WriteActivity extends AppCompatActivity {
         startActivity(refresh_intent);
         finish();
     }
+
     private void showInterstitial() {
 
         if (interstitialAd.isLoaded()) {

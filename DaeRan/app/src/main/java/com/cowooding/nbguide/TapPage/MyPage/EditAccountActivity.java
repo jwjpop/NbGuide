@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cowooding.nbguide.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +54,10 @@ public class EditAccountActivity extends AppCompatActivity {
         Intent id_intent = getIntent();
         id = id_intent.getStringExtra("id");
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         text_toolbar = (TextView)toolbar.findViewById(R.id.title);
@@ -75,7 +81,8 @@ public class EditAccountActivity extends AppCompatActivity {
         mReference = mDatabase.getReference("user/");
 
         imageButtonRight = (ImageButton) toolbar.findViewById(R.id.imagebutton_right);
-        imageButtonRight.setOnClickListener(new View.OnClickListener() {
+        //계정 비밀번호 수정하는 란인데 파이어베이스 Auth 알고리즘 쓰면 될 듯
+        /*imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -131,7 +138,7 @@ public class EditAccountActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "모두 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
     }
     public void onBackPressed() {
         finish();

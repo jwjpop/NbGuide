@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.MyPage.UserClass;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,6 +71,11 @@ public class ChatActivity extends AppCompatActivity {
         chat = getIntent();
         user = chat.getStringExtra("user");
         sender = chat.getStringExtra("sender");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        //출시전에 꼭 테스트 디바이스 빼기
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_user = (TextView) toolbar.findViewById(R.id.title);

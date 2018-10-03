@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -22,6 +22,20 @@
         >
     </ListView>
 
+        <!--하단바에 가리지 않게 하려는 장치 코드낭비느낌-->
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/colorPrimary"
+            app:itemIconTint="@xml/color"
+            app:itemTextColor="@xml/color"
+            android:layout_marginBottom="50dp"
+            app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
+            android:visibility="invisible"
+            app:menu="@xml/menu" />
+
 </LinearLayout>
 
     <ImageButton
@@ -31,19 +45,9 @@
         android:src="@drawable/write"
         android:background="@android:color/transparent"
         android:layout_gravity="right|bottom"
+        android:layout_marginBottom="110dp"
         android:layout_marginRight="5dp"
         />
 
-    <!--하단바에 가리지 않게 하려는 장치 코드낭비느낌-->
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@xml/color"
-        app:itemTextColor="@xml/color"
-        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
-        android:visibility="invisible"
-        app:menu="@xml/menu" />
-</LinearLayout>
+</FrameLayout>

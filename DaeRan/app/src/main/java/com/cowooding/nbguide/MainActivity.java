@@ -11,22 +11,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.cowooding.nbguide.TapPage.PlayListPage.PlayList;
 import com.cowooding.nbguide.TapPage.InfoPage.Info;
 import com.cowooding.nbguide.TapPage.MainPage.Main;
 import com.cowooding.nbguide.TapPage.MyPage.LoginMyPage;
 import com.cowooding.nbguide.TapPage.MyPage.MyPage;
-import com.google.android.gms.ads.AdListener;
+import com.fsn.cauly.CaulyAdInfo;
+import com.fsn.cauly.CaulyAdInfoBuilder;
+import com.fsn.cauly.CaulyCloseAd;
+import com.fsn.cauly.CaulyCloseAdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.AdView;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements CaulyCloseAdListener {
 
-    private InterstitialAd interstitialAd;
+    private static final String APP_CODE = "ecVFR3Ag"; // 광고 요청을 코드 ( 자신의 APP_CODE 쓸 것 )
+    CaulyCloseAd mCloseAd ;
+
     AdRequest adRequest;
 
 
@@ -34,12 +39,11 @@ public class MainActivity extends FragmentActivity {
     String loginId, loginPwd;
     int login=0;
 
-    private long pressedTime = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottombar);
+
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
@@ -58,12 +62,23 @@ public class MainActivity extends FragmentActivity {
         }
         replaceFragment(Main.newInstance());
 
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-2955863180824800/2283003206");
-
+        AdView mAdView = (AdView) findViewById(R.id.adView);
         adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
 
-        interstitialAd.loadAd(adRequest);
+        CaulyAdInfo closeAdInfo = new CaulyAdInfoBuilder(APP_CODE).build();
+        mCloseAd = new CaulyCloseAd();
+
+
+    //원하는 버튼의 문구를 설정 할 수 있다.
+    mCloseAd.setButtonText("취소", "종료");
+    //원하는 텍스트의 문구를 설정 할 수 있다.
+    mCloseAd.setDescriptionText("종료하시겠습니까?");
+
+        mCloseAd.setAdInfo(closeAdInfo);
+        mCloseAd.setCloseAdListener(this); // CaulyCloseAdListener 등록
+        // 종료광고 노출 후 back버튼 사용을 막기 원할 경우 disableBackKey();을 추가한다
+         mCloseAd.disableBackKey();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener
@@ -118,66 +133,73 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (mOnKeyBackPressedListener != null) {
-            mOnKeyBackPressedListener.onBack();
-        } else {
-
-
-            //이건 누르면 종료 물어보는 코드 (여기에 광고 노출 가능)
-            AlertDialog.Builder alert_ex = new AlertDialog.Builder(this);
-            alert_ex.setTitle("종료하시겠습니까?");
-            alert_ex.setMessage("정말로 종료하시겠습니까?");
-            alert_ex.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // 내용(취소시 할 일이 없기 때문에 아무일도 하지 않게 아무것도 적지
-                }
-            });
-            alert_ex.setPositiveButton("종료", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            AlertDialog alert = alert_ex.create();
-            alert.show();
-
-
-
-            /* 이건 두번 누르면 종료되는 코드
-            if (pressedTime == 0) {
-                Toast.makeText(getApplicationContext(),
-                        " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-                pressedTime = System.currentTimeMillis();
-            } else {
-                int seconds = (int) (System.currentTimeMillis() - pressedTime);
-
-                if (seconds > 2000) {
-                    Toast.makeText(getApplicationContext(),
-                            " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-                    pressedTime = 0;
-                } else {
-                    super.onBackPressed();
-                    finish();
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                }
-            }*/
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 앱을 처음 설치하여 실행할 때, 필요한 리소스를 다운받았는지 여부.
+            if (mCloseAd.isModuleLoaded())
+            {
+                mCloseAd.show(this);
+            }
+            else
+            {
+                // 광고에 필요한 리소스를 한번만  다운받는데 실패했을 때 앱의 종료팝업 구현
+                showDefaultClosePopup();
+            }
+            return true;
         }
-
+        return super.onKeyDown(keyCode, event);
     }
 
-    private void showInterstitial() {
-
-        if (interstitialAd.isLoaded()) {
-
-            interstitialAd.show();
-            AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
-            interstitialAd.loadAd(adRequest);
-        }
+    private void showDefaultClosePopup()
+    {
+        new AlertDialog.Builder(this).setTitle("").setMessage("종료 하시겠습니까?")
+                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("아니요",null)
+                .show();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
+        if (mCloseAd != null)
+            mCloseAd.resume(this); // 필수 호출
     }
+
+    @Override
+    public void onReceiveCloseAd(CaulyCloseAd caulyCloseAd, boolean b) {
+
+    }
+
+    @Override
+    public void onShowedCloseAd(CaulyCloseAd caulyCloseAd, boolean b) {
+
+    }
+
+    @Override
+    public void onFailedToReceiveCloseAd(CaulyCloseAd caulyCloseAd, int i, String s) {
+
+    }
+
+    @Override
+    public void onLeftClicked(CaulyCloseAd caulyCloseAd) {
+
+    }
+
+    @Override
+    public void onRightClicked(CaulyCloseAd caulyCloseAd) {
+        moveTaskToBack(true);
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    @Override
+    public void onLeaveCloseAd(CaulyCloseAd caulyCloseAd) {
+
+    }
+
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,6 +16,12 @@ import android.widget.Toast;
 
 import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
-
+    private FirebaseAuth mAuth;
 
     Toolbar toolbar;
     TextView text_toolbar;
@@ -55,6 +62,12 @@ public class LoginActivity extends AppCompatActivity {
 
         text_toolbar = (TextView)toolbar.findViewById(R.id.title);
         text_toolbar.setText("로그인");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
+
+        mAuth = FirebaseAuth.getInstance();
 
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
@@ -83,61 +96,73 @@ public class LoginActivity extends AppCompatActivity {
                 pw = editText_pw.getText().toString();
 
                 if (!id.equals("")) { // 공백이 아닌 경우
-                    mReference.addValueEventListener(new ValueEventListener() {
+                    mAuth.signInWithEmailAndPassword(id, pw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-                                UserClass db_user = messageData.getValue(UserClass.class);
-                                // child 내에 있는 데이터만큼 반복합니다.
-                                if (id.equals(db_user.getId())) {
-                                    id_count++;
-                                    equal_id=db_user.getId();
-                                    equal_pw=db_user.getPw();
-                                    break;
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                //유저가 토큰이 변경 될 만한 행동을 한 경우 로그인 할 때 토큰 초기화해줌
+                                String token = FirebaseInstanceId.getInstance().getToken();
+                                String split_id[] = id.split("\\.");
+                                String new_id = split_id[0]+"_"+split_id[1];
+                                UserClass userClass = new UserClass(new_id,token);
+                                databaseReference.child("user").child(new_id).setValue(userClass);
+
+                                //기기에 저장된 값 가져와서 null(한 번도 동의한 적 없는 경우)이면 true
+                                //true 또는 false면 그대로 가져옴
+                                SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
+                                String  st_agree = agree.getString("agree","null");
+                                if(st_agree.equals("null")){
+                                    SharedPreferences.Editor alarm = agree.edit();
+                                    alarm.putString("agree", "true");
+                                    alarm.commit();
                                 }
-                            }
-                            if (id_count != 0) { // 계정이 있는 경우
-                                if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
 
-                                    //유저가 토큰이 변경 될 만한 행동을 한 경우 로그인 할 때 토큰 초기화해줌
+                                //로그인 정보 저장
+                                SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                                SharedPreferences.Editor autoLogin = auto.edit();
+                                autoLogin.putString("inputId", id);
+                                autoLogin.putString("inputPwd", pw);
+                                autoLogin.commit();
 
-                                    String token = FirebaseInstanceId.getInstance().getToken();
-                                    UserClass userClass = new UserClass(id, pw,"0",token);
-                                    databaseReference.child("user").child(id).setValue(userClass);
 
-                                    //기기에 저장된 값 가져와서 null(한 번도 동의한 적 없는 경우)이면 true
-                                    //true 또는 false면 그대로 가져옴
-                                    SharedPreferences agree = getSharedPreferences("agree", Activity.MODE_PRIVATE);
-                                    String  st_agree = agree.getString("agree","null");
-                                    if(st_agree.equals("null")){
-                                        SharedPreferences.Editor alarm = agree.edit();
-                                        alarm.putString("agree", "true");
-                                        alarm.commit();
+                                Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(login_intent);
+                                finish();
+                            } else {
+                                //로그인 실패시
+                                mReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                                            UserClass db_user = messageData.getValue(UserClass.class);
+                                            // child 내에 있는 데이터만큼 반복합니다.
+                                            String split_id[] = id.split("\\.");
+                                            String new_id = split_id[0]+"_"+split_id[1];
+                                            if (new_id.equals(db_user.getId())) {
+                                                id_count++;
+                                                equal_id=db_user.getId();
+                                                break;
+                                            }
+                                        }
+                                        if (id_count != 0) { // 계정이 있는 경우
+                                            if(pw.equals(equal_pw)){ // 비밀번호가 일치하는 경우
+
+                                            } else{ //아이디는 맞지만 비밀번호가 다른 경우
+                                                Toast.makeText(getApplicationContext(),"비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        } else { // 계정이 없는 경우
+                                            Toast.makeText(getApplicationContext(), "계정을 확인해주세요", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
 
-                                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                                    //로그인 정보 저장
-                                    SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
-                                    SharedPreferences.Editor autoLogin = auto.edit();
-                                    autoLogin.putString("inputId", id);
-                                    autoLogin.putString("inputPwd", pw);
-                                    autoLogin.commit();
-
-                                    Intent login_intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(login_intent);
-                                    finish();
-                                } else{ //아이디는 맞지만 비밀번호가 다른 경우
-                                    Toast.makeText(getApplicationContext(),"비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else { // 계정이 없는 경우
-                                Toast.makeText(getApplicationContext(), "계정을 확인해주세요", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
                 }else{ // 공백인 경우

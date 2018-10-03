@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.cowooding.nbguide.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class SetupActivity extends AppCompatActivity {
 
@@ -28,6 +30,10 @@ public class SetupActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.title);
         toolbar_title.setText("설정");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        mAdView.loadAd(adRequest);
 
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {

@@ -20,12 +20,15 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="회원가입"
         android:textColor="#FFFFFF"
-        android:textSize="24dp" />
+        android:textSize="24dp"
+        android:ellipsize="end"
+    android:lines="1"/>
 
     <ImageButton
         android:id="@+id/imagebutton_right"
@@ -43,8 +46,5 @@
         android:layout_gravity="right"
         android:visibility="gone"
         android:background="@drawable/check"/>
-
-
-
 
 </android.support.v7.widget.Toolbar>
