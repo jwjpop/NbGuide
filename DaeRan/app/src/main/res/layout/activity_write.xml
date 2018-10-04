@@ -80,7 +80,9 @@
         android:id="@+id/edit_number"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="5"/>
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,7 +101,9 @@
         android:id="@+id/edit_price"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="2500"/>
     </LinearLayout>
     <EditText
         android:id="@+id/edit_content"

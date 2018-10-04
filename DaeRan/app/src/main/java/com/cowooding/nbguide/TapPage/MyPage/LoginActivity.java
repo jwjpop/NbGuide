@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     String id,pw;
     String equal_id,equal_pw;
 
-    Button button_signUp;
+    Button button_signUp,button_findPw;
 
     int id_count=0;
 
@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
         text_toolbar = (TextView)toolbar.findViewById(R.id.title);
         text_toolbar.setText("로그인");
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        final AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         mAuth = FirebaseAuth.getInstance();
@@ -179,6 +179,30 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent_signUp = new Intent(getApplicationContext(),SignUpActivity.class);
                 startActivity(intent_signUp);
                 finish();
+            }
+        });
+        button_findPw = (Button)findViewById(R.id.button_findPw);
+        button_findPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //아이디 공백 아니면
+                id = editText_id.getText().toString();
+
+                if (!id.equals("")) {
+                    mAuth.sendPasswordResetEmail(id)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "메일이 전송되었습니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+                //공백이면
+                else{
+                    Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

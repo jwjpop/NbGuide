@@ -5,7 +5,6 @@ package com.cowooding.nbguide.TapPage.PlayListPage;
  */
 
 public class PlayListClass {
-    //String imagepath;
     String music;
     String musician;
 

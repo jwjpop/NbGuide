@@ -10,11 +10,13 @@
             android:id="@+id/tv_user_id"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@drawable/mypage_background"
+            android:background="@drawable/outside_chatlist"
             android:textSize="25dp"
             android:gravity="center"
-            android:text="AAAAAAAAAA"
+            android:text="user_name"
             android:textAllCaps="false"
-            android:textColor="#e677c8"/>
+            android:textColor="#e677c8"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
 </LinearLayout>

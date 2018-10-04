@@ -83,7 +83,7 @@ public class LoginMyPage extends Fragment {
         });
 
         button_playlist.setVisibility(View.INVISIBLE);
-
+        //관리자일 때
         if(id.equals("cowooding@naver.com"))
         {
             button_playlist.setVisibility(View.VISIBLE);

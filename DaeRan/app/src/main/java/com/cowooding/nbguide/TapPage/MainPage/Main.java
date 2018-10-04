@@ -1,6 +1,8 @@
 package com.cowooding.nbguide.TapPage.MainPage;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -54,7 +56,6 @@ public class Main extends Fragment {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String nowtime;
 
-    int i=0;
     Bundle extra;
 
     public static Main newInstance() {
@@ -171,16 +172,16 @@ public class Main extends Fragment {
                     Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     //시간으로 자름(00시부터06시까지 작성 가능)
-                    /*if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
-*/
+                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
+
                         Intent write_intent = new Intent(getContext(), WriteActivity.class);
                         write_intent.putExtra("id", new_id);
                         startActivity(write_intent);
                         getActivity().finish();
 
-                   /* } else {
+                    } else {
                         Toast.makeText(getContext(), "00시부터 06시까지 작성 가능합니다.", Toast.LENGTH_SHORT).show();
-                    }*/
+                    }
                 }
 
             }
@@ -237,23 +238,6 @@ public class Main extends Fragment {
         };
         mReference.addChildEventListener(mChild);
     }
-
-    /*@Override
-    public void onBack() {
-
-            MainActivity activity = (MainActivity) getActivity();
-            activity.setOnKeyBackPressedListener(null);
-            activity.onBackPressed();
-
-    }
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((MainActivity) activity).setOnKeyBackPressedListener(this);
-        getActivity().getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mainFragment).commit();
-    }*/
-    //나중에 뒤로가기 수정
 
     private String getTime() {
         mNow = System.currentTimeMillis();

@@ -38,7 +38,7 @@ public class DocumentActivity extends AppCompatActivity{
         setContentView(R.layout.activity_document);
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         //툴바 설정

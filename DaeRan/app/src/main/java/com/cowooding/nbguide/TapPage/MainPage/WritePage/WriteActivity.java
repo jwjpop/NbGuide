@@ -74,7 +74,7 @@ public class WriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write);
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         interstitialAd = new InterstitialAd(this);
@@ -202,7 +202,7 @@ public class WriteActivity extends AppCompatActivity {
         if (interstitialAd.isLoaded()) {
 
                             interstitialAd.show();
-                            AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+                            AdRequest adRequest = new AdRequest.Builder().build();
                             interstitialAd.loadAd(adRequest);
         }
     }

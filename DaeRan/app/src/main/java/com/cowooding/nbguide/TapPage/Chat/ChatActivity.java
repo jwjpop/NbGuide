@@ -74,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         //출시전에 꼭 테스트 디바이스 빼기
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

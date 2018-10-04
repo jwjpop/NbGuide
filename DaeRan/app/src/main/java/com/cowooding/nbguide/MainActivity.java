@@ -34,7 +34,6 @@ public class MainActivity extends FragmentActivity implements CaulyCloseAdListen
 
     AdRequest adRequest;
 
-
     String id;
     String loginId, loginPwd;
     int login=0;
@@ -63,7 +62,7 @@ public class MainActivity extends FragmentActivity implements CaulyCloseAdListen
         replaceFragment(Main.newInstance());
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         CaulyAdInfo closeAdInfo = new CaulyAdInfoBuilder(APP_CODE).build();

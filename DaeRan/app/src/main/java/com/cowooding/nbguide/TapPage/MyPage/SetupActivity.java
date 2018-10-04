@@ -40,11 +40,9 @@ public class SetupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         new_id = intent.getStringExtra("new_id");
-        //토스트 제거
-        Toast.makeText(getApplicationContext(),new_id,Toast.LENGTH_SHORT).show();
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         imageButtonLeft = (ImageButton) toolbar.findViewById(R.id.imagebutton_left);

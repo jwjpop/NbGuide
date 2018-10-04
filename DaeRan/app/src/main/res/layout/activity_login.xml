@@ -68,13 +68,19 @@
             android:textSize="24dp"
             />
     </LinearLayout>
-
+    <Button
+        android:id="@+id/button_findPw"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:background="@drawable/button_find_pw"/>
     <Button
         android:id="@+id/button_signUp"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
         android:gravity="center"
         android:background="@drawable/button_signup"/>
 </LinearLayout>
