@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     int id_count=0;
     int id_chk=0;
+    int sign=0;
 
     public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{6,16}$");
 
@@ -76,8 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(refresh_intent);
-                            finish();
+                startActivity(refresh_intent);
+                finish();
             }
         });
 
@@ -95,11 +95,9 @@ public class SignUpActivity extends AppCompatActivity {
                 id = editText_id.getText().toString();
 
                 if (!id.equals("")) {
-                     if(android.util.Patterns.EMAIL_ADDRESS.matcher(id).matches()){
-                         String split_id[] = id.split("\\.");
-                         final String new_id = split_id[0]+"_"+split_id[1];
-
-                         //테스트
+                    if(android.util.Patterns.EMAIL_ADDRESS.matcher(id).matches()) {
+                        String split_id[] = id.split("\\.");
+                        final String new_id = split_id[0] + "_" + split_id[1];
                         mReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -110,12 +108,13 @@ public class SignUpActivity extends AppCompatActivity {
                                         id_count++;
                                     }
                                 }
-
-                                if (id_count != 0) {
+                                if(sign==0){
+                                    if (id_count != 0) {
                                         Toast.makeText(getApplicationContext(), "중복된 아이디 입니다.", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
-                                    id_chk = 1;
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
+                                        id_chk = 1;
+                                    }
                                 }
 
                             }
@@ -125,6 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                             }
                         });
+
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "이메일 형식으로 작성해주세요.", Toast.LENGTH_SHORT).show();
@@ -152,6 +152,8 @@ public class SignUpActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(getApplicationContext(),"계정 생성 성공",Toast.LENGTH_SHORT).show();
+                                        //가입 완료 후 중복 체크 방지
+                                        sign=1;
 
                                         //토큰 받기
                                         String token = FirebaseInstanceId.getInstance().getToken();
