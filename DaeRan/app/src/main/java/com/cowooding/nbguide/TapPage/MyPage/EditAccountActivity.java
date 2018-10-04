@@ -75,6 +75,7 @@ public class EditAccountActivity extends AppCompatActivity {
                 Intent intent_setup = new Intent(getApplicationContext(),SetupActivity.class);
                 intent_setup.putExtra("new_id",new_id);
                 startActivity(intent_setup);
+                finish();
             }
         });
 
@@ -152,6 +153,7 @@ public class EditAccountActivity extends AppCompatActivity {
         Intent intent_setup = new Intent(getApplicationContext(),SetupActivity.class);
         intent_setup.putExtra("new_id",new_id);
         startActivity(intent_setup);
+        finish();
     }
 
     public static boolean validatePassword(String pwStr) {
