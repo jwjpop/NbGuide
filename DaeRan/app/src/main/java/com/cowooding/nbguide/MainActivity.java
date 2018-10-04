@@ -29,7 +29,7 @@ import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends FragmentActivity implements CaulyCloseAdListener {
 
-    private static final String APP_CODE = "ecVFR3Ag"; // 광고 요청을 코드 ( 자신의 APP_CODE 쓸 것 )
+    private static final String APP_CODE = "7CAwpkVP"; // 광고 요청을 코드 ( 자신의 APP_CODE 쓸 것 )
     CaulyCloseAd mCloseAd ;
 
     AdRequest adRequest;
