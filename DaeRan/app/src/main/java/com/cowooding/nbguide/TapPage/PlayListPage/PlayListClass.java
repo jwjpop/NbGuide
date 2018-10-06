@@ -24,12 +24,4 @@ public class PlayListClass {
     public void setMusic(String music) {
         this.music = music;
     }
-
-    public String getMusician() {
-        return musician;
-    }
-
-    public void setMusician(String musician) {
-        this.musician = musician;
-    }
 }

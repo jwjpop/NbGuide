@@ -17,7 +17,6 @@ import com.cowooding.nbguide.TapPage.Chat.ChatActivity;
 import com.cowooding.nbguide.TapPage.MainPage.WritePage.EditActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

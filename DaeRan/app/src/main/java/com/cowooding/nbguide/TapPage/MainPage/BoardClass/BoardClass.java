@@ -61,10 +61,6 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
     public String getContent() {
         return content;
     }
