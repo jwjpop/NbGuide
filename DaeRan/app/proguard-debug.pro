@@ -4,5 +4,5 @@
 -keepattributes SoureFile,LineNumberTable,Signature   #소스파일, 라인 전보 유지
 -keepattributes *Annotation*, InnerClasses, EnclosingMethod
 
--keep class com.google.firebase.database.obfuscated.**{ *;}
+-keepclassmembers class com.cowooding.nbguide.TapPage.PlayListPage.**{ *;}
 # End: Debug ProGuard rules

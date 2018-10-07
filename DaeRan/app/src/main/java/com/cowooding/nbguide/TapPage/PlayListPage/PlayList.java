@@ -57,8 +57,8 @@ public class PlayList extends Fragment {
         });
 
         mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference("playlist"); // 변경값을 확인할 child 이름
 
+        mReference = mDatabase.getReference("playlist"); // 변경값을 확인할 child 이름
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
