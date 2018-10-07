@@ -11,20 +11,40 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+
+
+
+        release {
+
+
+
+            storeFile file('C:\\Users\\woojinroom\\NbGuide_key.jks') // 기준은 App 폴더 기준이다.
+
+            storePassword "dnwls11@"
+
+            keyAlias "NbGuide"
+
+            keyPassword "dnwls11@"
+
+        }
+
+    }
+
     buildTypes {
 
         debug{
-            minifyEnabled true
+            minifyEnabled false
             shrinkResources true
 
             proguardFile getDefaultProguardFile('proguard-android.txt')
-            // 프로젝트에 필요한 프로가드 설정
-            proguardFile 'proguard-rules.pro'
+
             // 디버그에 필요한 프로가드 설정
             proguardFile 'proguard-debug.pro'
         }
         release {
             minifyEnabled true
+            signingConfig signingConfigs.release
 
             proguardFile getDefaultProguardFile('proguard-android.txt')
             // 프로젝트에 필요한 프로가드 설정

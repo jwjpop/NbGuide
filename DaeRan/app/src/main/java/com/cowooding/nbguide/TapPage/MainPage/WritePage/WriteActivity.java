@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
-import com.cowooding.nbguide.TapPage.MainPage.BoardClass.BoardClass;
+import com.cowooding.nbguide.TapPage.MainPage.Board.BoardClass;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;

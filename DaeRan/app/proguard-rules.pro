@@ -1,6 +1,7 @@
 -keep class org.xmlpull.v1.** { *; }
--keepattributes Signature, *Annotation*, InnerClasses
+-keepattributes Signature, *Annotation*, InnerClasses, EnclosingMethod
 
+-keep class com.google.firebase.database.obfuscated.**{ *;}
 -dontwarn org.ejml.**
 -dontwarn org.xmlpull.**
 -dontwarn io.reactivex.**

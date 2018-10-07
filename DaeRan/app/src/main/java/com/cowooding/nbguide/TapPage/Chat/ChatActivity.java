@@ -43,6 +43,7 @@ public class ChatActivity extends AppCompatActivity {
     String user, date, text, sender, day;
     int chatlist = 0;
 
+
     private ListView mListView;
     private ArrayList<ChatClass> mChatArr;
     private ChatCustomAdapter mAdapter;

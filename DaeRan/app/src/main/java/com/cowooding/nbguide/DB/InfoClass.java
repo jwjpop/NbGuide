@@ -4,7 +4,7 @@ package com.cowooding.nbguide.DB;
  * Created by woojinroom on 2018-04-23.
  */
 
-import com.cowooding.nbguide.TapPage.MainPage.BoardClass.BoardClass;
+import com.cowooding.nbguide.TapPage.MainPage.Board.BoardClass;
 
 /**
  * Created by TonyChoi on 2016. 3. 29..
@@ -82,5 +82,12 @@ public class InfoClass { // 글에 뿌려줄 내용만 가지고 있는 인포 �
         this.number = number;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 }
 

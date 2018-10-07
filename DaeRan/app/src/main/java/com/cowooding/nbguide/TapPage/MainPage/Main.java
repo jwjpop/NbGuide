@@ -1,8 +1,6 @@
 package com.cowooding.nbguide.TapPage.MainPage;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,7 +15,7 @@ import android.widget.Toast;
 import com.cowooding.nbguide.DB.CustomAdapter;
 import com.cowooding.nbguide.DB.InfoClass;
 import com.cowooding.nbguide.R;
-import com.cowooding.nbguide.TapPage.MainPage.BoardClass.BoardClass;
+import com.cowooding.nbguide.TapPage.MainPage.Board.BoardClass;
 import com.cowooding.nbguide.TapPage.MainPage.WritePage.WriteActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -48,8 +46,6 @@ public class Main extends Fragment {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-
-    private ChildEventListener mChild;
 
     long mNow;
     Date mDate;
@@ -199,7 +195,6 @@ public class Main extends Fragment {
     //액티비티가 종료 될 때 디비를 닫아준다
     @Override
     public void onDestroy() {
-        mReference.removeEventListener(mChild);
         super.onDestroy();
 
     }
@@ -209,8 +204,6 @@ public class Main extends Fragment {
         mDatabase = FirebaseDatabase.getInstance();
 
         mReference = mDatabase.getReference("board");
-
-        mReference.addChildEventListener(mChild);
     }
 
     private String getTime() {

@@ -1,4 +1,4 @@
-package com.cowooding.nbguide.TapPage.MainPage.BoardClass;
+package com.cowooding.nbguide.TapPage.MainPage.Board;
 
 public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
 
@@ -61,6 +61,8 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
         return price;
     }
 
+    public void setPrice(String price) {this.price = price;}
+
     public String getContent() {
         return content;
     }
@@ -76,5 +78,6 @@ public class BoardClass { // 모든 내용이 들어 있는 보드 클래스
     public void setUser(String user) {
         this.user = user;
     }
+
 
 }
