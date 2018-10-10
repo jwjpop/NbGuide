@@ -135,18 +135,10 @@ public class Main extends Fragment {
                     BoardClass boardClass = messageData.getValue(BoardClass.class);
                     InfoClass infoClass = new InfoClass(boardClass);
 
-                    //날짜로 자름 (00시부터 작성 가능하기 때문에 문제 없다)
-                    //날짜가 같은건 불러오고 아닌건 삭제
-
-                        if (infoClass.getDate().substring(8, 10).equals(nowtime.substring(8, 10))) {
-                            mInfoArr.add(infoClass);
+                    //당일 9시부터 다음날 6시 59분까지의 글 보여줌
+                        if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {
+                                mInfoArr.add(infoClass);
                         }
-                        //날짜 같지 않고 관리자일 때
-                        else if(new_id.equals("cowooding@naver_com")){
-                                mDatabase.getReference("board").child(infoClass.getDate() + "_" + infoClass.getUser()).setValue(null);
-                        }
-
-                    // child 내에 있는 데이터만큼 반복합니다.
                 }
                 Collections.reverse(mInfoArr);
                 mAdapter.notifyDataSetChanged();
@@ -167,8 +159,8 @@ public class Main extends Fragment {
                 if (new_id.equals("guest")) {
                     Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    //시간으로 자름(00시부터06시까지 작성 가능)
-                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 0 && Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
+                    //시간으로 자름(당일 9시부터 다음날 06시 59분까지 작성 가능)
+                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 21 || Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
 
                         Intent write_intent = new Intent(getContext(), WriteActivity.class);
                         write_intent.putExtra("id", new_id);
@@ -176,7 +168,7 @@ public class Main extends Fragment {
                         getActivity().finish();
 
                     } else {
-                        Toast.makeText(getContext(), "00시부터 06시까지 작성 가능합니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "당일 21시부터 다음날 06시 59분까지 \n 작성 가능합니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
 

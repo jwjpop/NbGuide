@@ -4,6 +4,7 @@
 -keepattributes SoureFile,LineNumberTable,Signature   #소스파일, 라인 전보 유지
 -keepattributes *Annotation*, InnerClasses, EnclosingMethod
 
+
 -keepclassmembers class com.cowooding.nbguide.DB.**{ *;}
 -keepclassmembers class com.cowooding.nbguide.TapPage.Chat.**{ *;}
 -keepclassmembers class com.cowooding.nbguide.TapPage.MainPage.**{ *;}
@@ -26,5 +27,4 @@
 	public protected *;
 }
 -dontwarn android.webkit.**
-
 # End: Debug ProGuard rules

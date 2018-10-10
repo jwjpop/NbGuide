@@ -10,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cowooding.nbguide.MainActivity;
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.Chat.ChatListActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by woojinroom on 201801-31.
@@ -26,6 +30,11 @@ public class LoginMyPage extends Fragment {
 
     String id;
     String new_id;
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    int time;
 
     public static LoginMyPage newInstance() {
         return new LoginMyPage();
@@ -44,14 +53,21 @@ public class LoginMyPage extends Fragment {
         text_id = (TextView)view.findViewById(R.id.text_id);
         text_id.setText(new_id);
 
+        time =Integer.parseInt(getTime().substring(11,13));
         button_playlist = (Button)view.findViewById(R.id.button_playlist);
 
         button_chatlist=(Button)view.findViewById(R.id.button_chatlist);
         button_chatlist.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent intent_chatlist = new Intent(getContext(),ChatListActivity.class);
-                intent_chatlist.putExtra("id",new_id);
-                startActivity(intent_chatlist);
+                if(time >= 21 || time <= 6) {
+                    Intent intent_chatlist = new Intent(getContext(), ChatListActivity.class);
+                    intent_chatlist.putExtra("id", new_id);
+                    startActivity(intent_chatlist);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"당일 21시부터 다음날 6시59분까지 \n 이용하실 수 있습니다.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -98,6 +114,10 @@ public class LoginMyPage extends Fragment {
 
         return view;// 여기서 UI를 생성해서 View를 return
     }
-
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
 
 }

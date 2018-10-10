@@ -49,7 +49,7 @@ public class ChatListActivity extends AppCompatActivity {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     String day;
-
+    int time;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatlist);
@@ -84,6 +84,7 @@ public class ChatListActivity extends AppCompatActivity {
 
         //오늘 날짜
         day = getTime().substring(8,10);
+        time = Integer.parseInt(getTime().substring(11,13));
 
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("chat"); // 변경값을 확인할 child 이름
@@ -98,17 +99,13 @@ public class ChatListActivity extends AppCompatActivity {
 
                         for (DataSnapshot messageData : dataSnapshot.getChildren()) {
                             String id[] = messageData.getKey().split(" ");
-                            //날짜가 같으면 리스트 추가
-                                if (id[2].equals(day)) {
+
+                               //현재는 모든 챗리스트 등록
                                     if (id[0].equals(login_id) && !id[1].equals(login_id)) {
                                         mChatList.add(id[1]);
                                     } else if (!id[0].equals(login_id) && id[1].equals(login_id)) {
                                         mChatList.add(id[0]);
                                     }
-                                    //날짜 같지 않으면 관리자일 때 리스트 제거
-                                } else if(login_id.equals("cowooding@naver_com")){
-                                    mDatabase.getReference("chat/" + id[0] + " " + id[1] + " " + id[2]).setValue(null);
-                                }
 
                             mAdapter.notifyDataSetChanged();
                             mListView.setSelection(mAdapter.getCount() - 1);

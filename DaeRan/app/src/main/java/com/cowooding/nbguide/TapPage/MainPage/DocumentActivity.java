@@ -20,6 +20,9 @@ import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DocumentActivity extends AppCompatActivity{
 
     Toolbar toolbar;
@@ -31,6 +34,11 @@ public class DocumentActivity extends AppCompatActivity{
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    int time;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,10 +185,17 @@ public class DocumentActivity extends AppCompatActivity{
             imageButtonRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
-                    chat_intent.putExtra("user",st_user);
-                    chat_intent.putExtra("sender",login_id);
-                    startActivity(chat_intent);
+                    time = Integer.parseInt(getTime().substring(11,13));
+                    if(time >= 21 || time <= 6) {
+                        Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
+                        chat_intent.putExtra("user",st_user);
+                        chat_intent.putExtra("sender",login_id);
+                        startActivity(chat_intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"당일 21시부터 다음날 6시59분까지 \n 이용하실 수 있습니다.",Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -191,5 +206,10 @@ public class DocumentActivity extends AppCompatActivity{
         Intent refresh_intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(refresh_intent);
         finish();
+    }
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 }
