@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cowooding.nbguide.R;
 
@@ -48,7 +49,6 @@ public class CustomAdapter  extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
-
             holder = new ViewHolder();
             v = mInflater.inflate(R.layout.listview_custom_main, null);
             holder.title = (TextView)v.findViewById(R.id.tv_title);
@@ -58,8 +58,6 @@ public class CustomAdapter  extends BaseAdapter {
             holder.price = (TextView)v.findViewById(R.id.tv_price);
             holder.content = (TextView)v.findViewById(R.id.tv_content);
             holder.user = (TextView)v.findViewById(R.id.tv_user);
-
-
 
         //InfoClass를 생성하여 각 뷰의 포지션에 맞는 데이터를 가져옴
         InfoClass info = InfoArr.get(position);

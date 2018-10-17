@@ -9,16 +9,15 @@
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-        android:layout_weight="1">
+    android:orientation="vertical">
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_weight="1"
         >
     </ListView>
 
@@ -33,7 +32,6 @@
             app:itemTextColor="@xml/color"
             android:layout_marginBottom="50dp"
             app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
-            android:visibility="invisible"
             app:menu="@xml/menu" />
 
 </LinearLayout>

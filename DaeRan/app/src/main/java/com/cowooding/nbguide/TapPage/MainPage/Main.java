@@ -78,14 +78,40 @@ public class Main extends Fragment {
         // doWhileCursorToArray();
         initDatabase();
 
+
         //리스트뷰에 사용할 어댑터 초기화(파라메터 Context, ArrayList<InfoClass>)
         mAdapter = new CustomAdapter(getContext(), mInfoArr);
         mListView.setAdapter(mAdapter);
 
+        mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mInfoArr.clear();
+                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                    BoardClass boardClass = messageData.getValue(BoardClass.class);
+                    InfoClass infoClass = new InfoClass(boardClass);
+
+                    //당일 9시부터 다음날 6시 59분까지의 글 보여줌
+                    if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {
+                        mInfoArr.add(infoClass);
+                    }
+                }
+                Collections.reverse(mInfoArr);
+                mAdapter.notifyDataSetChanged();
+                mListView.setSelection(0);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-
+                Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
                 TextView tx_title = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_title);
                 String st_title = tx_title.getText().toString();
 
@@ -122,36 +148,6 @@ public class Main extends Fragment {
             }
         });
 
-
-
-        //여기 코드엔 initdatabase 안에 이미 들어있음 복사용
-        // mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mInfoArr.clear();
-                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-                    BoardClass boardClass = messageData.getValue(BoardClass.class);
-                    InfoClass infoClass = new InfoClass(boardClass);
-
-                    //당일 9시부터 다음날 6시 59분까지의 글 보여줌
-                        if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {
-                                mInfoArr.add(infoClass);
-                        }
-                }
-                Collections.reverse(mInfoArr);
-                mAdapter.notifyDataSetChanged();
-                mListView.setSelection(mAdapter.getCount() - 1);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        //리스트뷰의 아이템을 길게 눌렀을 경우 삭제하기 위해 롱클릭 리스너 따로 설정
-
         mImageButton = (ImageButton) view.findViewById(R.id.iamgebutton_write);
         mImageButton.setOnClickListener(new ImageButton.OnClickListener() {
             public void onClick(View view) {
@@ -174,7 +170,6 @@ public class Main extends Fragment {
 
             }
         });
-
         return view;
     }
 

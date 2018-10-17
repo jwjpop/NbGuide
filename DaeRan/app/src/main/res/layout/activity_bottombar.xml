@@ -11,12 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignBottom="@id/container">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
         app:itemBackground="@color/colorBlack"
         app:itemIconTint="@xml/color"
         app:itemTextColor="@xml/color"
@@ -34,4 +38,5 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="ca-app-pub-2955863180824800/3988629241">
     </com.google.android.gms.ads.AdView>
+</LinearLayout>
 </RelativeLayout>
