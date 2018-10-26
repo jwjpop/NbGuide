@@ -12,12 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cowooding.nbguide.DB.CustomAdapter;
-import com.cowooding.nbguide.DB.InfoClass;
+import com.cowooding.nbguide.TapPage.MainPage.Board.CustomAdapter;
+import com.cowooding.nbguide.TapPage.MainPage.Board.InfoClass;
 import com.cowooding.nbguide.R;
 import com.cowooding.nbguide.TapPage.MainPage.Board.BoardClass;
 import com.cowooding.nbguide.TapPage.MainPage.WritePage.WriteActivity;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -75,14 +74,11 @@ public class Main extends Fragment {
         //ArrayList 초기화
         mInfoArr = new ArrayList<InfoClass>();
 
-        // doWhileCursorToArray();
-        initDatabase();
-
-
         //리스트뷰에 사용할 어댑터 초기화(파라메터 Context, ArrayList<InfoClass>)
         mAdapter = new CustomAdapter(getContext(), mInfoArr);
         mListView.setAdapter(mAdapter);
 
+        mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("board"); // 변경값을 확인할 child 이름
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,9 +89,9 @@ public class Main extends Fragment {
                     InfoClass infoClass = new InfoClass(boardClass);
 
                     //당일 9시부터 다음날 6시 59분까지의 글 보여줌
-                    if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {
+                    /*if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {*/
                         mInfoArr.add(infoClass);
-                    }
+                  /*  }*/
                 }
                 Collections.reverse(mInfoArr);
                 mAdapter.notifyDataSetChanged();
@@ -156,16 +152,16 @@ public class Main extends Fragment {
                     Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     //시간으로 자름(당일 9시부터 다음날 06시 59분까지 작성 가능)
-                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 21 || Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
-
+                  /*  if (Integer.parseInt(nowtime.substring(11, 13)) >= 21 || Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
+*/
                         Intent write_intent = new Intent(getContext(), WriteActivity.class);
                         write_intent.putExtra("id", new_id);
                         startActivity(write_intent);
                         getActivity().finish();
 
-                    } else {
+                  /*  } else {
                         Toast.makeText(getContext(), "당일 21시부터 다음날 06시 59분까지 \n 작성 가능합니다.", Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
                 }
 
             }
@@ -184,13 +180,6 @@ public class Main extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-    }
-
-    private void initDatabase() {
-
-        mDatabase = FirebaseDatabase.getInstance();
-
-        mReference = mDatabase.getReference("board");
     }
 
     private String getTime() {

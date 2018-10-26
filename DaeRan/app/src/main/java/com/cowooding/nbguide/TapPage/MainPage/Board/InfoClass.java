@@ -1,4 +1,4 @@
-package com.cowooding.nbguide.DB;
+package com.cowooding.nbguide.TapPage.MainPage.Board;
 
 /**
  * Created by woojinroom on 2018-04-23.

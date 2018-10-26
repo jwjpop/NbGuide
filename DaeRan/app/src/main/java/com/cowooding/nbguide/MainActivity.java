@@ -43,6 +43,10 @@ public class MainActivity extends FragmentActivity implements CaulyCloseAdListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottombar);
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
@@ -60,10 +64,6 @@ public class MainActivity extends FragmentActivity implements CaulyCloseAdListen
             id=loginId;
         }
         replaceFragment(Main.newInstance());
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         CaulyAdInfo closeAdInfo = new CaulyAdInfoBuilder(APP_CODE).build();
         mCloseAd = new CaulyCloseAd();

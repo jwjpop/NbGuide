@@ -108,7 +108,7 @@ public class ChatListActivity extends AppCompatActivity {
                                     }
 
                             mAdapter.notifyDataSetChanged();
-                            mListView.setSelection(mAdapter.getCount() - 1);
+                            mListView.setSelection(0);
 
                         }
                     }

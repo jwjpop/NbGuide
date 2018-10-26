@@ -70,7 +70,7 @@ public class PlayList extends Fragment {
                 }
                 Collections.reverse(mInfoArr);
                 mAdapter.notifyDataSetChanged();
-                mListView.setSelection(mAdapter.getCount() - 1);
+                mListView.setSelection(0);
             }
 
             @Override
