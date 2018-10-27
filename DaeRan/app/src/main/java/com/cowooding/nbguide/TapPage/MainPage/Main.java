@@ -52,6 +52,7 @@ public class Main extends Fragment {
     String nowtime;
 
     Bundle extra;
+    InfoClass doc_info;
 
     public static Main newInstance() {
         return new Main();
@@ -89,9 +90,9 @@ public class Main extends Fragment {
                     InfoClass infoClass = new InfoClass(boardClass);
 
                     //당일 9시부터 다음날 6시 59분까지의 글 보여줌
-                    /*if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {*/
+                    if ((Integer.parseInt(infoClass.getDate().substring(11, 13)) >= 21) || (Integer.parseInt(infoClass.getDate().substring(11, 13)) <= 6)) {
                         mInfoArr.add(infoClass);
-                  /*  }*/
+                    }
                 }
                 Collections.reverse(mInfoArr);
                 mAdapter.notifyDataSetChanged();
@@ -108,35 +109,16 @@ public class Main extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
-                TextView tx_title = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_title);
-                String st_title = tx_title.getText().toString();
-
-                TextView tx_color = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_color);
-                String st_color = tx_color.getText().toString();
-
-                TextView tx_number = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_number);
-                String st_number = tx_number.getText().toString();
-
-                TextView tx_price = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_price);
-                String st_price = tx_price.getText().toString();
-
-                TextView tx_date = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_date);
-                String st_date = tx_date.getText().toString();
-
-                TextView tx_content = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_content);
-                String st_content = tx_content.getText().toString();
-
-                TextView tx_user = (TextView) arg0.getChildAt(position).findViewById(R.id.tv_user);
-                String st_user = tx_user.getText().toString();
+                doc_info = mInfoArr.get(position);
 
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);
-                doc_intent.putExtra("title", st_title);
-                doc_intent.putExtra("color", st_color);
-                doc_intent.putExtra("number", st_number);
-                doc_intent.putExtra("price", st_price);
-                doc_intent.putExtra("date", st_date);
-                doc_intent.putExtra("content", st_content);
-                doc_intent.putExtra("user", st_user);
+                doc_intent.putExtra("title", doc_info.title);
+                doc_intent.putExtra("color", doc_info.color);
+                doc_intent.putExtra("number", doc_info.number);
+                doc_intent.putExtra("price", doc_info.price);
+                doc_intent.putExtra("date", doc_info.date);
+                doc_intent.putExtra("content", doc_info.content);
+                doc_intent.putExtra("user", doc_info.user);
                 doc_intent.putExtra("login", new_id);
 
                 startActivity(doc_intent);
@@ -152,16 +134,16 @@ public class Main extends Fragment {
                     Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     //시간으로 자름(당일 9시부터 다음날 06시 59분까지 작성 가능)
-                  /*  if (Integer.parseInt(nowtime.substring(11, 13)) >= 21 || Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
-*/
+                    if (Integer.parseInt(nowtime.substring(11, 13)) >= 21 || Integer.parseInt(nowtime.substring(11, 13)) <= 6) {
+
                         Intent write_intent = new Intent(getContext(), WriteActivity.class);
                         write_intent.putExtra("id", new_id);
                         startActivity(write_intent);
                         getActivity().finish();
 
-                  /*  } else {
+                    } else {
                         Toast.makeText(getContext(), "당일 21시부터 다음날 06시 59분까지 \n 작성 가능합니다.", Toast.LENGTH_SHORT).show();
-                    }*/
+                    }
                 }
 
             }
