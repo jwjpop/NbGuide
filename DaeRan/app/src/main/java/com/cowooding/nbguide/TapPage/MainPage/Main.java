@@ -108,7 +108,6 @@ public class Main extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Toast.makeText(getContext(),String.valueOf(position),Toast.LENGTH_SHORT).show();
                 doc_info = mInfoArr.get(position);
 
                 Intent doc_intent = new Intent(getContext(), DocumentActivity.class);

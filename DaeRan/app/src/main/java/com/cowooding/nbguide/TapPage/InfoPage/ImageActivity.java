@@ -37,7 +37,7 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1A6F26748DB789BFFD7C97C18BD4A7B5").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         back=(Button)findViewById(R.id.button_back);
@@ -59,7 +59,7 @@ public class ImageActivity extends AppCompatActivity {
         {
             tv_info.setVisibility(View.INVISIBLE);
             mimageView.setVisibility(View.VISIBLE);
-            mimageView.setImageResource(R.drawable.menu2_180503);
+            mimageView.setImageResource(R.drawable.menu1_180503);
         }else if(menu==2)
         {
             tv_info.setVisibility(View.INVISIBLE);
